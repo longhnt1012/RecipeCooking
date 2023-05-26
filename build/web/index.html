@@ -51,30 +51,50 @@
                 <!--  Login Register Area -->
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
-                        <div class="login_register_area d-flex">
+                        <div class="col-8 col-sm-8">
+                            <div class="search_button justify-content-end align-items-center d-flex">
+                                <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="search-hidden-form justify-content-end align-items-center ">
+                                <form action="MainController" method="GET">
+                                    <input type="text" name="search" id="search-anything" placeholder="Search Anything...">
+                                    <input type="submit" name="action" value="Search" class="d-none">
+                                    <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="login_register_area d-flex col-4 col-sm-4">
                             <div class="login">
-                                <a href="login.jsp">Sign in</a>
+                                <a href="login.html">Sign in</a>
                             </div>
                             <div class="register">
-                                <a href="signup.jsp">Sign up</a>
+                                <a href="register.html">Sign up</a>
                             </div>
                         </div>
-                        <!-- Search Button Area -->
-                        <div class="search_button">
-                            <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        </div>
-                        <!-- Search Form -->
-                        <div class="search-hidden-form">
-                            <form action="MainController" method="GET">
+                    </div>
+                </div>
+                <!--   <div class="signup-search-area d-flex align-items-center justify-content-end">-->
+
+                <!-- Search Button Area -->
+                <!-- <div class="search-hidden-form">
+                            <form action="#" method="get">
                                 <input type="search" name="search" id="search-anything"
                                     placeholder="Search Anything...">
                                 <input type="submit" value="" class="d-none">
                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                             </form>
                         </div>
-                        
-                    </div>
-                </div>
+                        <div class="search_button">
+                            <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </div>
+                    -->
+                <!-- Search Form -->
+                <!--
+                       
+                    -->
+
+
+
             </div>
         </div>
     </div>
@@ -87,7 +107,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">Life to eat</a>
+                        <a href="index.html" class="yummy-logo">Flavorful Creations</a>
                     </div>
                 </div>
             </div>
@@ -110,11 +130,10 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="index.html">Recipes</a>
-                                        
+
                                         <a class="dropdown-item" href="single.html">Ingredients</a>
                                         <a class="dropdown-item" href="static.html">Trending</a>
                                         <a class="dropdown-item" href="contact.html">Creators</a>
-                                       
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -231,11 +250,7 @@
     <section class="categories_area clearfix" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-12 col-lg-12">
-                        <h1>Categories</h1>
-                    </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
                         <img src="img/catagory-img/1.jpg" alt="">
                         <div class="catagory-title">
@@ -497,6 +512,7 @@
                                         <h4 class="post-headline">Where To Get The Best Sunday Roast In The Cotswolds
                                         </h4>
                                     </a>
+                                    
                                 </div>
                             </div>
                         </div>
