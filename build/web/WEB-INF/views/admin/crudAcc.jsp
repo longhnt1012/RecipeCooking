@@ -9,7 +9,7 @@
 <table border="1" width="4" cellspacing="4" cellpadding="2">
     <thead>
         <tr>
-            <th>Number</th>
+
             <th>ID</th>
             <th>Name</th>
             <th>Address</th>
@@ -21,9 +21,8 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="account" items="${list}" varStatus="loop">
+        <c:forEach var="account" items="${list}" >
             <tr>
-                <td>${loop.count}</td>
                 <td>${account.id}</td>
                 <td>${account.name}</td>
                 <td>${account.address}</td>
@@ -39,6 +38,14 @@
         </c:forEach>
     </tbody>
 </table>
+
+<nav>
+    <ul style="display: flex; justify-content: center">
+        <c:forEach var="i" begin="1" end="${endP}">
+            <li class="page-item" style="list-style: none; padding-right: 20px"><a class="page-link" href="<c:url value="/admin/crudAcc.do?page=${i}" />">${i}</a></li>
+            </c:forEach>
+    </ul>
+</nav>
 <a href="<c:url value="/home/success.do"/>">Back</a>
 
 

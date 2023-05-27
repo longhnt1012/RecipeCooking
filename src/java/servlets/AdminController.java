@@ -7,16 +7,13 @@ package servlets;
 
 import db.Account;
 import db.AccountFacade;
-import db.AddCmtByAdmin;
 import db.Comments;
 import db.CommentsFacade;
+import db.Product;
+import db.ProductFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,38 +42,64 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        switch (action) {
-            case "crudAcc": {
-                crudAcc(request, response);
-                break;
-            }
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        if (account != null && account.getRole().equalsIgnoreCase("ADMIN")) {
+            try {
+                switch (action) {
+                    case "crudAcc": {
+                        crudAcc(request, response);
+                        break;
+                    }
 
-            case "manaCmts": {
-                manaCmts(request, response);
-                break;
-            }
+                    case "manaCmts": {
+                        manaCmts(request, response);
+                        break;
+                    }
 
-            case "removeCmts": {
-                removeCmts(request, response);
-                break;
-            }
+                    case "removeCmts": {
+                        removeCmts(request, response);
+                        break;
+                    }
 
-            case "edit": {
-                edit(request, response);
-                break;
-            }
+                    case "edit": {
+                        edit(request, response);
+                        break;
+                    }
 
-            case "edit_handler": {
-                edit_handler(request, response);
-                break;
-            }
+                    case "edit_handler": {
+                        edit_handler(request, response);
+                        break;
+                    }
 
-            case "remove": {
-                remove(request, response);
-                break;
-            }
+                    case "remove": {
+                        remove(request, response);
+                        break;
+                    }
 
+                    case "crudPro": {
+                        crudPro(request, response);
+                        break;
+                    }
+
+                    case "deletePro": {
+                        deletePro(request, response);
+                        break;
+                    }
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.setAttribute("controller", "error");
+                request.setAttribute("action", "error");
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -121,7 +144,18 @@ public class AdminController extends HttpServlet {
     protected void crudAcc(HttpServletRequest request, HttpServletResponse response) {
         try {
             AccountFacade af = new AccountFacade();
-            List<Account> list = af.selectAll();
+            String indexPage = request.getParameter("page");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int page = Integer.parseInt(indexPage);
+            int count = af.getAllAcc();
+            int endP = count / 8;
+            if (count % 8 != 0) {
+                endP++;
+            }
+            List<Account> list = af.pageIndex(page);
+            request.setAttribute("endP", endP);
             request.setAttribute("list", list);
             request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         } catch (Exception e) {
@@ -141,7 +175,7 @@ public class AdminController extends HttpServlet {
         }
     }
 
-    protected void edit_handler(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void edit_handler(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String op = request.getParameter("op");
 //        Pattern p = Pattern.compile("^(USER|ADMIN)$");
         switch (op) {
@@ -177,6 +211,9 @@ public class AdminController extends HttpServlet {
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    request.setAttribute("controller", "error");
+                    request.setAttribute("action", "error");
+                    request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 }
                 break;
 
@@ -187,7 +224,7 @@ public class AdminController extends HttpServlet {
         }
     }
 
-    protected void remove(HttpServletRequest request, HttpServletResponse response) {
+    protected void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             AccountFacade af = new AccountFacade();
@@ -196,10 +233,13 @@ public class AdminController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         }
     }
 
-    protected void manaCmts(HttpServletRequest request, HttpServletResponse response) {
+    protected void manaCmts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             CommentsFacade cf = new CommentsFacade();
             List<Comments> listComments = cf.getAllComments();
@@ -207,15 +247,61 @@ public class AdminController extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         }
     }
 
-    protected void removeCmts(HttpServletRequest request, HttpServletResponse response) {
+    protected void removeCmts(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             CommentsFacade cf = new CommentsFacade();
             cf.removeCmts(id);
             response.sendRedirect(request.getContextPath() + "/admin/manaCmts.do");
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        }
+    }
+
+    private void crudPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        try {
+            ProductFacade pf = new ProductFacade();
+            String indexPage = request.getParameter("page");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int page = Integer.parseInt(indexPage);
+            int count = pf.countPro();
+            int endP = count / 8;
+            if (count % 8 != 0) {
+                endP++;
+            }
+            List<Product> list = pf.pageIndex(page);
+            request.setAttribute("endP", endP);
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+
+        }
+    }
+
+    protected void deletePro(HttpServletRequest request, HttpServletResponse response) {
+        Account account = (Account) request.getSession().getAttribute("account");
+        String op = request.getParameter("op");
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ProductFacade pf = new ProductFacade();
+            pf.deletePro(id);
+            response.sendRedirect(request.getContextPath() + "/home/success.do");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

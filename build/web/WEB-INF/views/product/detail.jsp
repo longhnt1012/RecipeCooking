@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 Name: ${product.name} </br>
 Description: ${product.description} </br>
-<a href="<c:url value="/cart/addToCart.do?id=${product.id}"/>">Add To Favourite</a>
+<a href="<c:url value="/favourite/addToFavourite.do?id=${product.id}"/>">Add To Favourite</a>
 <a href="<c:url value="/product/product.do"/>">Back</a>
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="text-dark mb-0">Comments (<span>${noCmts}</span>)</h4>                   

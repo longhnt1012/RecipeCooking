@@ -49,6 +49,25 @@ public class ProductController extends HttpServlet {
                 product(request, response);
                 break;
 
+            case "addPro":
+                addPro(request, response);
+                break;
+
+            case "addPro_handler":
+                addPro_handler(request, response);
+                break;
+
+            case "updatePro":
+                updatePro(request, response);
+                break;
+
+            case "updatePro_handler":
+                updatePro_handler(request, response);
+                break;
+
+            case "deletePro":
+                deletePro(request, response);
+
             case "detail":
                 detail(request, response);
                 break;
@@ -102,7 +121,18 @@ public class ProductController extends HttpServlet {
     protected void product(HttpServletRequest request, HttpServletResponse response) {
         try {
             ProductFacade pf = new ProductFacade();
-            List<Product> list = pf.getAll();
+            String indexPage = request.getParameter("page");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int page = Integer.parseInt(indexPage);
+            int count = pf.countPro();
+            int endP = count / 8;
+            if (count % 8 != 0) {
+                endP++;
+            }
+            List<Product> list = pf.pageIndex(page);
+            request.setAttribute("endP", endP);
             request.setAttribute("list", list);
             request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         } catch (Exception e) {
@@ -154,4 +184,122 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+    //ADD FOR USER
+    protected void addPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        }
+    }
+
+    //ADD FOR USER
+    protected void addPro_handler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        String op = request.getParameter("op");
+        try {
+            if (account == null) {
+                request.setAttribute("message", "Login to Add Product plz");
+                request.getRequestDispatcher(request.getContextPath() + "/home/index.do").forward(request, response);
+            } else {
+                switch (op) {
+                    case "Add":
+                        try {
+                            String name = request.getParameter("name");
+                            String description = request.getParameter("description");
+                            ProductFacade pf = new ProductFacade();
+                            Product product = pf.addPro(name, description);
+                            response.sendRedirect(request.getContextPath() + "/home/success.do");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case "Cancel":
+                        response.sendRedirect(request.getContextPath() + "/home/success.do");
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("message", e.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        }
+
+    }
+
+    //UPDATE FOR USER
+    protected void updatePro(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Account account = (Account) request.getSession().getAttribute("account");
+        if (account == null) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        } else {
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                ProductFacade pf = new ProductFacade();
+                Product product = pf.getOne(id);
+                request.setAttribute("product", product);
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    //UPDATE FOR USER
+    protected void updatePro_handler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Account account = (Account) request.getSession().getAttribute("account");
+        String op = request.getParameter("op");
+        if (account == null) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        } else {
+            switch (op) {
+                case "update":
+                    try {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        String name = request.getParameter("name");
+                        String description = request.getParameter("description");
+                        ProductFacade pf = new ProductFacade();
+                        Product product = new Product(id, description, name);
+                        pf.updatePro(description, name);
+                        response.sendRedirect(request.getContextPath() + "/home/success");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    }
+
+    //DELETE FOR USER
+    protected void deletePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Account account = (Account) request.getSession().getAttribute("account");
+        String op = request.getParameter("op");
+        try {
+            if (account == null) {
+                request.setAttribute("controller", "error");
+                request.setAttribute("action", "error");
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+            } else {
+                int id = Integer.parseInt(request.getParameter("id"));
+                ProductFacade pf = new ProductFacade();
+                pf.deletePro(id);
+                response.sendRedirect(request.getContextPath() + "/admin/crudPro.do");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

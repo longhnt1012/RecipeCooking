@@ -10,16 +10,14 @@
 <table border="1" width="4" cellspacing="4">
     <thead>
         <tr>
-            <th>No.</th>
             <th>Name</th>
             <th>Description</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="product" items="${list}" varStatus="loop">
+        <c:forEach var="product" items="${list}" >
         <tr>
-            <td>${loop.count}</td>
             <td>${product.name}</td>
             <td>${product.description}</td>
             <td>
@@ -30,6 +28,13 @@
     </tbody>
 </table>
 
+<nav>
+    <ul style="display: flex; justify-content: center">
+        <c:forEach var="i" begin="1" end="${endP}">
+            <li class="page-item" style="list-style: none; padding-right: 20px"><a class="page-link" href="<c:url value="/product/product.do?page=${i}" />">${i}</a></li>
+            </c:forEach>
+    </ul>
+</nav>
 <a href="<c:url value="/home/success.do"/>">Back</a>
 
 

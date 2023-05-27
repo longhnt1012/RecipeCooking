@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="8">
         <file>
             <url>src/java/servlets/AccountController.java</url>
             <bookmark id="1">
@@ -12,10 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/JavaCode/Account/web/WEB-INF/views/product/detail.jsp</file>
-            <file>file:/C:/JavaCode/Account/src/java/servlets/AdminController.java</file>
-            <file>file:/C:/JavaCode/Account/web/WEB-INF/views/admin/manaCmts.jsp</file>
-            <file>file:/C:/JavaCode/Account/src/java/db/CommentsFacade.java</file>
+            <file>file:/C:/JavaCode/Account/src/java/servlets/FavouriteController.java</file>
         </group>
     </open-files>
 </project-private>
