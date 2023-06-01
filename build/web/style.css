@@ -24,7 +24,6 @@
 ----------------------------------- */
 
 /* ***** Fonts ***** */
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700|Quicksand:300,400,500,700|Shadows+Into+Light+Two');
 
 /* ***** Import CSS ***** */
@@ -931,11 +930,11 @@ li {
 
 .widget-title>h6 {
     background: #fee2d9;
-    height: 40px;
+    height: 55px;
     width: 100%;
-    line-height: 40px;
+    line-height: 52px;
     border-radius: 2px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 
 .about-me-widget-thumb img {
@@ -1521,3 +1520,4 @@ li {
     color: #fff;
     cursor: pointer;
 }
+/* ------------------------------------------------------------ */
