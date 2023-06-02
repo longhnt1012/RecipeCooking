@@ -24,6 +24,7 @@
 ----------------------------------- */
 
 /* ***** Fonts ***** */
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700|Quicksand:300,400,500,700|Shadows+Into+Light+Two');
 
 /* ***** Import CSS ***** */
@@ -234,16 +235,16 @@ li {
     list-style: none;
 }
 
-.heading_text>p {
+.heading_text > p {
     font-size: 16px;
 }
 
-.heading_text>h2 {
+.heading_text > h2 {
     font-weight: 500;
     color: #333;
 }
 
-.heading_text>h3 {
+.heading_text > h3 {
     color: #b4b4b4;
     font-size: 90px;
     font-weight: 100;
@@ -252,22 +253,6 @@ li {
 
 .font-shadow-into-light {
     font-family: 'Shadows Into Light Two', cursive !important;
-}
-
-.saved-favorite {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-#linkInput {
-    width: 300px;
-  }
-.print-recipe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
 }
 
 .yummy-table {
@@ -317,7 +302,6 @@ li {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
-
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -329,7 +313,6 @@ li {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
-
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
@@ -357,17 +340,17 @@ li {
 }
 
 
-.top_header_area .top_social_bar>a {
+.top_header_area .top_social_bar > a {
     font-size: 12px;
     color: #232d37;
     margin-right: 30px;
 }
 
-.top_header_area .top_social_bar>a:hover {
+.top_header_area .top_social_bar > a:hover {
     color: #fc6c3f;
 }
 
-.top_header_area .top_social_bar>a:last-of-type {
+.top_header_area .top_social_bar > a:last-of-type {
     margin-right: 0;
 }
 
@@ -388,9 +371,8 @@ li {
     padding-right: 13px;
 }
 
-
 .top_header_area .signup-search-area .search_button {
-    margin-right: 15px;
+    margin-left: 54px;
 }
 
 #searchBtn {
@@ -412,8 +394,6 @@ li {
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     font-size: 12px;
-    margin-top: -10px;
-    margin-left: -15px;
 }
 
 .search-hidden-form.search-form-open {
@@ -507,7 +487,7 @@ li {
     overflow: hidden
 }
 
-.welcome-single-slide .project_title a>h5 {
+.welcome-single-slide .project_title a > h5 {
     color: #ffffff;
     font-size: 24px;
     font-weight: 700;
@@ -604,6 +584,8 @@ li {
 
 .single_catagory img {
     border-radius: 20px;
+    width: 330px;
+    height: 236px;
 }
 
 .catagory-title {
@@ -625,14 +607,14 @@ li {
     background-color: #fc6c3f;
 }
 
-.catagory-title a>h5 {
+.catagory-title a > h5 {
     margin-bottom: 0;
     line-height: 50px;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
 }
 
-.single_catagory:hover .catagory-title a>h5 {
+.single_catagory:hover .catagory-title a > h5 {
     color: #fff;
 }
 
@@ -643,6 +625,8 @@ li {
 .post-thumb img {
     border-radius: 30px;
     margin-bottom: 30px;
+    width: 330px;
+    height: 220px;
 }
 
 .post-meta {
@@ -670,18 +654,6 @@ li {
 .post-comments a:hover,
 .post-share a:hover {
     color: #000;
-}
-
-.checked {
-    color: orange;
-}
-
-.rating-count {
-    margin-top: 15px;
-}
-
-.star-rating span {
-    margin-right: 7px;
 }
 
 .post-favourite a,
@@ -854,18 +826,18 @@ li {
     justify-content: space-between
 }
 
-.single-icon>a {
+.single-icon > a {
     color: #51545f;
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
 }
 
-.single-icon>a:hover {
+.single-icon > a:hover {
     color: #fc6c3f;
 }
 
-.single-icon>a>i {
+.single-icon > a > i {
     font-size: 16px;
     padding-right: 12px;
 }
@@ -898,7 +870,7 @@ li {
     justify-content: center
 }
 
-.copy_right_text>p {
+.copy_right_text > p {
     font-size: 14px;
     color: #b5aec4;
     margin-bottom: 0;
@@ -928,13 +900,13 @@ li {
     margin-bottom: 50px;
 }
 
-.widget-title>h6 {
+.widget-title > h6 {
     background: #fee2d9;
-    height: 55px;
+    height: 40px;
     width: 100%;
-    line-height: 52px;
+    line-height: 40px;
     border-radius: 2px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 .about-me-widget-thumb img {
@@ -956,13 +928,13 @@ li {
 
 /* subscribe_follow_area */
 
-.subscribe-link>a {
+.subscribe-link > a {
     font-size: 14px;
     color: #51545f;
     padding: 0 15px;
 }
 
-.subscribe-link>a:hover {
+.subscribe-link > a:hover {
     color: #fc6c3f;
 }
 
@@ -998,7 +970,7 @@ li {
     margin-left: 10px;
 }
 
-.popular-post-widget .single-populer-post .post-content>p {
+.popular-post-widget .single-populer-post .post-content > p {
     font-size: 14px;
     color: #b5aec4;
     font-weight: 400;
@@ -1143,7 +1115,7 @@ li {
     font-size: 16px;
 }
 
-.breadcrumb-item+.breadcrumb-item:before {
+.breadcrumb-item + .breadcrumb-item:before {
     content: "\f105";
     font-family: 'FontAwesome'
 }
@@ -1466,7 +1438,6 @@ li {
     background-size: cover;
     z-index: 1;
 }
-
 .bg-pattern:after {
     position: absolute;
     width: 100%;
@@ -1479,22 +1450,22 @@ li {
 }
 
 #pattern-switcher {
-    width: 120px;
-    background-color: #fc6c3f;
-    position: fixed;
-    top: 15%;
-    z-index: 9999;
-    cursor: pointer;
-    height: 50px;
+	width: 120px;
+	background-color: #fc6c3f;
+	position: fixed;
+	top: 15%;
+	z-index: 9999;
+	cursor: pointer;
+	height: 50px;
     right: 0;
     color: #fff;
-    font-size: 12px;
-    line-height: 50px;
-    text-align: center;
-    text-transform: uppercase;
+	font-size: 12px;
+	line-height: 50px;
+	text-align: center;
+	text-transform: uppercase;
     letter-spacing: 1px;
     -webkit-transition-duration: 500ms;
-    transition-duration: 500ms;
+            transition-duration: 500ms;
 }
 
 #pattern-switcher.pattern-remove {
@@ -1502,22 +1473,21 @@ li {
 }
 
 #pattern-switcher:hover {
-    background-color: #e3410e;
+	background-color: #e3410e;
 }
 
-#patter-close>i {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    background-color: #111;
-    font-size: 11px;
-    line-height: 20px;
-    border-radius: 50%;
-    right: 110px;
-    top: calc(15% - 10px);
-    text-align: center;
-    z-index: 99999;
-    color: #fff;
-    cursor: pointer;
+#patter-close > i {
+	position: fixed;
+	width: 20px;
+	height: 20px;
+	background-color: #111;
+	font-size: 11px;
+	line-height: 20px;
+	border-radius: 50%;
+	right: 110px;
+	top: calc(15% - 10px);
+	text-align: center;
+	z-index: 99999;
+	color: #fff;
+	cursor: pointer;
 }
-/* ------------------------------------------------------------ */
