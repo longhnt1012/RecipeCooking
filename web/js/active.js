@@ -134,28 +134,3 @@
 
 })(jQuery);
 
-function generateRandomString(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
-
-// Function to generate the share link
-function generateShareLink() {
-  const randomString = generateRandomString(10);
-  const shareLink = 'https://example.com/share/' + randomString;
-  return shareLink;
-}
-
-// Function to handle the button click event
-function shareButtonClicked() {
-  const linkInput = document.getElementById('linkInput');
-  linkInput.value = generateShareLink();
-}
-
-// Add click event listener to the share button
-const shareButton = document.getElementById('shareButton');
-shareButton.addEventListener('click', shareButtonClicked);

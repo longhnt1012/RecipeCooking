@@ -24,6 +24,7 @@
 ----------------------------------- */
 
 /* ***** Fonts ***** */
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700|Quicksand:300,400,500,700|Shadows+Into+Light+Two');
 
 /* ***** Import CSS ***** */
@@ -120,7 +121,7 @@ p {
 
 .section_padding_0_80 {
     padding-top: 0;
-    padding-bottom: 80px;
+    padding-bottom: 40px;
 }
 
 img {
@@ -260,9 +261,7 @@ li {
     align-items: center;
     margin-bottom: 10px;
 }
-#linkInput {
-    width: 300px;
-  }
+
 .print-recipe {
     display: flex;
     justify-content: center;
@@ -593,7 +592,7 @@ li {
 -------------------- */
 
 .categories_area {
-    padding: 80px 0 50px 0;
+    padding: 50px 0 50px 0;
 }
 
 .single_catagory {
@@ -930,11 +929,11 @@ li {
 
 .widget-title>h6 {
     background: #fee2d9;
-    height: 55px;
+    height: 40px;
     width: 100%;
-    line-height: 52px;
+    line-height: 40px;
     border-radius: 2px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 .about-me-widget-thumb img {
@@ -1496,7 +1495,7 @@ li {
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
 }
-
+.personal-list
 #pattern-switcher.pattern-remove {
     right: -200px;
 }
@@ -1520,4 +1519,68 @@ li {
     color: #fff;
     cursor: pointer;
 }
-/* ------------------------------------------------------------ */
+/*Long css*/
+.show-more-button{
+    border-color:#fc6c3f;
+    border-style: solid;
+    padding: 15px 25px 15px 25px;
+    color: black;
+}
+.show-more-button:hover{
+    background-color: #fc6c3f;
+    color: white;
+}
+.my-favorite{
+    margin-bottom:30px;
+    
+}
+.personal-info-a,.change-password-a,.saved-items-a,.personal-recipes-a{
+    border-bottom-style: solid;border-color:whitesmoke;padding:10px 20px 10px 30px;
+
+    
+}
+.personal-info-a a,.change-password-a a,.saved-items-a a,.personal-recipes-a a{
+     font-size: 16px;
+     color:black;
+}
+.personal-info-a a:hover,.change-password-a a:hover,.saved-items-a a:hover,.personal-recipes-a a:hover{
+    
+    color: #fc6c3f;
+}
+.personal-info-a:hover,.change-password-a:hover,.saved-items-a:hover,.personal-recipes-a:hover{
+    background-color: whitesmoke;
+    border-left: solid 3px #fc6c3f;
+}
+.password{
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.save-password{
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px;
+    
+}
+.save-password-input{
+    padding: 5px 15px;
+    background-color: white;
+    color: black;
+    
+    
+}
+.save-password-input:hover{
+    background-color: #fc6c3f;
+    color:white;
+    
+}
+.personal-info-body ul li {
+    margin-bottom: 30px;
+}
+.ingredients ul li{
+    margin-bottom: 20px;
+    
+}
+
+
+
