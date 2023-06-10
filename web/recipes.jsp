@@ -3,7 +3,11 @@
     Created on : May 24, 2023, 1:53:17 PM
     Author     : Admin
 --%>
+<<<<<<< HEAD
 
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- 
     Document   : homepage
@@ -28,7 +32,11 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
+<<<<<<< HEAD
     <link href="css/style.css" rel="stylesheet">
+=======
+    <link href="style.css" rel="stylesheet">
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
@@ -56,7 +64,15 @@
                 <div class="col-5 col-sm-6">
                     <!--  Top Social bar start -->
                     <div class="top_social_bar">
+<<<<<<< HEAD
                         
+=======
+                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        
+                        <a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
+                        
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
                     </div>
                 </div>
                 <!--  Login Register Area -->
@@ -90,6 +106,7 @@
     <!-- ****** Top Header Area End ****** -->
 
     <!-- ****** Header Area Start ****** -->
+<<<<<<< HEAD
         <header class="header_area" style="background-color: #ebebeb;">
             <div class="container">
                 <div class="row">
@@ -134,6 +151,62 @@
             </div>
         </header>
         <!-- ****** Header Area End ****** -->
+=======
+    <header class="header_area">
+        <div class="container">
+            <div class="row">
+                <!-- Logo Area Start -->
+                <div class="col-12">
+                    <div class="logo_area text-center">
+                        <a href="index.html" class="yummy-logo">Yummy Blog</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav" aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars" aria-hidden="true"></i> Menu</button>
+                        <!-- Menu Area Start -->
+                        <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
+                            <ul class="navbar-nav" id="yummy-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="index.html">Home</a>
+                                        <a class="dropdown-item" href="recipes.jsp">Recipes</a>
+                                        <a class="dropdown-item" href="single.html">Single Blog</a>
+                                        <a class="dropdown-item" href="static.html">Static Page</a>
+                                        <a class="dropdown-item" href="contact.html">Contact</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Features</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="categories.jsp">Categories</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="recipes.jsp">Recipes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ****** Header Area End ****** -->
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
 
     <!-- ****** Breadcumb Area Start ****** -->
     <div class="breadcumb-area" style="background-image: url(img/bg-img/breadcumb.jpg);">
@@ -169,6 +242,52 @@
             <div class="row">
                 <!-- Single Post -->
                 
+<<<<<<< HEAD
+=======
+                <c:forEach var="item" varStatus="counter" items="${sessionScope.LIST_RECIPES}">
+                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-post wow fadeInUp" data-wow-delay="0.${counter.count}s">
+                        <!-- Post Thumb -->
+                        <div class="post-thumb">
+                            <img src="img/recipe-img/${item.picture}" alt="">
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <div class="post-meta d-flex">
+                                <div class="post-author-date-area d-flex">
+                                    <!-- Post Author -->
+                                    <div class="post-author">
+                                        <a href="#">By ${item.userID}</a>
+                                    </div>
+                                    <!-- Post Date -->
+                                    <div class="post-date">
+                                        <a href="#">${item.cookingTime}</a>
+                                    </div>
+                                </div>
+                                <!-- Post Comment & Share Area -->
+                                <div class="post-comment-share-area d-flex">
+                                    <!-- Post Favourite -->
+                                    <div class="post-favourite">
+                                        <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
+                                    </div>
+                                    <!-- Post Comments -->
+                                    <div class="post-comments">
+                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
+                                    </div>
+                                    <!-- Post Share -->
+                                    <div class="post-share">
+                                        <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <h4 class="post-headline">${item.recipeName}</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
                 
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
@@ -205,7 +324,11 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <a href="recipedetail.jsp">
+=======
+                            <a href="#">
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
                                 <h4 class="post-headline">Where To Get The Best Sunday Roast In The Cotswolds</h4>
                             </a>
                         </div>
@@ -710,6 +833,7 @@
     </section>
     <!-- ****** Archive Area End ****** -->
 
+<<<<<<< HEAD
     <!-- ****** Footer Menu Area Start ****** -->
                     <footer class="footer_area" style="background-color: #ebebeb;">
                         <div class="container">
@@ -746,6 +870,226 @@
                         </div>
                     </footer>
                     <!-- ****** Footer Menu Area End ****** -->
+=======
+    <!-- ****** Instagram Area Start ****** -->
+    <div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/1.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/2.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/3.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/4.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/5.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/6.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/1.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/2.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ****** Our Creative Portfolio Area End ****** -->
+
+    <!-- ****** Footer Social Icon Area Start ****** -->
+    <div class="social_icon_area clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-social-area d-flex">
+                        <div class="single-icon">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i><span>facebook</span></a>
+                        </div>
+
+                        <div class="single-icon">
+                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i><span>GOOGLE+</span></a>
+                        </div>
+
+                        <div class="single-icon">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****** Footer Social Icon Area End ****** -->
+
+    <!-- ****** Footer Menu Area Start ****** -->
+    <footer class="footer_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-content">
+                        <!-- Logo Area Start -->
+                        <div class="footer-logo-area text-center">
+                            <a href="index.html" class="yummy-logo">Life to eat</a>
+                        </div>
+                        <!-- Menu Area Start -->
+                        <nav class="navbar navbar-expand-lg">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#yummyfood-footer-nav" aria-controls="yummyfood-footer-nav"
+                                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"
+                                    aria-hidden="true"></i> Menu</button>
+                            <!-- Menu Area Start -->
+                            <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Features</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Categories</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Archive</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Copywrite Text -->
+                    <div class="copy_right_text text-center">
+                        <p>Copyright @2023 All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                aria-hidden="true"></i> by "Life to eat clean"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ****** Footer Menu Area End ****** -->
+>>>>>>> d15fe12938e4323f893d89364cb91eeffb7561fd
 
     <!-- Jquery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
