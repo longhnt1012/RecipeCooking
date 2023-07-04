@@ -149,9 +149,7 @@
                         <div class="col-sm-5">
                             <h2>Create Recipes</h2>
                         </div>
-                        <div class="col-sm-7">
-                            <a data-target="#addProductModal" data-toggle="modal" class="btn">Save</a>
-                        </div>
+                        
                     </div>
                     <div class="container">
                         <form action="MainController" method="POST">
@@ -159,8 +157,9 @@
                                 <h4 class="post-headline mt-15">Title</h4>
                                 <input class="form-control" type="text" name="recipeName" placeholder="Give your recipe a name"/>
                             </div>
-                            <div class="row justify-content-center mt-15">
-                                <button class="btn" type="button" name="recipeImage">Add source</button>
+                            <div class="row">
+                                <h4 class="post-headline mt-15">Image</h4>
+                                <input class="form-control" type="text" name="recipeImage" placeholder="Give your recipe image"/>
                             </div>
                             <div class="row">
                                 <label class="post-headline mt-15"><h4>Description</h4></label>
@@ -171,10 +170,14 @@
                             </div>
                             <div class="row" >
 
-                                <div class="col-12 col-md-2 col-lg-2" style="margin-left: -15px">
-                                    <input class="form-control" type="number" name="amountIngredients" min="1" placeholder="Amount" >
+                                <div class="col-8" style="margin-left: -25px">
+                                    <input class="form-control" type="text" name="nameIngredients" placeholder="Typing Ingredients" style="margin-left: 10px; margin-right: 10px" >
                                 </div>
-                                <div class="col-12 col-md-2 col-lg-2" >
+
+                                <div class="col-2"> 
+                                    <input class="form-control" type="text" name="amountIngredients" min="1" placeholder="Amount" style="margin-left: 10px" >
+                                </div>
+                                <div class="col-2 ">
                                     <select class="form-control" name="unitIngredients" style="margin-left: 10px;padding: 5px; text-align: center">
                                         <option value="g" >g</option>
                                         <option value="Cup">cup</option>
@@ -184,68 +187,69 @@
                                         <option value="kg">Kg</option>
                                     </select>
                                 </div>
-                                
-                                <div class="col-12 col-md-8 col-lg-8">
-                                    <input class="form-control" type="text" name="nameIngredients" placeholder="Typing Ingredients" style="margin-left: 30px" >
-                                </div>
-                                
+
 
                             </div>
                             <div class="row mt-4">
                                 <h6>+ Add More Ingredients</h6>
                             </div>
-                            <h4 class="post-headline row mt-15">Prep Time</h4>
-                            <div class="row">
-                                <div class="col-6 hihi">
-                                    <input class="form-control" type="text" name="recipePrepTime" placeholder="Hours"/>
-                                </div>
-                                <div class="col-6 hihi1">
-                                    <input class="form-control" type="text" name="recipePrepTime" placeholder="Minutes"/>
-                                </div>
-                            </div>
+
                             <h4 class="post-headline row mt-15">Cooking Time</h4>
                             <div class="row">
-                                <div class="col-6 hihi">
-                                    <input class="form-control" type="text" name="recipeCookingTime" placeholder="Hours"/>
+                                <div class="col-5 hihi">
+                                    <input class="form-control" type="text" name="recipeCookingTime" placeholder="Time..."/>
                                 </div>
-                                <div class="col-6 hihi1">
-                                    <input class="form-control" type="text" name="recipeCookingTime" placeholder="Minutes"/>
+                                <div class="col-6" style="display: inline-table">
+                                        <h5>minutes</h5>
+
                                 </div>
                             </div>
                             <h4 class="post-headline row mt-15">Stepping</h4>
-                            <div class="row">
-
-
-                                <input  class="form-control" type="text" name="recipeStepping" placeholder="Stepping" >
-
-                            </div>
-                            <h4 class="post-headline row mt-15">Nutritional: Per Serving</h4>
-                            <div class="row">
-                                <div class="col-3 col-md-3 col-lg-3">
-                                    <div class="row mt-15 mb-15"><h6 style="text-align: center">Calories</h6></div>
-                                    <div class="row">
-                                        <input type="number" name="calories" placeholder="Calories" min="0" >
-                                    </div>
+                            <div class="row" >
+                                <div class="col-2 hihi">
+                                    <input class="form-control" type="number" name="recipeStepping" placeholder="Type step ..."/>
                                 </div>
-                                <div class="col-3 col-md-3 col-lg-3">
-                                    <div class="row mt-15 mb-15">Fat</div>
-                                    <div class="row">
-                                        <input type="number" name="fat" placeholder="Fat" min="0">
-                                    </div>
-                                </div>
-                                <div class="col-3 col-md-3 col-lg-3">
-                                    <div class="row mt-15 mb-15">Protein</div>
-                                    <div class="row">
-                                        <input type="number" name="protein" placeholder="Protein" min="0">
-                                    </div>
-                                </div>
-                                <div class="col-3 col-md-3 col-lg-3">
-                                    <div class="row mt-15 mb-15">Carbs</div>
-                                    <div class="row">
-                                        <input type="number" name="carbs" placeholder="Carbs" min="0">
-                                    </div>
+                                <div class="col-10 hihi1">
+                                    <input class="form-control" type="text" name="recipeStepping" placeholder="Instructions...."/>
+                                </div>  
+                                <div class="row mt-4" style="margin-bottom: 40px;margin-left: 0px">
+                                    <h6>+ Add More Ingredients</h6>
                                 </div>
                             </div>
+                            <!-- <h4 class="post-headline row mt-15">Nutritional: Per Serving</h4>
+                             <div class="row">
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15"><h6 style="text-align: center">Calories</h6></div>
+                                     <div class="row">
+                                         <input type="number" name="calories" placeholder="Calories" min="0" >
+                                     </div>
+                                 </div>
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15">Fat</div>
+                                     <div class="row">
+                                         <input type="number" name="fat" placeholder="Fat" min="0">
+                                     </div>
+                                 </div>
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15">Protein</div>
+                                     <div class="row">
+                                         <input type="number" name="protein" placeholder="Protein" min="0">
+                                     </div>
+                                 </div>
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15">Carbs</div>
+                                     <div class="row">
+                                         <input type="number" name="carbs" placeholder="Carbs" min="0">
+                                     </div>
+                                 </div>
+                             </div>
+                            -->
+                            <div class="table-title-1 row">
+                                <div class="col-sm-12">
+                                    <a data-target="#addProductModal" data-toggle="modal" class="btn">Save</a>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -278,3 +282,41 @@
         <!-- Active JS -->
         <script src="js/active.js"></script>
     </body>
+    <style>
+        .table-title-1 {
+    padding-bottom: 15px;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 20px 20px 0 0;
+}
+.table-title-1 h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+}
+.table-title-1 .btn {
+    float: right;
+    font-size: 15px;
+    background: #fc6c3f;
+    min-width: 50px;
+    border-radius: 2px;
+    border: 2px solid #959695;
+    outline: none !important;
+}
+.table-title-1 .btn:hover {
+    color: white;
+    background-color: #e86c46;
+}
+
+.table-title-1 .btn i {
+    float: left;
+    font-size: 21px;
+    margin-right: 5px;
+}
+.table-title-1 .btn span {
+    color: black;
+    float: left;
+    margin-top: 2px;
+
+}      
+    </style>

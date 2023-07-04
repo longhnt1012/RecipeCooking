@@ -8182,7 +8182,7 @@ h1, h2, h3, h4, h5,
 .content {
   overflow: none;
   width: 100%;
- 
+  max-width: 790px;
   padding: 0px 0;
   height: 500px;
   position: relative;
@@ -8193,7 +8193,7 @@ h1, h2, h3, h4, h5,
 .events-container {
   overflow-y: scroll;
   height: 100%;
-  width: 33.33333%;
+  width: 50%;
   float: right;
   margin: 0px auto;
   display: inline-block;
@@ -8247,7 +8247,7 @@ h1, h2, h3, h4, h5,
   position: relative;
   margin: 0 auto;
   height: 100%;
-  width: 66.66666%;
+  width: 50%;
   background: #fff;
   font: 13px Helvetica, Arial, san-serif;
   display: inline-block;
@@ -8440,11 +8440,13 @@ h1, h2, h3, h4, h5,
   z-index: 5;
   background: #000;
   position: absolute;
-  width: 33.33333%;
+  width: 50%;
   height: 500px;
   top: 0;
   right: 0;
-  display: none; }
+  display: none; 
+ 
+  }
   @media (max-width: 767.98px) {
     .dialog {
       width: 100%; } }

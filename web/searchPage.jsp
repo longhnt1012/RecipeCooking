@@ -1,10 +1,11 @@
+<%-- 
+    Document   : searchPage
+    Created on : Jun 23, 2023, 4:04:52 PM
+    Author     : My PC
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -70,7 +71,7 @@ and open the template in the editor.
     <!-- ****** Top Header Area End ****** -->
 
     <!-- ****** Header Area Start ****** -->
-        <header class="header_area" >
+        <header class="header_area">
             <div class="container">
                 <div class="row">
                     <!-- Logo Area Start -->
@@ -95,9 +96,9 @@ and open the template in the editor.
                                                 class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="recipePage.html">Recipes</a>
+                                        <a class="nav-link active" href="recipePage.html">Recipes</a>
                                     </li>
-                                    <li class="nav-item  active">
+                                    <li class="nav-item ">
                                         <a class="nav-link" href="categories.jsp">Categories</a>
                                     </li>
                                     <li class="nav-item">
@@ -134,7 +135,7 @@ and open the template in the editor.
                             <ol class="breadcrumb">
                               <!--  <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Search "Keto"</li>-->
-                              <h1>Search: "Keto"</h1> 
+                              <h1>Search: "K"</h1> 
                             </ol>
                         </nav>
                     </div>
@@ -152,49 +153,7 @@ and open the template in the editor.
                        <!-- <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
                             <h2 style="margin-bottom: 30px;"></h2>
                         </div> -->
-                        <div class="col-md-4">
-                            <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                <!-- Post Thumb -->
-                                <div class="post-thumb">
-                                    <img src="img/blog-img/H a f s a.jpeg" alt=""/>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <div class="post-meta d-flex">
-                                        <div class="post-author-date-area d-flex">
-                                            <!-- Post Author -->
-                                            <div class="post-author">
-                                                <a href="#">By Marian</a>
-                                            </div>
-                                            <!-- Post Date -->
-                                            <div class="post-date">
-                                                <a href="#">May 19, 2017</a>
-                                            </div>
-                                        </div>
-                                        <!-- Post Comment & Share Area -->
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-                                            <div class="post-favourite">
-                                                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
-                                            </div>
-                                            <!-- Post Comments -->
-                                            <div class="post-comments">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
-                                            </div>
-                                            <!-- Post Share -->
-                                            <div class="post-share">
-                                                <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="recipePage.html">
-                                        <h4 class="post-headline">Where To Get The Best Coffee!!!
-                                        </h4>
-                                    </a>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-4">
                             <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                 <!-- Post Thumb -->
@@ -469,4 +428,3 @@ and open the template in the editor.
 }
     
 </style>
-
