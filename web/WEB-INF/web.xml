@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+<<<<<<< HEAD
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>sample.controller.NewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
+=======
+        <servlet-name>MainController</servlet-name>
+        <servlet-class>sampe.controller.MainController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainController</servlet-name>
+        <url-pattern>/MainController</url-pattern>
+>>>>>>> da3d2f22422c1b74d756e56f2df4f6e0717353cb
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,6 +23,10 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
+<<<<<<< HEAD
         <welcome-file>MainController</welcome-file>
+=======
+        <welcome-file>mainpage.html</welcome-file>
+>>>>>>> da3d2f22422c1b74d756e56f2df4f6e0717353cb
     </welcome-file-list>
 </web-app>

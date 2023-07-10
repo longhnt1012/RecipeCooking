@@ -7,8 +7,13 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
+<<<<<<< HEAD
 <project name="RecipeOrganizer" default="default" basedir=".">
     <description>Builds, tests, and runs the project RecipeOrganizer.</description>
+=======
+<project name="RecipeCookingMainFlow" default="default" basedir=".">
+    <description>Builds, tests, and runs the project RecipeCookingMainFlow.</description>
+>>>>>>> da3d2f22422c1b74d756e56f2df4f6e0717353cb
     <import file="nbproject/build-impl.xml"/>
     <!--
 
