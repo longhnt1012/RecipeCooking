@@ -1,33 +1,38 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package swp.ro.CategoryOfRecipes;
 
 /**
  *
- * @author truc0
+ * @author Admin
  */
 public class CategoryOfRecipesDTO {
-    private int ID;
+    private int corID;
     private int categoryID;
     private int recipeID;
-
+    private String categoryName;
+    private String recipeName;
+    
     public CategoryOfRecipesDTO() {
     }
 
-    public CategoryOfRecipesDTO(int ID, int categoryID, int recipeID) {
-        this.ID = ID;
+    public CategoryOfRecipesDTO(int corID, int categoryID, int recipeID, String categoryName, String recipeName) {
+        this.corID = corID;
         this.categoryID = categoryID;
         this.recipeID = recipeID;
+        this.categoryName = categoryName;
+        this.recipeName = recipeName;
     }
 
-    public int getID() {
-        return ID;
+    public int getCorID() {
+        return corID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setCorID(int corID) {
+        this.corID = corID;
     }
 
     public int getCategoryID() {
@@ -46,9 +51,19 @@ public class CategoryOfRecipesDTO {
         this.recipeID = recipeID;
     }
 
-    @Override
-    public String toString() {
-        return "CategoryOfRecipesDTO{" + "ID=" + ID + ", categoryID=" + categoryID + ", recipeID=" + recipeID + '}';
+    public String getCategoryName() {
+        return categoryName;
     }
-    
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
 }

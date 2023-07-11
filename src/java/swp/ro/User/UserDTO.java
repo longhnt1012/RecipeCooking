@@ -17,24 +17,21 @@ import java.util.Date;
 public class UserDTO {
     private int userID;
     private String userName;
-    private String firstName;
-    private String lastName;
     private Date dob;
     private boolean gender;
     private String phone;
     private String gmail;
     private String password;
     private String role;
-    private boolean status;  
+    private boolean status; 
+    private String imageUser;
 
     public UserDTO() {
     }
 
-    public UserDTO(int userID, String userName, String firstName, String lastName, Date dob, boolean gender, String phone, String gmail, String password, String role, boolean status) {
+    public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String role, boolean status) {
         this.userID = userID;
         this.userName = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.dob = dob;
         this.gender = gender;
         this.phone = phone;
@@ -44,6 +41,20 @@ public class UserDTO {
         this.status = status;
     }
 
+    public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String role, boolean status, String imageUser) {
+        this.userID = userID;
+        this.userName = userName;
+        this.dob = dob;
+        this.gender = gender;
+        this.phone = phone;
+        this.gmail = gmail;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+        this.imageUser = imageUser;
+    }
+
+    
     public int getUserID() {
         return userID;
     }
@@ -58,22 +69,6 @@ public class UserDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Date getDob() {
@@ -132,9 +127,19 @@ public class UserDTO {
         this.status = status;
     }
 
+    public String getImageUser() {
+        return imageUser;
+    }
+
+    public void setImageUser(String imageUser) {
+        this.imageUser = imageUser;
+    }
+
+    
+
     @Override
     public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", role=" + role + ", status=" + status + '}';
+        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", role=" + role + ", status=" + status + '}';
     }
 
 }

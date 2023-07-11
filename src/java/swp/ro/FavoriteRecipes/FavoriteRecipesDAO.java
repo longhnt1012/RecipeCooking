@@ -4,7 +4,7 @@
  */
 package swp.ro.FavoriteRecipes;
 
-import DBUtil.DBUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +30,7 @@ public class FavoriteRecipesDAO {
         Map<Integer, Integer> map = new HashMap<>();
         int totalComments = 0;
         try {
-            conn = DBUtil.makeConnection();
+            conn = DBUtil.DBContext.getConnection();
             if (conn != null) {
                 for (RecipeDTO recipe : list) {
 //                    ptm = conn.prepareStatement(SEARCH);
@@ -64,7 +64,7 @@ public class FavoriteRecipesDAO {
         }
         return map;
     }
-    public int getTotalCommentsForRecipe(int recipeID) throws SQLException {
+    public int getTotalCommentsForRecipe(int recipeID) throws SQLException, ClassNotFoundException {
         int totalComments = 0;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -72,7 +72,7 @@ public class FavoriteRecipesDAO {
 
         try {
             // Kết nối đến cơ sở dữ liệu (DBUtil.makeConnection() là phương thức giả định)
-            conn = DBUtil.makeConnection();
+            conn = DBUtil.DBContext.getConnection();
 
             if (conn != null) {
                 // Chuẩn bị truy vấn SQL

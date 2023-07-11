@@ -4,7 +4,8 @@
  */
 package swp.ro.rating;
 
-import DBUtil.DBUtil;
+
+import DBUtil.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +51,7 @@ public class RatingDAO {
         listNameRecipe.add("Broken Rice");
         
         try {
-            conn = DBUtil.makeConnection();
+            conn = DBContext.getConnection();
             if (conn != null) {
                 for (String list : listNameRecipe) {
                     ptm = conn.prepareStatement(RATING_RECIPE_HOME);
@@ -102,7 +103,7 @@ public class RatingDAO {
         listNameRecipe.add("Broken Rice");
         
         try {
-            conn = DBUtil.makeConnection();
+             conn = DBContext.getConnection();
             if (conn != null) {
                 for (String list : listNameRecipe) {
                     ptm = conn.prepareStatement(RATING_TOTAL_RECIPE);

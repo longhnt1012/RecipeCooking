@@ -22,9 +22,24 @@ public class RecipeDTO {
     private double cookingTime;
     private String image;
     private boolean status;
+    private String userName;
 
     public RecipeDTO() {
     }
+
+    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String instruction, String description, double cookingTime, String image, boolean status, String userName) {
+        this.recipeID = recipeID;
+        this.userID = userID;
+        this.recipeName = recipeName;
+        this.datePost = datePost;
+        this.instruction = instruction;
+        this.description = description;
+        this.cookingTime = cookingTime;
+        this.image = image;
+        this.status = status;
+        this.userName = userName;
+    }
+    
 
     public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String instruction, String description, double cookingTime, String image, boolean status) {
         this.recipeID = recipeID;
@@ -108,6 +123,14 @@ public class RecipeDTO {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
