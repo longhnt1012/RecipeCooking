@@ -31,7 +31,7 @@ public class UserDAO {
         loginUser.setUserName(userName);
         loginUser.setPassword(password);
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(LOGIN);
                 ptm.setString(1, userName);
@@ -69,7 +69,7 @@ public class UserDAO {
         List<UserDTO> listUser = new ArrayList<>();
 
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_USER);
                 ptm.setString(1, "%" + search + "%");
@@ -110,7 +110,7 @@ public class UserDAO {
         List<UserDTO> listUser = new ArrayList<>();
 
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_CATEGORY);
                 ptm.setString(1, searchCategory);

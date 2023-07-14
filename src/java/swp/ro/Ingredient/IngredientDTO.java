@@ -25,13 +25,6 @@ public class IngredientDTO {
         this.quantity = quantity;
         this.unit = unit;
     }
-     public IngredientDTO(String ingredientName, int recipeID, double quantity, String unit) {
-        this.ingredientID = ingredientID;
-        this.ingredientName = ingredientName;
-        this.recipeID = recipeID;
-        this.quantity = quantity;
-        this.unit = unit;
-    }
 
     public int getIngredientID() {
         return ingredientID;

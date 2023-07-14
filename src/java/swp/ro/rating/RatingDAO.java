@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import swp.ro.Recipe.RecipeDTO;
-
+import java.lang.Math;
 /**
  *
  * @author truc0
@@ -26,31 +26,31 @@ public class RatingDAO {
     private static final String RATING_TOTAL_RECIPE="SELECT SUM([scoreUser]) as SUMScore\n" +
                                                     " FROM (SELECT re.recipeID, recipeName,ra.scoreUser, ra.userID FROM [Recipe] re inner join [Rating] ra on re.recipeID=ra.recipeID \n" +
                                                     " where recipeName=? ) AS [R]";
-    public Map<String, Integer>  getListRating() throws SQLException {
+    public Map<String, Double>  getListRating() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         List<RatingDTO> listRecipe = new ArrayList<>();
         List<String> listNameRecipe = new ArrayList<>();
-        Map<String, Integer> listRating = new HashMap();
+        Map<String, Double> listRating = new HashMap();
         listNameRecipe.add("Homemade Pho");
-        listNameRecipe.add("Easy Spaghetti Bolognese");
-        listNameRecipe.add("Beefsteak");
-        listNameRecipe.add("Baked Salmon - Leek parcel");
-        listNameRecipe.add("Chicken Fries");
-        listNameRecipe.add("Aubergine - chickpea stew");
-        listNameRecipe.add("Baked Kale Chips");
-        listNameRecipe.add("Maple Salmon");
-        listNameRecipe.add("Miso Soup");
-        listNameRecipe.add("Green Salad");
-        listNameRecipe.add("Hambuger Vegetables");
-        listNameRecipe.add("Pineapple And Banana Smoothie");
-        listNameRecipe.add("Baked Salmon - Leek Parcel");
-        listNameRecipe.add("Pho");
-        listNameRecipe.add("Broken Rice");
+//        listNameRecipe.add("Easy Spaghetti Bolognese");
+//        listNameRecipe.add("Beefsteak");
+//        listNameRecipe.add("Baked Salmon - Leek parcel");
+//        listNameRecipe.add("Chicken Fries");
+//        listNameRecipe.add("Aubergine - chickpea stew");
+//        listNameRecipe.add("Baked Kale Chips");
+//        listNameRecipe.add("Maple Salmon");
+//        listNameRecipe.add("Miso Soup");
+//        listNameRecipe.add("Green Salad");
+//        listNameRecipe.add("Hambuger Vegetables");
+//        listNameRecipe.add("Pineapple And Banana Smoothie");
+//        listNameRecipe.add("Baked Salmon - Leek Parcel");
+//        listNameRecipe.add("Pho");
+//        listNameRecipe.add("Broken Rice");
         
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 for (String list : listNameRecipe) {
                     ptm = conn.prepareStatement(RATING_RECIPE_HOME);
@@ -58,7 +58,9 @@ public class RatingDAO {
                     rs = ptm.executeQuery();
                     if (rs.next()) {
                         double score = rs.getDouble("AVGScore");
-                        listRating.put(list.toString(), (int) Math.round(score) );
+                        listRating.put(list.toString(), score );
+                        double x =Math.floor(score) ;
+                        double x1 =Math.floor(score) ;
                     }
                 }
                 
@@ -77,7 +79,7 @@ public class RatingDAO {
             }
         }
         return listRating;   
-    }
+    } 
     public Map<String, Integer>  getTotalRating() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -102,7 +104,7 @@ public class RatingDAO {
         listNameRecipe.add("Broken Rice");
         
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 for (String list : listNameRecipe) {
                     ptm = conn.prepareStatement(RATING_TOTAL_RECIPE);

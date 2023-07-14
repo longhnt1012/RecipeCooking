@@ -227,7 +227,7 @@
                                 <div class="col-6 col-md-6">
                                     <%
                                             List<RecipeDTO> listRecipe = (List<RecipeDTO>) session.getAttribute("SEARCH_LIST_NAME_RECIPE");
-                                            Map<String, Integer> listRating = (Map<String, Integer>) session.getAttribute("LIST_RATING_RECIPE");
+                                            Map<String, Double> listRating = (Map<String, Double>) session.getAttribute("LIST_RATING_RECIPE");
                                             Map<String, Integer> listTotalRating = (Map<String, Integer>) session.getAttribute("LIST_TOTAL_RATING");
                                         %>
                                         <%
@@ -254,26 +254,26 @@
                                         <!-- Post Share -->
                                        
                                     </div>
-                                    <span class="fa fa-star <% if (listRating.get("Pho") >= 1) {
+                                    <span class="fa fa-star <% if (listRating.get("Homemade Pho") >= 1 ) {
                                               %>checked
                                               <%
                                                   }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 2) {
+                                        <span class="fa fa-star <% if (listRating.get("Homemade Pho")>= 2) {
                                               %>checked
                                               <%
                                                   }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 3) {
+                                        <span class="fa fa-star <% if (listRating.get("Homemade Pho") >= 3) {
                                               %>checked
                                               <%
                                                   }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 4) {
+                                        <span class="fa fa-star <% if (Math.floor(listRating.get("Homemade Pho")) >= 4) {
                                               %>checked
                                               <%
                                                   }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") == 5) {
+                                        <span class="fa fa-star <% if (Math.floor(listRating.get("Homemade Pho")) == 5) {
                                               %>checked
                                               <%}%>"></span>
-                                        <span > <%=listTotalRating.get("Pho")%> ratings</span>
+                                        <span > <%=listRating.get("Homemade Pho")%> ratings</span>
                                    
                                 </div>
 

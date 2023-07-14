@@ -36,8 +36,6 @@ public class MainController extends HttpServlet {
     private final static String SEARCH="SearchHome";
     private final static String SEARCH_CONTROLLER="SearchHomeController";
     private final static String LOGIN_GMAIL_CONTROLLER="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8084/PRI301_3BW_SP23_JSP_JSTL/LoginGoogleServlet&response_type=code&client_id=212109708525-gfv9i56jfe3f8ji2cvh13u19o0durodt.apps.googleusercontent.com&approval_prompt=force";
-    private final static String CREATE_ISC = "CreateISC";
-    private final static String CREATE_ISC_CONTROLLER = "CreateISCController"; 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,11 +43,11 @@ public class MainController extends HttpServlet {
         String url=ERROR;
         try {
             String action=request.getParameter("action");
-            if(action==null){
+             if(action==null){
                 RecipeDAO dao = new RecipeDAO();
                 RatingDAO daoRating = new RatingDAO();
                 List<RecipeDTO> list = dao.getListRecipeHome();
-                Map<String, Integer> listRating = daoRating.getListRating();
+                Map<String, Double> listRating = daoRating.getListRating();
                 Map<String, Integer> listTotalRating = daoRating.getTotalRating();
                 HttpSession session=request.getSession();
                 session.setAttribute("SEARCH_LIST_NAME_RECIPE", list); 
@@ -62,8 +60,6 @@ public class MainController extends HttpServlet {
                 url=SEARCH_CONTROLLER;
             }else if(CREATE_RECIPE.equals(action)){
                 url=CREATE_RECIPE_CONTROLLER;
-            }else if(CREATE_ISC.equals(action)){
-                url=CREATE_ISC_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController:" + e.toString());

@@ -168,7 +168,7 @@
                                     <input class="form-control" type="number" step="0.1" name="quantity" min="1" placeholder="Amount" style="margin-left: 10px" >
                                 </div>
                                 <div class="col-2" style="display: inline-table,margin-top: 2px">
-                                    <input class="form-control" type="text" name="unit" placeholder="Unit" style="margin-left: 10px" >
+                                    <h5>gram</h5>
 
                                 </div>
                                 <div class="input_fields_wrap" style="margin-top: 20px">
@@ -224,8 +224,8 @@
         </footer>
         <!-- Jquery-2.2.4 js -->
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="js/js/addMore/addMoreStep.js"></script>
-        <script src="js/js/addMore/addMoreIngre.js"></script>
+        <script src="js/addMore/addMoreS.js"></script>
+        <script src="js/addMore/addMoreI.js"></script>
 
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>

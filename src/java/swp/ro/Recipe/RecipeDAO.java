@@ -31,31 +31,6 @@ public class RecipeDAO {
     private static final String SEARCH_USER ="SELECT * FROM [User] WHERE userID IN (SELECT distinct userID FROM Recipe where recipeName like ? AND STATUS =1 )";
     private static final String SEARCH_NAME_RECIPE_HOME = "SELECT recipeID, userID, recipeName, datePost, description, cookingTime, image FROM Recipe where recipeName = ? AND STATUS =1";
     private static final String INSERT_RECIPE="INSERT INTO [Recipe] (userID, recipeName,datePost,description,cookingTime,image,status) VALUES (?,?,?,?,?,?,0)";
-        private static final String GET_NEW = "select TOP 1 recipeID from Recipe order by recipeID DESC";
-    
-
-    public int getNewRecipeID() throws SQLException, ClassNotFoundException {
-        int recipeID = 1;
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try{
-            conn = DBUtil.getConnection();
-            ptm = conn.prepareStatement(GET_NEW);
-            rs = ptm.executeQuery();
-            while(rs.next()){
-           RecipeDTO recipe = new RecipeDTO();
-           recipe.setRecipeID(rs.getInt("recipeID"));                
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
-        }
-        return recipeID;
-    }
     
     public List<RecipeDTO> getListSearchRecipe(String search) throws SQLException {
         Connection conn = null;
@@ -64,7 +39,7 @@ public class RecipeDAO {
         List<RecipeDTO> listRecipe = new ArrayList<>();
         
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH);
                 ptm.setString(1, "%" + search + "%");
@@ -104,7 +79,7 @@ public class RecipeDAO {
         ResultSet rs = null;
         String recipe = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH);
                 ptm.setString(1, search);
@@ -137,7 +112,7 @@ public class RecipeDAO {
         List<RecipeDTO> listRecipe = new ArrayList<>();
         
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_CATETAGORY);
                 ptm.setString(1, searchCategory );
@@ -193,7 +168,7 @@ public class RecipeDAO {
         listNameRecipe.add("Broken Rice");
         
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 for (String list : listNameRecipe) {
                     ptm = conn.prepareStatement(SEARCH_NAME_RECIPE_HOME);
@@ -233,16 +208,22 @@ public class RecipeDAO {
        Connection con = null;
        PreparedStatement ptm = null;
        try{
-           con=DBUtil.getConnection();
+           con=DBUtil.makeConnection();
            if(con != null){
                ptm=con.prepareStatement(INSERT_RECIPE);
+               int userID=recipe.getUserID();
+               String recipeName = recipe.getRecipeName();
                SimpleDateFormat datePost = new SimpleDateFormat("yyyy-MM-dd");
+               String datepost = datePost.format(recipe.getDatePost());
+               String description = recipe.getDescription();
+               String image = recipe.getImage();
+               double cooking = recipe.getCookingTime();
                ptm.setInt(1, recipe.getUserID());
                ptm.setString(2, recipe.getRecipeName());
                ptm.setString(3, datePost.format(recipe.getDatePost()));
                ptm.setString(4, recipe.getDescription());
-               ptm.setDouble(5, recipe.getCookingTime());
-               ptm.setString(6, recipe.getImage());               
+               ptm.setString(5, recipe.getImage());
+               ptm.setDouble(6, recipe.getCookingTime());               
                check = ptm.executeUpdate()>0?true:false;   
            }
            

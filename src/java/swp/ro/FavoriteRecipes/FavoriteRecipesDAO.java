@@ -30,7 +30,7 @@ public class FavoriteRecipesDAO {
         Map<Integer, Integer> map = new HashMap<>();
         int totalComments = 0;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
             if (conn != null) {
                 for (RecipeDTO recipe : list) {
 //                    ptm = conn.prepareStatement(SEARCH);
@@ -72,7 +72,7 @@ public class FavoriteRecipesDAO {
 
         try {
             // Kết nối đến cơ sở dữ liệu (DBUtil.makeConnection() là phương thức giả định)
-            conn = DBUtil.getConnection();
+            conn = DBUtil.makeConnection();
 
             if (conn != null) {
                 // Chuẩn bị truy vấn SQL

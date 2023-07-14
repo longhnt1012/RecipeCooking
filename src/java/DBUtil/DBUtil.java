@@ -16,11 +16,11 @@ import java.util.logging.Logger;
  * @author truc0
  */
 public class DBUtil {
-     public static Connection getConnection() {
+    public static Connection makeConnection() {
         Connection conn = null;
         try {
 
-            String dbURL = "jdbc:sqlserver://LAPTOP-ED34OS6R;databaseName=RecipeOrganizer;encrypt=true;trustServerCertificate=true;";
+            String dbURL = "jdbc:sqlserver://DESKTOP-8O80KD9;databaseName=RecipeOrganizer;encrypt=true;trustServerCertificate=true;";
             String user = "sa";
             String pass = "12345";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -48,7 +48,7 @@ public class DBUtil {
     public static void main(String[] args) throws SQLException {
         
         System.out.println("This is to test if we can connect to SQLServer");
-        Connection conn = getConnection();
+        Connection conn = makeConnection();
         DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
         System.out.println("Driver name: " + dm.getDriverName());
         System.out.println("Driver version: " + dm.getDriverVersion());
