@@ -9,31 +9,25 @@ package swp.ro.CategoryOfRecipes;
  * @author truc0
  */
 public class CategoryOfRecipesDTO {
-    private int corID;
+    private int ID;
     private int categoryID;
     private int recipeID;
-    private String categoryName;
-    private String recipeName;
-    private boolean status;
-    
+
     public CategoryOfRecipesDTO() {
     }
 
-    public CategoryOfRecipesDTO(int corID, int categoryID, int recipeID, String categoryName, String recipeName, boolean status) {
-        this.corID = corID;
+    public CategoryOfRecipesDTO(int ID, int categoryID, int recipeID) {
+        this.ID = ID;
         this.categoryID = categoryID;
         this.recipeID = recipeID;
-        this.categoryName = categoryName;
-        this.recipeName = recipeName;
-        this.status = status;
     }
 
-    public int getCorID() {
-        return corID;
+    public int getID() {
+        return ID;
     }
 
-    public void setCorID(int corID) {
-        this.corID = corID;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getCategoryID() {
@@ -52,28 +46,9 @@ public class CategoryOfRecipesDTO {
         this.recipeID = recipeID;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getRecipeName() {
-        return recipeName;
-    }
-
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    @Override
+    public String toString() {
+        return "CategoryOfRecipesDTO{" + "ID=" + ID + ", categoryID=" + categoryID + ", recipeID=" + recipeID + '}';
     }
     
 }

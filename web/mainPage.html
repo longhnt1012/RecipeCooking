@@ -1,7 +1,4 @@
-<%@page import="java.util.Map"%>
-<%@page import="swp.ro.Recipe.RecipeDTO"%>
-<%@page import="swp.ro.Recipe.RecipeDTO"%>
-<%@page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,14 +58,14 @@
                             </div>
                             <div class="search-hidden-form justify-content-end align-items-center ">
                                 <form action="MainController" method="POST">
-                                        <input type="text" name="search" id="search-anything"
-                                               placeholder="Search Anything...">
-                                        <input type="submit" name="action" value="SearchHome" class="d-none">
-                                        <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                    </form>
+                                    <input type="text" name="search" id="search-anything"
+                                        placeholder="Search Anything...">
+                                    <input type="submit" name="action" value="SearchHome" class="d-none">
+                                    <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                </form>
                             </div>
                         </div>
-                         <div class="login_register_area d-flex col-4 col-sm-4">
+                        <div class="login_register_area d-flex col-4 col-sm-4">
                             <div class="login">
                                 <a href="loginPage.html">Sign in</a>
                             </div>
@@ -92,7 +89,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="mainpage.jsp" class="yummy-logo">Flavorful Creations</a>
+                        <a href="index.html" class="yummy-logo">Flavorful Creations</a>
                     </div>
                 </div>
             </div>
@@ -107,29 +104,29 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="mainpage.jsp">Home <span
+                                    <a class="nav-link" href="mainPage.html">Home <span
                                             class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="recipespage.jsp">Recipes</a>
+                                    <a class="nav-link" href="recipesPage.html">Recipes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="categories.jsp">Categories</a>
+                                    <a class="nav-link" href="categories.html">Categories</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
+                                        <a class="dropdown-item" href="loginPage.html">Add a recipe</a>
 
-                                        <a class="dropdown-item" href="#">My favorites</a>
-                                        <a class="dropdown-item" href="myfavorite.html">Saved</a>
-                                        
+                                        <a class="dropdown-item" href="loginPage.html">My favorites</a>
+                                        <a class="dropdown-item" href="loginPage.html">Saved</a>
+
                                     </div>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="planpage.jsp">Meal Plan</a>
+                                    <a class="nav-link" href="loginPage.html">Meal Plan</a>
                                 </li>
 
                             </ul>
@@ -146,9 +143,9 @@
 
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="categories.jsp">
+                <a href="categories.jsp ">
                     <img src="img/sidebar-img/healthyfoodslogan.png" alt="Trending" style="">
-            </a>
+                </a>
             </div>
         </div>
     </div>
@@ -158,7 +155,7 @@
     <!-- ****** Welcome Area End ****** -->
 
     <!-- ****** Categories Area Start ****** -->
-     <section class="categories_area clearfix" id="about">
+    <section class="categories_area clearfix" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
@@ -216,25 +213,12 @@
                         <li style="margin-bottom: 30px;">
                             <div class="row">
                                 <div class="col-6 col-md-6">
-                                    <%
-                                            List<RecipeDTO> listRecipe = (List<RecipeDTO>) session.getAttribute("SEARCH_LIST_NAME_RECIPE");
-                                            Map<String, Integer> listRating = (Map<String, Integer>) session.getAttribute("LIST_RATING_RECIPE");
-                                            Map<String, Integer> listTotalRating = (Map<String, Integer>) session.getAttribute("LIST_TOTAL_RATING");
-                                        %>
-                                        <%
-                                            for (RecipeDTO list : listRecipe) {
-                                                if (list.getRecipeName().equals("Homemade Pho")) {
-                                        %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
-                                        <%
-                                                    break;
-                                                }
-                                            }
-                                        %>
+                                    <img src="img/sidebar-img/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg"
+                                        alt="" style="width: 100%;">
                                 </div>
                                 <div class="col-6 col-md-6">
-                                  <a href="MainController?action=SearchHome&searchRecipe=Homemade Pho"><h3>Homemade Pho</h3></a>
                                     
+                                    <a href="MainController?action=SearchHome&searchRecipe=Homemade Pho"><h5>Homemade Pho</h5></a>
                                     <div class="post-comment-share-area d-flex">
                                         <!-- Post Favourite -->
                                         
@@ -245,26 +229,12 @@
                                         <!-- Post Share -->
                                        
                                     </div>
-                                    <span class="fa fa-star <% if (listRating.get("Pho") >= 1) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 2) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 3) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 4) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") == 5) {
-                                              %>checked
-                                              <%}%>"></span>
-                                        <span > <%=listTotalRating.get("Pho")%> ratings</span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star" style="margin-right: 10px;"></span>
+                                    <span > 300 ratings</span>
                                    
                                 </div>
 
@@ -274,24 +244,15 @@
                         <li style="margin-bottom: 30px;">
                             <div class="row">
                                 <div class="col-6 col-md-6">
-                                    <%
-                                            for (RecipeDTO list : listRecipe) {
-                                                if (list.getRecipeName().equals("Beefsteak")) {
-                                        %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
-                                        <%
-                                                    break;
-                                                }
-                                            }
-                                        %>
-                                        <img src="img/sidebar-img/steak_10_b1b1397477ea4c8ca1f215989632a614_1024x1024.jpg"
-                                             alt="" style="width: 100%;">
+                                    <img src="img/sidebar-img/steak_10_b1b1397477ea4c8ca1f215989632a614_1024x1024.jpg"
+                                        alt="" style="width: 100%;">
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <a href="MainController?action=SearchHome&searchRecipe=Beefsteak">
+                                    <!--<a href="beefsteak.html">
+                                        
                                         <h5>Beefsteak</h5>
-                                    </a>
-                                    
+                                    </a>-->
+                                    <a href="MainController?action=SearchHome&searchRecipe=Beefsteak"><h5>Beefsteak</h5></a>
                                     <div class="post-comment-share-area d-flex">
                                         <!-- Post Favourite -->
                                         
@@ -320,8 +281,8 @@
                                     <img src="img/sidebar-img/chikenfries.jpg" alt="" style="width: 100%;height: 95%;">
                                 </div>
                                 <div class="col-6 col-md-6">
+                                    <!--<a href="chickenfries.html"><h5>Chicken Fries</h5></a>-->
                                     <a href="MainController?action=SearchHome&searchRecipe=Chicken Fries"><h5>Chicken Fries</h5></a>
-                                    
                                     <div class="post-comment-share-area d-flex">
                                         <!-- Post Favourite -->
                                         
@@ -355,11 +316,10 @@
                                     <img src="img/sidebar-img/download (1).jpeg" alt="" style="width: 100%;">
                                 </div>
                                 <div class="col-6 col-md-6">
-                                   <a href="MainController?action=SearchHome&searchRecipe=Easy Spaghetti Bolognese">
-                                    <h4>Easy spaghetti Bolognese
-                                    </h4>
-                                   </a>
-                                    
+                                   <!--<a href="">
+                                    <h4>Easy spaghetti Bolognese</h4>
+                                   </a>-->
+                                    <a href="MainController?action=SearchHome&searchRecipe=Easy Spaghetti Bolognese"><h5>Easy Spaghetti Bolognese</h5></a>
                                     <div class="post-comment-share-area d-flex">
                                         <!-- Post Favourite -->
                                         
@@ -389,10 +349,12 @@
                                         style="width: 100%;height: 95%;">
                                 </div>
                                 <div class="col-6 col-md-6">
-                                   <a href="MainController?action=SearchHome&searchRecipe=Baked Salmon-Leek Parcel">
+                                   <!--<a href="baked-salmon-recipes.html">
                                     <h5>Baked Salmon & Leek parcel
                                     </h5>
-                                </a>
+                                </a>-->
+                                    <a href="MainController?action=SearchHome&searchRecipe=Baked Salmon-Leek Parcel"><h5>Baked Salmon & Leek parcel</h5></a>
+                                   
                                     <div class="post-comment-share-area d-flex">
                                         <!-- Post Favourite -->
                                         
@@ -422,8 +384,9 @@
                                 </div>
                                 <div class="col-6 col-md-6">
                                     
-                                    <h5>Aubergine & chickpea stew
-                                    </h5>
+                                    <!--<h5>Aubergine & chickpea stew
+                                    </h5>-->
+                                    <a href="MainController?action=SearchHome&searchRecipe=Aubergine-chickpea Stew"><h5>Aubergine & chickpea stew</h5></a>
                                     <div class="post-comment-share-area d-flex">
                                         <!-- Post Favourite -->
                                         
@@ -475,7 +438,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -488,11 +451,8 @@
                                     <span class="fa fa-star checked" style="margin-right: 10px;"></span>
                                     <span > 300 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Baked Kale Chips">
-                                        <h4 class="post-headline">Baked Kale Chips
-                                        </h4>
-                                    </a>
-
+                                    <!--<a href="#"><h4 class="post-headline">Baked Kale Chips</h4></a>-->
+                                    <a href="MainController?action=SearchHome&searchRecipe=Baked Kale Chips"><h4>Baked Kale Chips</h4></a>
                                 </div>
                             </div>
                         </div>
@@ -508,7 +468,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -541,7 +501,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -574,7 +534,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -607,7 +567,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -640,7 +600,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -674,7 +634,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -707,7 +667,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -740,7 +700,7 @@
                                         <div class="post-author-date-area d-flex">
                                             <!-- Post Author -->
                                             <div class="post-author">
-                                                <a href="#">By Th‡nh Long</a>
+                                                <a href="#">By Th√†nh Long</a>
                                             </div>
                                             <!-- Post Date -->
                                            
@@ -805,7 +765,7 @@
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
                                    <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="mainpage.html">Home <span
+                                    <a class="nav-link" href="mainPage.html">Home <span
                                             class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
@@ -850,6 +810,7 @@
             </div>
         </div>
     </footer>
+
     <!-- ****** Footer Menu Area End ****** -->
 
     <!-- Jquery-2.2.4 js -->

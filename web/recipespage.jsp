@@ -1,7 +1,4 @@
-<%@page import="java.util.Map"%>
-<%@page import="swp.ro.Recipe.RecipeDTO"%>
-<%@page import="swp.ro.Recipe.RecipeDTO"%>
-<%@page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +24,7 @@
 </head>
 
 <body>
-    <!-- Preloader Start -->
+       <!-- Preloader Start -->
     <div id="preloader">
         <div class="yummy-load"></div>
     </div>
@@ -60,21 +57,30 @@
                                 <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                             </div>
                             <div class="search-hidden-form justify-content-end align-items-center ">
-                                <form action="MainController" method="POST">
-                                        <input type="text" name="search" id="search-anything"
-                                               placeholder="Search Anything...">
-                                        <input type="submit" name="action" value="SearchHome" class="d-none">
-                                        <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                    </form>
+                                <form action="MainController" method="GET">
+                                    <input type="text" name="search" id="search-anything"
+                                        placeholder="Search Anything...">
+                                    <input type="submit" name="action" value="Search" class="d-none">
+                                    <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                </form>
                             </div>
                         </div>
-                         <div class="login_register_area d-flex col-4 col-sm-4">
-                            <div class="login">
-                                <a href="loginPage.html">Sign in</a>
-                            </div>
-                            <div class="register">
-                                <a href="register.html">Sign up</a>
-                            </div>
+                        <div class="login_register_area d-flex col-4 col-sm-4">
+                            <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>Hi Long${sessionScope.USER_ID.fullName}</h7></a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="view-public-info.html">Your Profile</a>
+
+                                        <a class="dropdown-item" href="changepass.html">Change Password</a>
+                                        <a class="dropdown-item" href="myfavorite.html">Your Saved</a>
+                                        <form action="MainController" method="POST">
+                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                        </form>
+                                        
+
+                                    </div>
+                                </li>
                         </div>
                     </div>
                 </div>
@@ -106,11 +112,11 @@
                         <!-- Menu Area Start -->
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
-                                <li class="nav-item active">
+                                <li class="nav-item">
                                     <a class="nav-link" href="mainpage.jsp">Home <span
                                             class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item  active">
                                     <a class="nav-link" href="recipespage.jsp">Recipes</a>
                                 </li>
                                 <li class="nav-item">
@@ -139,331 +145,17 @@
             </div>
         </div>
     </header>
-    <!-- ****** Header Area End ****** -->
-
-    <!-- ****** Welcome Post Area Start ****** -->
-    <div id="slider">
-
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <a href="categories.jsp">
-                    <img src="img/sidebar-img/healthyfoodslogan.png" alt="Trending" style="">
-            </a>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- ****** Welcome Area End ****** -->
-
-    <!-- ****** Categories Area Start ****** -->
-     <section class="categories_area clearfix" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
-                    <h2 style="margin-bottom: 20px;">Recommended Categories</h2>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
-                        <img src="img/sidebar-img/healthymain.jpeg" alt="" style="width: 350px;height:220px">
-                        <div class="catagory-title">
-                            <a href="MainController?action=SearchHome&searchCategory=Healthy Main Dishes">
-                                <h5>Healthy Main Dishes</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single_catagory wow fadeInUp" data-wow-delay=".6s">
-                        <img src="img/sidebar-img/green-salad.jpg" alt="" style="width: 350px;height:220px">
-                        <div class="catagory-title">
-                            <a href="MainController?action=SearchHome&searchCategory=Healthy Salad">
-                                <h5>Healthy Salad</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
-                        <img src="img/catagory-img/3.jpg" alt="" style="width: 350px;height:220px">
-                        <div class="catagory-title">
-                            <a href="MainController?action=SearchHome&searchCategory=Eat clean">
-                                <h5>Eat clean</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-12" style="text-align:  center;margin-top:30px">
-
-                            <a class="show-more-button" href="categories.jsp" style="border-radius: 30px;">Explore it</a>
-
-                        </div>
-            </div>
-        </div>
-    </section>
-    <!-- ****** Categories Area End ****** -->
-
-    <!-- ****** Blog Area Start ****** -->
-    <section class="blog_area section_padding_0_80">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12 col-lg-12 " style="text-align: center;">
-                    <h2 style="margin-bottom: 30px;">Featuring Recipes</h2>
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                    <ul class="toptrending">
-                        <li style="margin-bottom: 30px;">
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <%
-                                            List<RecipeDTO> listRecipe = (List<RecipeDTO>) session.getAttribute("SEARCH_LIST_NAME_RECIPE");
-                                            Map<String, Integer> listRating = (Map<String, Integer>) session.getAttribute("LIST_RATING_RECIPE");
-                                            Map<String, Integer> listTotalRating = (Map<String, Integer>) session.getAttribute("LIST_TOTAL_RATING");
-                                        %>
-                                        <%
-                                            for (RecipeDTO list : listRecipe) {
-                                                if (list.getRecipeName().equals("Homemade Pho")) {
-                                        %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
-                                        <%
-                                                    break;
-                                                }
-                                            }
-                                        %>
-                                </div>
-                                <div class="col-6 col-md-6">
-                                  <a href="MainController?action=SearchHome&searchRecipe=Homemade Pho"><h3>Homemade Pho</h3></a>
-                                    
-                                    <div class="post-comment-share-area d-flex">
-                                        <!-- Post Favourite -->
-                                        
-                                        <!-- Post Comments -->
-                                        <div class="post-comments" style="margin-bottom: 10px;">
-                                            <a href="asia.html"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                        </div>
-                                        <!-- Post Share -->
-                                       
-                                    </div>
-                                    <span class="fa fa-star <% if (listRating.get("Pho") >= 1) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 2) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 3) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 4) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") == 5) {
-                                              %>checked
-                                              <%}%>"></span>
-                                        <span > <%=listTotalRating.get("Pho")%> ratings</span>
-                                   
-                                </div>
-
-                            </div>
-
-                        </li>
-                        <li style="margin-bottom: 30px;">
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <%
-                                            for (RecipeDTO list : listRecipe) {
-                                                if (list.getRecipeName().equals("Beefsteak")) {
-                                        %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
-                                        <%
-                                                    break;
-                                                }
-                                            }
-                                        %>
-                                        <img src="img/sidebar-img/steak_10_b1b1397477ea4c8ca1f215989632a614_1024x1024.jpg"
-                                             alt="" style="width: 100%;">
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <a href="MainController?action=SearchHome&searchRecipe=Beefsteak">
-                                        <h5>Beefsteak</h5>
-                                    </a>
-                                    
-                                    <div class="post-comment-share-area d-flex">
-                                        <!-- Post Favourite -->
-                                        
-                                        <!-- Post Comments -->
-                                        <div class="post-comments" style="margin-bottom: 10px;">
-                                            <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                        </div>
-                                        <!-- Post Share -->
-                                       
-                                    </div>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                    <span > 264 ratings</span>
-                                   
-                                </div>
-
-                            </div>
-
-                        </li>
-                        <li style="margin-bottom: 30px;">
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <img src="img/sidebar-img/chikenfries.jpg" alt="" style="width: 100%;height: 95%;">
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <a href="MainController?action=SearchHome&searchRecipe=Chicken Fries"><h5>Chicken Fries</h5></a>
-                                    
-                                    <div class="post-comment-share-area d-flex">
-                                        <!-- Post Favourite -->
-                                        
-                                        <!-- Post Comments -->
-                                        <div class="post-comments" style="margin-bottom: 10px;">
-                                            <a href="america.html "><i class="" aria-hidden="true"></i>Raw Food Diet</a>
-                                        </div>
-                                        <!-- Post Share -->
-                                       
-                                    </div>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                    <span > 240 ratings</span>
-                                   
-                                </div>
-
-                            </div>
-
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                    <ul class="toptrending">
-                        <li style="margin-bottom: 30px;">
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <img src="img/sidebar-img/download (1).jpeg" alt="" style="width: 100%;">
-                                </div>
-                                <div class="col-6 col-md-6">
-                                   <a href="MainController?action=SearchHome&searchRecipe=Easy Spaghetti Bolognese">
-                                    <h4>Easy spaghetti Bolognese
-                                    </h4>
-                                   </a>
-                                    
-                                    <div class="post-comment-share-area d-flex">
-                                        <!-- Post Favourite -->
-                                        
-                                        <!-- Post Comments -->
-                                        <div class="post-comments" style="margin-bottom: 10px;">
-                                            <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                        </div>
-                                        <!-- Post Share -->
-                                       
-                                    </div>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                    <span > 300 ratings</span>
-                                   
-                                </div>
-
-                            </div>
-
-                        </li>
-                        <li style="margin-bottom: 30px;">
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <img src="img/sidebar-img/Salmon-and-potato-parcels.jpg" alt=""
-                                        style="width: 100%;height: 95%;">
-                                </div>
-                                <div class="col-6 col-md-6">
-                                   <a href="MainController?action=SearchHome&searchRecipe=Baked Salmon-Leek Parcel">
-                                    <h5>Baked Salmon & Leek parcel
-                                    </h5>
-                                </a>
-                                    <div class="post-comment-share-area d-flex">
-                                        <!-- Post Favourite -->
-                                        
-                                        <!-- Post Comments -->
-                                        <div class="post-comments" style="margin-bottom: 10px;">
-                                            <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                        </div>
-                                        <!-- Post Share -->
-                                       
-                                    </div>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                    <span > 300 ratings</span>
-                                   
-                                </div>
-
-                            </div>
-
-                        </li>
-                        <li style="margin-bottom: 30px;">
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <img src="img/sidebar-img/Aubergine&bean.png" alt="" style="width: 100%; ">
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    
-                                    <h5>Aubergine & chickpea stew
-                                    </h5>
-                                    <div class="post-comment-share-area d-flex">
-                                        <!-- Post Favourite -->
-                                        
-                                        <!-- Post Comments -->
-                                        <div class="post-comments" style="margin-bottom: 10px;">
-                                            <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                        </div>
-                                        <!-- Post Share -->
-                                       
-                                    </div>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                    <span > 300 ratings</span>
-                                   
-                                </div>
-
-                            </div>
-
-                        </li>
-
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- ****** Blog Area End ****** -->
-    <section class="blog_area section_padding_0_80">
+    
+     <section class="blog_area section_padding_0_80">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 ">
                     <!-- col-lg-8 -->
                     <div class="row">
                         <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
-                            <h2 style="margin-bottom: 30px;">Suggest Recipes</h2>
+                            <h2 style="margin-bottom: 30px;">All Recipes</h2>
                         </div>
-                         <div class="col-md-4">
+                        <div class="col-md-4">
                             <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                 <!-- Post Thumb -->
                                 <div class="post-thumb">
@@ -488,7 +180,7 @@
                                     <span class="fa fa-star checked" style="margin-right: 10px;"></span>
                                     <span > 300 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Baked Kale Chips">
+                                    <a href="#">
                                         <h4 class="post-headline">Baked Kale Chips
                                         </h4>
                                     </a>
@@ -521,7 +213,7 @@
                                     <span class="fa fa-star" style="margin-right: 10px;"></span>
                                     <span > 242 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Maple Salmon">
+                                    <a href="#">
                                         <h4 class="post-headline">Maple Salmon
                                         </h4>
                                     </a>
@@ -554,7 +246,7 @@
                                     <span class="fa fa-star" style="margin-right: 10px;"></span>
                                     <span > 300 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Miso Soup">
+                                    <a href="#">
                                         <h4 class="post-headline">Miso Soup
                                         </h4>
                                     </a>
@@ -587,7 +279,7 @@
                                     <span class="fa fa-star checked" style="margin-right: 10px;"></span>
                                     <span > 30 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Green Salad">
+                                    <a href="#">
                                         <h4 class="post-headline">Green Salad
                                         </h4>
                                     </a>
@@ -620,7 +312,7 @@
                                     <span class="fa fa-star" style="margin-right: 10px;"></span>
                                     <span > 150 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Hambuger Vegetables">
+                                    <a href="#">
                                         <h4 class="post-headline">Hambuger Vegetables
                                         </h4>
                                     </a>
@@ -653,7 +345,7 @@
                                     <span class="fa fa-star" style="margin-right: 10px;"></span>
                                     <span > 300 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Pineapple and Banana Smoothie">
+                                    <a href="#">
                                         <h4 class="post-headline">Pineapple and Banana Smoothie
                                         </h4>
                                     </a>
@@ -687,7 +379,7 @@
                                     <span class="fa fa-star checked" style="margin-right: 10px;"></span>
                                     <span > 230 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Baked Salmon - Leek Parcel">
+                                    <a href="#">
                                         <h4 class="post-headline">Baked Salmon & Leek Parcel
                                         </h4>
                                     </a>
@@ -720,7 +412,7 @@
                                     <span class="fa fa-star checked" style="margin-right: 10px;"></span>
                                     <span > 1050 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Pho">
+                                    <a href="pho.jsp">
                                         <h4 class="post-headline">Pho
                                         </h4>
                                     </a>
@@ -753,7 +445,7 @@
                                     <span class="fa fa-star" style="margin-right: 10px;"></span>
                                     <span > 300 ratings</span>
                                     </div>
-                                    <a href="MainController?action=SearchHome&searchRecipe=Broken Rice">
+                                    <a href="comtam.html">
                                         <h4 class="post-headline">Broken Rice
                                         </h4>
                                     </a>
@@ -763,30 +455,40 @@
                        
 
                     </div>
-                        <div class="col-12 col-md-12 col-lg-12" style="text-align:  center;margin-top:30px">
-
-                            <a class="show-more-button" href="recipespage.jsp" style="border-radius: 30px;">Show more</a>
-
+                         <div class="col-12">
+                    <div class="pagination-area d-sm-flex mt-15">
+                        <nav aria-label="#">
+                            <ul class="pagination">
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="page-status">
+                            <p>Page 1 of 60 results</p>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ****** Instagram Area Start ****** -->
-  
-        <!-- Instagram Item -->
-       
-    <!-- ****** Our Creative Portfolio Area End ****** -->
-
-    <!-- ****** Footer Social Icon Area Start ****** -->
+    
+    
+    
+    
+    
+    
     
     <!-- ****** Footer Social Icon Area End ****** -->
 
     <!-- ****** Footer Menu Area Start ****** -->
-    <footer class="footer_area">
+     <footer class="footer_area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -850,6 +552,7 @@
             </div>
         </div>
     </footer>
+
     <!-- ****** Footer Menu Area End ****** -->
 
     <!-- Jquery-2.2.4 js -->
@@ -863,3 +566,4 @@
     <!-- Active JS -->
     <script src="js/active.js"></script>
 </body>
+

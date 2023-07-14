@@ -4,8 +4,9 @@
  */
 package swp.ro.Recipe;
 
+import java.util.Date;
 
-import java.sql.Date;
+
 
 /**
  *
@@ -18,27 +19,34 @@ public class RecipeDTO {
     private String recipeName;
     private Date datePost;
     private String description;
-    private float cookingTime;
-    private String imageRecipe;    
+    private double cookingTime;
+    private String image;
     private boolean status;
-    private String userName;
 
     public RecipeDTO() {
     }
 
-    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, float cookingTime, String imageRecipe, boolean status, String userName) {
+    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, double cookingTime, String image, boolean status) {
         this.recipeID = recipeID;
         this.userID = userID;
         this.recipeName = recipeName;
         this.datePost = datePost;
         this.description = description;
         this.cookingTime = cookingTime;
-        this.imageRecipe = imageRecipe;
+        this.image = image;
         this.status = status;
-        this.userName = userName;
     }
-
-   public int getRecipeID() {
+    
+    public RecipeDTO(int userID, String recipeName, Date datePost, String description, double cookingTime, String image, boolean status) {
+        this.userID = userID;
+        this.recipeName = recipeName;
+        this.datePost = datePost;
+        this.description = description;
+        this.cookingTime = cookingTime;
+        this.image = image;
+        this.status = status;
+    }
+    public int getRecipeID() {
         return recipeID;
     }
 
@@ -78,28 +86,20 @@ public class RecipeDTO {
         this.description = description;
     }
 
-    public float getCookingTime() {
+    public double getCookingTime() {
         return cookingTime;
     }
 
-    public void setCookingTime(float cookingTime) {
+    public void setCookingTime(double cookingTime) {
         this.cookingTime = cookingTime;
     }
 
-    public String getImageRecipe() {
-        return imageRecipe;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageRecipe(String imageRecipe) {
-        this.imageRecipe = imageRecipe;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public boolean isStatus() {
@@ -109,5 +109,11 @@ public class RecipeDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "RecipeDTO{" + "recipeID=" + recipeID + ", userID=" + userID + ", recipeName=" + recipeName + ", datePost=" + datePost + ", description=" + description + ", cookingTime=" + cookingTime + ", image=" + image + ", status=" + status + '}';
+    }
+
     
 }

@@ -12,33 +12,15 @@ public class FavoriteRecipesDTO {
     private int favoriteRecipeID;
     private int recipeID;
     private int userID;
-    private String img;
-    private String recipeName;
+
     public FavoriteRecipesDTO() {
     }
-    
+
     public FavoriteRecipesDTO(int favoriteRecipeID, int recipeID, int userID) {
         this.favoriteRecipeID = favoriteRecipeID;
         this.recipeID = recipeID;
         this.userID = userID;
     }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public String getRecipeName() {
-        return recipeName;
-    }
-
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
-    }
-    
 
     public int getFavoriteRecipeID() {
         return favoriteRecipeID;

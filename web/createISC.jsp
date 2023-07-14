@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,9 +23,6 @@
     </head>
 
     <body>
-        <c:if test="${sessionScope.LOGIN_USER == null }">
-            <c:redirect url="loginPage.html"></c:redirect>
-        </c:if>
         <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
@@ -157,37 +153,52 @@
                     </div>
                     <div class="container">
                         <form action="MainController" method="POST">
+
+                            <!--Ingerdient -->
                             <div class="row">
-                                <h4 class="post-headline mt-15">Title</h4>
-                                <input class="form-control" type="text" name="recipeName" placeholder="Give your recipe a name"/>
+                                <label class="post-headline mt-15"><h4>Ingredients</h4></label>
                             </div>
-                            <div class="row">
-                                <h4 class="post-headline mt-15">Image</h4>
-                                <input class="form-control" type="file" name="image" placeholder="Give your recipe image"/>
-                            </div>
-                            <!--   <div class="row justify-content-center mt-15">
-                                   <button class="btn" type="button" name="recipeImage">Add source</button>
-                               </div> -->
-                            <div class="row">
-                                <label class="post-headline mt-15"><h4>Description</h4></label>
-                                <input class="form-control" type="text" name="description" placeholder="Introduce your recipe"/>
-                            </div>
-                            <!--Cooking Time -->
-                            <h4 class="post-headline row mt-15">Cooking Time</h4>
-                            
-                            <div class="row">
-                                <div class="col-6 hihi">
-                                    <input  class="form-control" step="0.1" type="number" min="1" name="cookingTime" placeholder="Time..."/>
+                            <div class="row" >
+
+                                <div class="col-7" style="margin-left: -25px">
+                                    <input class="form-control" type="text" name="ingredientName" placeholder="Typing Ingredients" style="margin-left: 10px; margin-right: 10px" >
                                 </div>
-                                <div class="col-6" style="display: inline-table,margin-top: 2px">
-                                    <h5>minutes</h5>
+
+                                <div class="col-2"> 
+                                    <input class="form-control" type="number" step="0.1" name="quantity" min="1" placeholder="Amount" style="margin-left: 10px" >
+                                </div>
+                                <div class="col-2" style="display: inline-table,margin-top: 2px">
+                                    <input class="form-control" type="text" name="unit" placeholder="Unit" style="margin-left: 10px" >
 
                                 </div>
+                                <div class="input_fields_wrap" style="margin-top: 20px">
+                                    <button class="add_field_button">+ Add More Ingredients</button>
+                                </div>
+                                <!-- <div class="row" >
+                                     
+                                 </div>-->
                             </div>
-                            <!--submit-->
-                            <div class="table-title-1 row">                                
+
+                            <!--Categories -->
+
+
+                            <!-- Stepp  -->
+                            <h4 class="post-headline row mt-15">Stepping</h4>
+                            <div class="row" >
+                                <div class="col-2 hihi">
+                                    <input class="form-control" type="number" min="1" name="stepNumber" placeholder="step ..."/>
+                                </div>
+                                <div class="col-10 hihi1">
+                                    <input class="form-control" type="text" name="instructions" placeholder="Instructions...."/>
+                                </div>  
+                                <div class="input_fields_wrap_Step" style="margin-top: 20px">
+                                    <button class="add_field_button_Step">+ Add More Step</button>
+                                </div>
+                            </div>
+
+                            <div class="table-title-1 row">
                                 <div class="col-sm-12">
-                                    <input type="submit" name="action" value="CreateRecipe" data-target="#addProductModal" data-toggle="modal" class="btn">
+                                    <input type="submit" name="action" value="CreateISC" data-target="#addProductModal" data-toggle="modal" class="btn">
                                 </div>
                             </div>
                         </form>
@@ -213,8 +224,8 @@
         </footer>
         <!-- Jquery-2.2.4 js -->
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="js/addMore/addMoreS.js"></script>
-        <script src="js/addMore/addMoreI.js"></script>
+        <script src="js/js/addMore/addMoreStep.js"></script>
+        <script src="js/js/addMore/addMoreIngre.js"></script>
 
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>

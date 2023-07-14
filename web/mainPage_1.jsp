@@ -68,13 +68,22 @@
                                     </form>
                             </div>
                         </div>
-                         <div class="login_register_area d-flex col-4 col-sm-4">
-                            <div class="login">
-                                <a href="loginPage.html">Sign in</a>
-                            </div>
-                            <div class="register">
-                                <a href="register.html">Sign up</a>
-                            </div>
+                        <div class="login_register_area d-flex col-4 col-sm-4">
+                            <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="view-public-info.html">Your Profile</a>
+
+                                        <a class="dropdown-item" href="changepass.html">Change Password</a>
+                                        <a class="dropdown-item" href="myfavorite.html">Your Saved</a>
+                                        <form action="MainController" method="POST">
+                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                        </form>
+                                        
+
+                                    </div>
+                                </li>
                         </div>
                     </div>
                 </div>

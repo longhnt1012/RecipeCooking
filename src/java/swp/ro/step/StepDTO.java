@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package swp.ro.step;
+package swp.ro.Step;
 
 /**
  *
- * @author Admin
+ * @author My PC
  */
 public class StepDTO {
+
     private int stepID;
     private int recipeID;
     private int stepNumber;
@@ -17,11 +18,17 @@ public class StepDTO {
     public StepDTO() {
     }
 
-    public StepDTO(int stepID, int recipeID, int stepNumber, String instruction) {
+    public StepDTO(int stepID, int recipeID, int stepNumber, String instructions) {
         this.stepID = stepID;
         this.recipeID = recipeID;
         this.stepNumber = stepNumber;
-        this.instructions = instruction;
+        this.instructions = instructions;
+    }
+
+    public StepDTO(int recipeID, int stepNumber, String instructions) {
+        this.recipeID = recipeID;
+        this.stepNumber = stepNumber;
+        this.instructions = instructions;
     }
 
     public int getStepID() {
@@ -55,5 +62,10 @@ public class StepDTO {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
-    
+
+    @Override
+    public String toString() {
+        return "StepDTO{" + "stepID=" + stepID + ", recipeID=" + recipeID + ", stepNumber=" + stepNumber + ", instructions=" + instructions + '}';
+    }
+
 }

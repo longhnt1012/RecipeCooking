@@ -96,7 +96,7 @@
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                                 <ul class="navbar-nav" id="yummy-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="mainpage.html">Home <span
+                                        <a class="nav-link" href="mainPage.html">Home <span
                                                 class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">

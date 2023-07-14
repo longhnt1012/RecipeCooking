@@ -11,17 +11,15 @@ package swp.ro.Category;
 public class CategoryDTO {
     private int categoryID;
     private String categoryName;
-    private String image;
 
     public CategoryDTO() {
     }
 
-    public CategoryDTO(int categoryID, String categoryName, String image) {
+    public CategoryDTO(int categoryID, String categoryName) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
-        this.image = image;
     }
-    
+
     public int getCategoryID() {
         return categoryID;
     }
@@ -38,15 +36,6 @@ public class CategoryDTO {
         this.categoryName = categoryName;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    
     @Override
     public String toString() {
         return "CategoryDTO{" + "categoryID=" + categoryID + ", categoryName=" + categoryName + '}';

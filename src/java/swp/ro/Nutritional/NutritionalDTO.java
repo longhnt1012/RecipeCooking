@@ -11,17 +11,23 @@ package swp.ro.Nutritional;
 public class NutritionalDTO {
     private int nutritionalID;
     private String name;
-    private int ingredientID;
-    private double measurement;
+    private float calories;
+    private float fat;
+    private float proteins;
+    private float carb;
+    private float sugar;
 
     public NutritionalDTO() {
     }
 
-    public NutritionalDTO(int nutritionalID, String name, int ingredientID, double measurement) {
+    public NutritionalDTO(int nutritionalID, String name, float calories, float fat, float proteins, float carb, float sugar) {
         this.nutritionalID = nutritionalID;
         this.name = name;
-        this.ingredientID = ingredientID;
-        this.measurement = measurement;
+        this.calories = calories;
+        this.fat = fat;
+        this.proteins = proteins;
+        this.carb = carb;
+        this.sugar = sugar;
     }
 
     public int getNutritionalID() {
@@ -40,25 +46,50 @@ public class NutritionalDTO {
         this.name = name;
     }
 
-    public int getIngredientID() {
-        return ingredientID;
+    public float getCalories() {
+        return calories;
     }
 
-    public void setIngredientID(int ingredientID) {
-        this.ingredientID = ingredientID;
+    public void setCalories(float calories) {
+        this.calories = calories;
     }
 
-    public double getMeasurement() {
-        return measurement;
+    public float getFat() {
+        return fat;
     }
 
-    public void setMeasurement(double measurement) {
-        this.measurement = measurement;
+    public void setFat(float fat) {
+        this.fat = fat;
+    }
+
+    public float getProteins() {
+        return proteins;
+    }
+
+    public void setProteins(float proteins) {
+        this.proteins = proteins;
+    }
+
+    public float getCarb() {
+        return carb;
+    }
+
+    public void setCarb(float carb) {
+        this.carb = carb;
+    }
+
+    public float getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(float sugar) {
+        this.sugar = sugar;
     }
 
     @Override
     public String toString() {
-        return "NutritionalDTO{" + "nutritionalID=" + nutritionalID + ", name=" + name + ", ingredientID=" + ingredientID + ", measurement=" + measurement + '}';
+        return "NutritionalDTO{" + "nutritionalID=" + nutritionalID + ", name=" + name + ", calories=" + calories + ", fat=" + fat + ", proteins=" + proteins + ", carb=" + carb + ", sugar=" + sugar + '}';
     }
+
     
 }

@@ -2,53 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package swp.ro.step;
+package swp.ro.Step;
 
 import DBUtil.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author My PC
  */
 public class StepDAO {
 
-    private static final String GET_STEPS_BY_RECIPEID = "SELECT * FROM [Step] WHERE recipeID = ?";
-
-    public List<StepDTO> getStepsByRecipeID(int recipeID) throws SQLException {
-        List<StepDTO> list = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtil.getConnection1();
-            ptm = conn.prepareStatement(GET_STEPS_BY_RECIPEID);
-            ptm.setInt(1, recipeID);
-            rs = ptm.executeQuery();
-            while (rs.next()) {
-                int stepID = rs.getInt("stepID");
-                int stepNumber = rs.getInt("stepNumber");
-                String instructions = rs.getString("instructions");
-                list.add(new StepDTO(stepID, recipeID, stepNumber, instructions));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return list;
-    }
+    private static final String INSERT_STEP="INSERT INTO Step (recipeID,stepNumber,instructions) Values(?,?,?)";
+   public boolean insertStep(StepDTO step) throws SQLException {
+       boolean check = false;
+       Connection con = null;
+       PreparedStatement ptm = null;
+       try{
+           con=DBUtil.getConnection();
+           if(con != null){
+               ptm=con.prepareStatement(INSERT_STEP);
+               int recipeID =  step.getRecipeID();
+               int stepNumber = step.getStepNumber();
+               String instructions = step.getInstructions();
+               ptm.setInt(1, step.getRecipeID());
+               ptm.setInt(2, step.getStepNumber());
+               ptm.setString(3, step.getInstructions());
+               check = ptm.executeUpdate()>0?true:false;   
+           }
+           
+       }finally{
+           if(ptm != null) ptm.close();
+           if(con != null) con.close();
+       }    
+       return check;    }
+    
 }

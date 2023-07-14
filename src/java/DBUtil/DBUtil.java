@@ -16,16 +16,42 @@ import java.util.logging.Logger;
  * @author truc0
  */
 public class DBUtil {
-   private static final String userName="sa";
-    private static final String passWord="12345";
-    
-    public static Connection getConnection1() throws SQLException, ClassNotFoundException {
+     public static Connection getConnection() {
         Connection conn = null;
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url="jdbc:sqlserver://localhost:1433;databaseName=RecipeOrganizer";
-        String username="sa";
-        String password="12345";
-        conn= DriverManager.getConnection(url, username, password);
+        try {
+
+            String dbURL = "jdbc:sqlserver://LAPTOP-ED34OS6R;databaseName=RecipeOrganizer;encrypt=true;trustServerCertificate=true;";
+            String user = "sa";
+            String pass = "12345";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection(dbURL, user, pass);
+            //System.out.println("Connect to DB successfully");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return conn;
+    }
+
+    public static void closeConnection(Connection conn) {
+
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+
+    public static void main(String[] args) throws SQLException {
+        
+        System.out.println("This is to test if we can connect to SQLServer");
+        Connection conn = getConnection();
+        DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
+        System.out.println("Driver name: " + dm.getDriverName());
+        System.out.println("Driver version: " + dm.getDriverVersion());
+        closeConnection(conn);
     }
 }
