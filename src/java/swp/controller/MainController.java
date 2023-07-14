@@ -64,6 +64,20 @@ public class MainController extends HttpServlet {
     private static final String REMOVE_FROM_FAVORITE_CONTROLLER = "RemoveFromFavoriteController";
     private static final String PLANNING_PAGE="PlanningPage";
     private static final String PLANNING_PAGE_CONTROLLER="PlanningPageController";
+    private static final String LOAD_CATEGORY = "LoadCategories";
+    private static final String LOAD_CATEGORY_CONTROLLER = "LoadCategoriesController";
+    private static final String SEARCH_BY_CATEGORY = "SearchByCategory";
+    private static final String SEARCH_BY_CATEGORY_CONTROLLER = "SearchByCategoryController";
+    //Admin flow
+     private static final String LOAD_USERS = "LoadUsers";
+    private static final String LOAD_USERS_CONTROLLER = "LoadUsersController";
+    private static final String LOAD_RECIPES = "LoadRecipes";
+    private static final String LOAD_RECIPES_CONTROLLER = "LoadRecipesController";
+    private static final String LOAD_FEEDBACKS = "LoadFeedbacks";
+    private static final String LOAD_FEEDBACKS_CONTROLLER = "LoadFeedbacksController";
+    private static final String LOAD_CATEGORY_OF_RECIPE = "LoadCategoryOfRecipe";
+    private static final String LOAD_CATEGORY_OF_RECIPE_CONTROLLER = "LoadCategoryOfRecipeController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -119,6 +133,16 @@ public class MainController extends HttpServlet {
                 url=REMOVE_FROM_FAVORITE_CONTROLLER;
             }else if(PLANNING_PAGE.equals(action)){
                 url=PLANNING_PAGE_CONTROLLER;
+            }else if (LOAD_CATEGORY.equals(action)) {
+                url = LOAD_CATEGORY_CONTROLLER;
+            } else if (LOAD_USERS.equals(action)) {
+                url = LOAD_USERS_CONTROLLER;
+            } else if (LOAD_RECIPES.equals(action)) {
+                url = LOAD_RECIPES_CONTROLLER;
+            } else if (LOAD_FEEDBACKS.equals(action)) {
+                url = LOAD_FEEDBACKS_CONTROLLER;
+            } else if (LOAD_CATEGORY_OF_RECIPE.equals(action)) {
+                url = LOAD_CATEGORY_OF_RECIPE_CONTROLLER;
             }
             else {
                 request.setAttribute("ERROR", "Your ACTION is not support!!!");

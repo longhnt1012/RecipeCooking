@@ -16,38 +16,30 @@ import java.util.Date;
  * @author truc0
  */
 public class FeedBackDTO {
+    
     private int feedBackID;
     private String content;
-    private int recipeID ;
+    private int recipeID;
     private int userID;
     private Date feedbackDate;
     private boolean status;
+    private String recipeName;
     private String userName;
 
     public FeedBackDTO() {
     }
 
-    public FeedBackDTO(int feedBackID, String content, int recipeID, int userID, Date feedbackDate, boolean status, String userName) {
+    public FeedBackDTO(int feedBackID, String content, int recipeID, int userID, Date feedbackDate, boolean status, String recipeName, String userName) {
         this.feedBackID = feedBackID;
         this.content = content;
         this.recipeID = recipeID;
         this.userID = userID;
         this.feedbackDate = feedbackDate;
         this.status = status;
+        this.recipeName = recipeName;
         this.userName = userName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    
-
-    
     public int getFeedBackID() {
         return feedBackID;
     }
@@ -88,7 +80,6 @@ public class FeedBackDTO {
         this.feedbackDate = feedbackDate;
     }
 
-  
     public boolean isStatus() {
         return status;
     }
@@ -97,11 +88,19 @@ public class FeedBackDTO {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "FeedBackDTO{" + "feedBackID=" + feedBackID + ", content=" + content + ", recipeID=" + recipeID + ", userID=" + userID + ", feedbackDate=" + feedbackDate + ", status=" + status + '}';
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    
-    
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

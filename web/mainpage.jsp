@@ -2,6 +2,7 @@
 <%@page import="swp.ro.Recipe.RecipeDTO"%>
 <%@page import="swp.ro.Recipe.RecipeDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +28,7 @@
     </head>
 
     <body>
-       <!-- Preloader Start -->
+        <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -69,33 +70,33 @@
                                 </div>
                             </div>
                             <c:if test="${LOGIN_USER ==null}" >
-                            <div class="login_register_area d-flex col-4 col-sm-4">
-                                <div class="login">
-                                    <a href="login.jsp">Sign in</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <div class="login">
+                                        <a href="login.jsp">Sign in</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="register.html">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="register">
-                                    <a href="register.html">Sign up</a>
-                                </div>
-                            </div>
                             </c:if>
                             <c:if test="${LOGIN_USER !=null}">
-                                  <div class="login_register_area d-flex col-4 col-sm-4">
-                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="#">Your Profile</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="#">Your Profile</a>
 
-                                        <a class="dropdown-item" href="#">Change Password</a>
-                                        <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
-                                        <form action="MainController" method="POST">
-                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
-                                        </form>
-                                        
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                            </form>
 
-                                    </div>
-                                </li>
-                        </div>
+
+                                        </div>
+                                    </li>
+                                </div>
                             </c:if>
                         </div>
                     </div>
@@ -130,19 +131,19 @@
                                     <li class="nav-item active">
                                         <c:if test="${LOGIN_USER == null}">
                                             <a class="nav-link" href="mainpage.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                         <c:if test="${LOGIN_USER != null}">
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER != null}">
                                             <a class="nav-link" href="mainpage_user.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                        
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="categories.jsp">Categories</a>
+                                        <a class="nav-link" href="MainController?action=LoadCategories">Categories</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
@@ -253,7 +254,7 @@
                                             for (RecipeDTO list : listRecipe) {
                                                 if (list.getRecipeName().equals("Homemade Pho")) {
                                         %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
+                                        <img src="<%=list.getImageRecipe()%>" alt="" style="width: 100%;">
                                         <%
                                                     break;
                                                 }
@@ -306,7 +307,7 @@
                                             for (RecipeDTO list : listRecipe) {
                                                 if (list.getRecipeName().equals("Beefsteak")) {
                                         %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
+                                        <img src="<%=list.getImageRecipe()%>" alt="" style="width: 100%;">
                                         <%
                                                     break;
                                                 }
@@ -894,3 +895,4 @@
         <!-- Active JS -->
         <script src="js/active.js"></script>
     </body>
+</html>

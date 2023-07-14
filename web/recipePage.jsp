@@ -186,7 +186,7 @@
                                         <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                             <!-- Post Thumb -->
                                             <div class="post-thumb">
-                                                <img src="${recipe.image}" alt="" style="height:220px ;width: 350px">
+                                                <img src="${recipe.imageRecipe}" alt="" style="height:220px ;width: 350px">
                                             </div>
                                             <!-- Post Content -->
                                             <div class="post-content">

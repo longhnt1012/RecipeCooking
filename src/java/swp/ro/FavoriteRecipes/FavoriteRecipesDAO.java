@@ -23,6 +23,8 @@ import swp.ro.User.UserDTO;
 public class FavoriteRecipesDAO {
     private static final String SEARCH = "select count(*) AS totalCount from FavoriteRecipes fr where recipeID=?";
     private static final String COMMENT_COUNT = "SELECT COUNT(*) AS totalComments FROM FavoriteRecipes WHERE recipeID=?";
+    
+    
     public Map<Integer, Integer> getListLike(List<RecipeDTO> list) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;

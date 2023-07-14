@@ -19,6 +19,8 @@ import swp.ro.rating.RatingDAO;
 import swp.ro.rating.RatingDTO;
 import swp.ro.savedRecipes.SavedRecipesDAO;
 import swp.ro.savedRecipes.SavedRecipesDTO;
+import swp.ro.step.StepDAO;
+import swp.ro.step.StepDTO;
 
 /**
  *
@@ -41,7 +43,7 @@ public class RecipeDetailController extends HttpServlet {
         int recipeID = Integer.parseInt(request.getParameter("recipeID"));
         UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
         try {
-
+            
             if (user == null) {
                 RecipeDAO rDAO = new RecipeDAO();
                 RecipeDTO recipe = rDAO.getOne(recipeID);
@@ -59,13 +61,18 @@ public class RecipeDetailController extends HttpServlet {
                 int sSize = saveDAO.totalSavedORecipe(recipeID);
                 int fSize = favoDAO.totalFavoriteORecipe(recipeID);
                 
+                //Steps of recipe
+                StepDAO stepDAO = new StepDAO();
+                List<StepDTO> listStep = stepDAO.getStepsByRecipeID(recipeID);
+                
                 request.setAttribute("sSize", sSize);
                 request.setAttribute("fSize", fSize);
                 request.setAttribute("totalRate", totalRate);
                 request.setAttribute("feedbacks", listFeedback);
                 request.setAttribute("noFb", listFeedback.size());
                 request.setAttribute("recipe", recipe);
-
+                request.setAttribute("LIST_STEP", listStep);
+                
                 request.getRequestDispatcher("recipeDetail.jsp").forward(request, response);
             } else {
 

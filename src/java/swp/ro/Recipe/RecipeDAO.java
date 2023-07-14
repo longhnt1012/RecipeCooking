@@ -23,20 +23,34 @@ import swp.ro.User.UserDTO;
  */
 public class RecipeDAO {
 
-    private static final String SEARCH = "SELECT recipeID, userID, recipeName, datePost, description, cookingTime, image FROM Recipe where recipeName like ? AND STATUS =1";
+    private static final String SEARCH = "SELECT recipeID, userID, recipeName, datePost, description, cookingTime, imageRecipe FROM Recipe where recipeName like ? AND STATUS =1";
     private static final String SEARCH_RECIPE = "SELECT recipeID FROM Recipe where recipeName = ? ";
-    private static final String SEARCH_CATETAGORY = "select recipeID, userID, recipeName, datePost, description, cookingTime, image,ID, c.categoryID, c.categoryName from \n" +
-                                                     "(SELECT r.recipeID, userID, recipeName, datePost, description, cookingTime, image,ID, categoryID FROM  [Recipe] r, [CategoryOfRecipes] C \n" +
-                                                     " WHERE r.recipeID=c.recipeID ) as[RC] inner join [Category] c on [RC].categoryID=c.categoryID where c.categoryName=?" ;
-    private static final String SEARCH_USER ="SELECT * FROM [User] WHERE userID IN (SELECT distinct userID FROM Recipe where recipeName like ? AND STATUS =1 )";
-    private static final String SEARCH_NAME_RECIPE_HOME = "SELECT recipeID, userID, recipeName, datePost, description, cookingTime, image FROM Recipe where recipeName = ? AND STATUS =1";
+    private static final String SEARCH_CATETAGORY = "select recipeID, userID, recipeName, datePost, description, cookingTime, imageRecipe,ID, c.categoryID, c.categoryName from \n"
+            + "(SELECT r.recipeID, userID, recipeName, datePost, description, cookingTime, imageRecipe,ID, categoryID FROM  [Recipe] r, [CategoryOfRecipes] C \n"
+            + " WHERE r.recipeID=c.recipeID ) as[RC] inner join [Category] c on [RC].categoryID=c.categoryID where c.categoryName=?";
+    private static final String SEARCH_USER = "SELECT * FROM [User] WHERE userID IN (SELECT distinct userID FROM Recipe where recipeName like ? AND STATUS =1 )";
+    private static final String SEARCH_NAME_RECIPE_HOME = "SELECT recipeID, userID, recipeName, datePost, description, cookingTime, imageRecipe FROM Recipe where recipeName = ? AND STATUS =1";
+    //Admin
+    private static final String UPDATE = "UPDATE [Recipe] SET [recipeName] = ?, [description] = ?, [cookingTime] = ?, [imageRecipe] = ?, [status] = ? WHERE [recipeID] = ?";
+    private static final String REMOVE_RECIPE = "DELETE [Rating] WHERE recipeID = ?\n"
+            + "DELETE [Feedback] WHERE recipeID = ?\n"
+            + "DELETE [MealPlanning] WHERE recipeID = ?\n"
+            + "DELETE [FavoriteRecipe] WHERE recipeID = ?\n"
+            + "DELETE [CategoryOfRecipes] WHERE recipeID = ?\n"
+            + "DElETE [IngredientOfRecipe] WHERE recipeID = ?\n"
+            + "DElETE [SavedRecipes] WHERE recipeID = ?\n"
+            + "DELETE [Recipe] WHERE recipeID = ?";
+    private static final String RECENT_RECIPE = "SELECT TOP 5 * FROM [Recipe] re JOIN [User] u "
+                                                + "ON re.userID = u.userID ORDER BY datePost DESC";
+    private static final String READ = "SELECT * FROM [Recipe] a JOIN [User] b ON a.userID = b.userID";
+    private static final String COUNT_RECIPE = "SELECT COUNT(recipeID) AS countRecipe FROM [Recipe]";
     
     public List<RecipeDTO> getListSearchRecipe(String search) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         List<RecipeDTO> listRecipe = new ArrayList<>();
-        
+
         try {
             conn = DBUtil.getConnection1();
             if (conn != null) {
@@ -45,15 +59,15 @@ public class RecipeDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     RecipeDTO recipe = new RecipeDTO();
-                    recipe.setRecipeID( rs.getInt("recipeID"));
+                    recipe.setRecipeID(rs.getInt("recipeID"));
                     recipe.setUserID(rs.getInt("userID"));
                     recipe.setRecipeName(rs.getString("recipeName"));
                     recipe.setDatePost(rs.getDate("datePost"));
                     recipe.setDescription(rs.getString("description"));
                     recipe.setCookingTime(rs.getInt("cookingTime"));
-                    recipe.setImage(rs.getString("image"));
+                    recipe.setImageRecipe(rs.getString("imageRecipe"));
                     listRecipe.add(recipe);
-                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +84,6 @@ public class RecipeDAO {
         }
         return listRecipe;
     }
-    
 
     public String getSearchRecipe(String search) throws SQLException {
         Connection conn = null;
@@ -109,24 +122,24 @@ public class RecipeDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         List<RecipeDTO> listRecipe = new ArrayList<>();
-        
+
         try {
             conn = DBUtil.getConnection1();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_CATETAGORY);
-                ptm.setString(1, searchCategory );
+                ptm.setString(1, searchCategory);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     RecipeDTO recipe = new RecipeDTO();
-                    recipe.setRecipeID( rs.getInt("recipeID"));
+                    recipe.setRecipeID(rs.getInt("recipeID"));
                     recipe.setUserID(rs.getInt("userID"));
                     recipe.setRecipeName(rs.getString("recipeName"));
                     recipe.setDatePost(rs.getDate("datePost"));
                     recipe.setDescription(rs.getString("description"));
                     recipe.setCookingTime(rs.getInt("cookingTime"));
-                    recipe.setImage(rs.getString("image"));
+                    recipe.setImageRecipe(rs.getString("imageRecipe"));
                     listRecipe.add(recipe);
-                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,27 +178,27 @@ public class RecipeDAO {
         listNameRecipe.add("Baked Salmon - Leek Parcel");
         listNameRecipe.add("Pho");
         listNameRecipe.add("Broken Rice");
-        
+
         try {
             conn = DBUtil.getConnection1();
             if (conn != null) {
                 for (String list : listNameRecipe) {
                     ptm = conn.prepareStatement(SEARCH_NAME_RECIPE_HOME);
-                    ptm.setString(1, list.toString() );
+                    ptm.setString(1, list.toString());
                     rs = ptm.executeQuery();
                     while (rs.next()) {
-                    RecipeDTO recipe = new RecipeDTO();
-                    recipe.setRecipeID( rs.getInt("recipeID"));
-                    recipe.setUserID(rs.getInt("userID"));
-                    recipe.setRecipeName(rs.getString("recipeName"));
-                    recipe.setDatePost(rs.getDate("datePost"));
-                    recipe.setDescription(rs.getString("description"));
-                    recipe.setCookingTime(rs.getInt("cookingTime"));
-                    recipe.setImage(rs.getString("image"));
-                    listRecipe.add(recipe);
+                        RecipeDTO recipe = new RecipeDTO();
+                        recipe.setRecipeID(rs.getInt("recipeID"));
+                        recipe.setUserID(rs.getInt("userID"));
+                        recipe.setRecipeName(rs.getString("recipeName"));
+                        recipe.setDatePost(rs.getDate("datePost"));
+                        recipe.setDescription(rs.getString("description"));
+                        recipe.setCookingTime(rs.getInt("cookingTime"));
+                        recipe.setImageRecipe(rs.getString("imageRecipe"));
+                        listRecipe.add(recipe);
                     }
                 }
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,11 +213,11 @@ public class RecipeDAO {
                 conn.close();
             }
         }
-        return listRecipe;    
+        return listRecipe;
     }
-    
+
     public int countPro() throws SQLException, ClassNotFoundException {
-         Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("select count(*) from [Recipe]");
         ResultSet rs = stm.executeQuery();
         while (rs.next()) {
@@ -215,7 +228,7 @@ public class RecipeDAO {
 
     public List<RecipeDTO> getAll() throws SQLException, ClassNotFoundException {
         List<RecipeDTO> list = null;
-          Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("select * from [Recipe]");
         ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
@@ -226,8 +239,8 @@ public class RecipeDAO {
             recipe.setRecipeName(rs.getString("recipeName"));
             recipe.setDatePost(rs.getDate("datePost"));
             recipe.setDescription(rs.getString("description"));
-            recipe.setCookingTime(rs.getDouble("cookingTime"));
-            recipe.setImage(rs.getString("image"));
+            recipe.setCookingTime(rs.getFloat("cookingTime"));
+            recipe.setImageRecipe(rs.getString("imageRecipe"));
             recipe.setStatus(rs.getBoolean("status"));
             list.add(recipe);
         }
@@ -236,7 +249,7 @@ public class RecipeDAO {
 
     public List<RecipeDTO> pageIndex(int index) throws SQLException, ClassNotFoundException {
         List<RecipeDTO> list = null;
-          Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("select * from [Recipe] a join [User] b"
                 + " on a.userID = b.userID order by [recipeID] "
                 + "offset ? rows fetch next 9 rows only"
@@ -252,8 +265,8 @@ public class RecipeDAO {
             recipe.setUserName(rs.getString("userName"));
             recipe.setDatePost(rs.getDate("datePost"));
             recipe.setDescription(rs.getString("description"));
-            recipe.setCookingTime(rs.getDouble("cookingTime"));
-            recipe.setImage(rs.getString("image"));
+            recipe.setCookingTime(rs.getFloat("cookingTime"));
+            recipe.setImageRecipe(rs.getString("imageRecipe"));
 //            recipe.setUserCount(rs.getInt("userCount"));
 //            recipe.setTotalScore(rs.getInt("totalScore"));
             recipe.setStatus(rs.getBoolean("status"));
@@ -276,8 +289,8 @@ public class RecipeDAO {
             recipe.setRecipeName(rs.getString("recipeName"));
             recipe.setDatePost(rs.getDate("datePost"));
             recipe.setDescription(rs.getString("description"));
-            recipe.setCookingTime(rs.getDouble("cookingTime"));
-            recipe.setImage(rs.getString("image"));
+            recipe.setCookingTime(rs.getFloat("cookingTime"));
+            recipe.setImageRecipe(rs.getString("image"));
             recipe.setStatus(rs.getBoolean("status"));
             list.add(recipe);
         }
@@ -286,7 +299,7 @@ public class RecipeDAO {
     }
 
     public void addPro(RecipeDTO recipe) throws SQLException, ClassNotFoundException {
-         Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("insert [Recipe] values(?, ?, ?, ?, ?, ?, ?, 0)");
         stm.setInt(1, recipe.getUserID());
         stm.setString(2, recipe.getRecipeName());
@@ -294,14 +307,14 @@ public class RecipeDAO {
         stm.setString(3, sdf.format(recipe.getDatePost()));
         stm.setString(4, recipe.getDescription());
         stm.setDouble(5, recipe.getCookingTime());
-        stm.setString(6, recipe.getImage());
+        stm.setString(6, recipe.getImageRecipe());
         stm.executeUpdate();
         con.close();
     }
 
     public RecipeDTO updatePro(String name, String description, double cookingTime, String image, int recipeID)
             throws SQLException, ClassNotFoundException {
-         Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("update [Recipe] set [recipeName] = ?, "
                 + "[description] = ?, [cookingTime] = ?, "
                 + "[image] = ?, [status] = 0 where [recipeID] = ?");
@@ -316,7 +329,7 @@ public class RecipeDAO {
     }
 
     public void deletePro(int recipeID) throws SQLException, ClassNotFoundException {
-         Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("delete [Recipe] where recipeID = ?");
         stm.setInt(1, recipeID);
         int count = stm.executeUpdate();
@@ -336,9 +349,9 @@ public class RecipeDAO {
             recipe.setRecipeName(rs.getString("recipeName"));
             recipe.setDatePost(rs.getDate("datePost"));
             recipe.setDescription(rs.getString("description"));
-            recipe.setCookingTime(rs.getDouble("cookingTime"));
+            recipe.setCookingTime(rs.getFloat("cookingTime"));
             recipe.setUserName(rs.getString("userName"));
-            recipe.setImage(rs.getString("image"));
+            recipe.setImageRecipe(rs.getString("imageRecipe"));
             recipe.setStatus(rs.getBoolean("status"));
         }
         con.close();
@@ -346,12 +359,170 @@ public class RecipeDAO {
     }
 
     public void addRecipeForUser(int recipeID) throws SQLException, ClassNotFoundException {
-          Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection1();
         PreparedStatement stm = con.prepareStatement("update Recipe set [status] = 1 where recipeID = ?");
         stm.setInt(1, recipeID);
         int count = stm.executeUpdate();
         con.close();
     }
     
-  
+    //Admin method
+    public List<RecipeDTO> load() throws SQLException {
+        List<RecipeDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getConnection1();
+            ptm = conn.prepareCall(READ);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int recipeID = rs.getInt("recipeID");
+                int userID = rs.getInt("userID");
+                String recipeName = rs.getString("recipeName");
+                Date datePost = rs.getDate("datePost");
+                String description = rs.getString("description");
+                float cookingTime = rs.getFloat("cookingTime");
+                boolean status = rs.getBoolean("status");
+                String image = rs.getString("imageRecipe");
+                String userName = rs.getString("userName");
+                list.add(new RecipeDTO(recipeID, userID, recipeName, datePost,  description, cookingTime, image, status, userName));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public boolean update(RecipeDTO updateRecipe) throws SQLException {
+        boolean checkUpdate = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtil.getConnection1();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE);
+                ptm.setString(1, updateRecipe.getRecipeName());
+                ptm.setString(3, updateRecipe.getDescription());
+                ptm.setFloat(4, updateRecipe.getCookingTime());
+                ptm.setString(5, updateRecipe.getImageRecipe());
+                ptm.setBoolean(6, updateRecipe.isStatus());
+                ptm.setInt(7, updateRecipe.getRecipeID());
+                checkUpdate = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return checkUpdate;
+    }
+
+    public boolean removeRecipe(int recipeID) throws SQLException {
+        boolean checkRemove = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtil.getConnection1();
+            if (conn != null) {
+                ptm = conn.prepareStatement(REMOVE_RECIPE);
+                ptm.setInt(1, recipeID);
+                ptm.setInt(2, recipeID);
+                ptm.setInt(3, recipeID);
+                ptm.setInt(4, recipeID);
+                ptm.setInt(5, recipeID);
+                ptm.setInt(6, recipeID);
+                ptm.setInt(7, recipeID);
+                ptm.setInt(8, recipeID);
+                checkRemove = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return checkRemove;
+    }
+    
+    public List<RecipeDTO> recentRecipes() throws SQLException {
+        List<RecipeDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getConnection1();
+            ptm = conn.prepareCall(RECENT_RECIPE);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int recipeID = rs.getInt("recipeID");
+                int userID = rs.getInt("userID");
+                String recipeName = rs.getString("recipeName");
+                Date datePost = rs.getDate("datePost");
+                String description = rs.getString("description");
+                float cookingTime = rs.getFloat("cookingTime");
+                boolean status = rs.getBoolean("status");
+                String image = rs.getString("imageRecipe");
+                String userName = rs.getString("userName");
+                list.add(new RecipeDTO(recipeID, userID, recipeName, datePost, description, cookingTime, image, status, userName));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public int countRecipes() throws SQLException, ClassNotFoundException {
+        Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement(COUNT_RECIPE);
+        ResultSet rs = stm.executeQuery();
+        int count = 0;
+        try {
+            if (rs.next()) {
+                count = rs.getInt("countRecipe");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return count;
+    }
 }

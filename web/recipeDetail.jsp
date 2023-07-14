@@ -41,7 +41,7 @@
     </head>
 
     <body>
-      <!-- Preloader Start -->
+        <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -83,33 +83,33 @@
                                 </div>
                             </div>
                             <c:if test="${LOGIN_USER ==null}" >
-                            <div class="login_register_area d-flex col-4 col-sm-4">
-                                <div class="login">
-                                    <a href="login.jsp">Sign in</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <div class="login">
+                                        <a href="login.jsp">Sign in</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="register.html">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="register">
-                                    <a href="register.html">Sign up</a>
-                                </div>
-                            </div>
                             </c:if>
                             <c:if test="${LOGIN_USER !=null}">
-                                  <div class="login_register_area d-flex col-4 col-sm-4">
-                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="#">Your Profile</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="#">Your Profile</a>
 
-                                        <a class="dropdown-item" href="#">Change Password</a>
-                                        <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
-                                        <form action="MainController" method="POST">
-                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
-                                        </form>
-                                        
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                            </form>
 
-                                    </div>
-                                </li>
-                        </div>
+
+                                        </div>
+                                    </li>
+                                </div>
                             </c:if>
                         </div>
                     </div>
@@ -144,13 +144,13 @@
                                     <li class="nav-item active">
                                         <c:if test="${LOGIN_USER == null}">
                                             <a class="nav-link" href="mainpage.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                         <c:if test="${LOGIN_USER != null}">
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER != null}">
                                             <a class="nav-link" href="mainpage_user.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                        
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
@@ -204,7 +204,7 @@
                             <div class="col-12">
                                 <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                     <div class="post-thumb">
-                                        <img src="${recipe.image}" alt="StuffedChicken"/>
+                                        <img src="${recipe.imageRecipe}" alt="StuffedChicken"/>
                                     </div>  
                                 </div>
                             </div>
@@ -384,48 +384,33 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-5 col-lg-5 mt-5">
-                        <h4 style="background-color: #fafafa">Ingredients</h4>
-                        <ul style="background-color: #fafafa">
-                            <li>- 450g chicken breasts</li>
-                            <li>- 120g cream cheese</li>
-                            <li>- 2 tbsp green pesto</li>
-                            <li>- 2 tbsp Parmesan cheese, finely grated</li>
-                            <li>- ½ tsp avocado oil</li>
-                            <li>- ¼ tsp sea salt</li>
-                            <li>- ¼ tsp ground black pepper</li>
-                        </ul>
+                        <h4 style="background-color: #fafafa;border: solid 2px">Ingredients</h4>
+                        <div  style="border: solid 2px">
+                            <ul style="background-color: #fafafa">
+                                <li>- 450g chicken breasts</li>
+                                <li>- 120g cream cheese</li>
+                                <li>- 2 tbsp green pesto</li>
+                                <li>- 2 tbsp Parmesan cheese, finely grated</li>
+                                <li>- ½ tsp avocado oil</li>
+                                <li>- ¼ tsp sea salt</li>
+                                <li>- ¼ tsp ground black pepper</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-12 col-md-5 col-lg-5 mt-5">
-                        <h4 style="background-color: #fafafa">Steps</h4>
-                        <div  style="background-color: #fafafa">
-                            <h5>Step 1:</h5>
-                            <p>Preheat the air fryer to 350°F (180°C).</p>
-                            <h5>Step 2:</h5>
-                            <P>Place the chicken breasts flat on a chopping board 
-                                and slice a pocket into each breast horizontally.</P>
-
-                            <h5>Step 3:</h5>
-                            <p>Combine the cream cheese, pesto, and Parmesan cheese.</p>
-                            <h5>Step 4:</h5>
-                            <p>Spoon equal portions of the cheese mixture into the pockets
-                                of the chicken breasts. Fold the top of the chicken breast over 
-                                the filling and secure it with a toothpick.</p>
-                            <h5>Step 5:</h5>
-                            <p>Drizzle the avocado oil over the chicken breasts and rub it in.
-                                Season on both sides with sea salt and ground black pepper.</p>
-                            <h5>Step 6:</h5>
-                            <p>Place the stuffed chicken breasts in the preheated air fryer 
-                                and cook for 18-20 minutes until golden and cooked through.</p>
-                            <h5>Step 7:</h5>
-                            <p>Remove from the air fryer and serve with a green salad or your 
-                                favorite veggies.</p>
+                        <h4 style="background-color: #fafafa; border: solid 2px">Steps</h4>
+                        <div  style="background-color: #fafafa; border: solid 2px">
+                            <c:forEach var="step" items="${LIST_STEP}">
+                                <h5>Step ${step.stepNumber}:</h5>
+                                <p>${step.instructions}</p>
+                            </c:forEach>
                         </div>
 
                     </div>
                 </div>
 
                 <!--Comment -->
-                <div class="container mt-9 mb-9">
+                <div class="container mt-9 mb-9 m-md-5">
                     <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-12" >
                             <div class="card">
