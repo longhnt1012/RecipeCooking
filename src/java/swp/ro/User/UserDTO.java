@@ -22,14 +22,14 @@ public class UserDTO {
     private String phone;
     private String gmail;
     private String password;
-    private String imageUser;
     private String role;
     private boolean status;  
+    private String imageProfile;
 
     public UserDTO() {
     }
 
-    public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String imageUser, String role, boolean status) {
+    public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String role, boolean status, String imageProfile) {
         this.userID = userID;
         this.userName = userName;
         this.dob = dob;
@@ -37,9 +37,9 @@ public class UserDTO {
         this.phone = phone;
         this.gmail = gmail;
         this.password = password;
-        this.imageUser = imageUser;
         this.role = role;
         this.status = status;
+        this.imageProfile = imageProfile;
     }
 
     public int getUserID() {
@@ -98,14 +98,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getImageUser() {
-        return imageUser;
-    }
-
-    public void setImageUser(String imageUser) {
-        this.imageUser = imageUser;
-    }
-
     public String getRole() {
         return role;
     }
@@ -122,10 +114,17 @@ public class UserDTO {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", imageUser=" + imageUser + ", role=" + role + ", status=" + status + '}';
+    public String getImageProfile() {
+        return imageProfile;
     }
 
+    public void setImageProfile(String imageProfile) {
+        this.imageProfile = imageProfile;
+    }
     
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", role=" + role + ", status=" + status + '}';
+    }
+
 }

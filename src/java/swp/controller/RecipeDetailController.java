@@ -65,6 +65,8 @@ public class RecipeDetailController extends HttpServlet {
                 StepDAO stepDAO = new StepDAO();
                 List<StepDTO> listStep = stepDAO.getStepsByRecipeID(recipeID);
                 
+                //Ingredients of recipe
+                
                 request.setAttribute("sSize", sSize);
                 request.setAttribute("fSize", fSize);
                 request.setAttribute("totalRate", totalRate);

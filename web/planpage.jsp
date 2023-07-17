@@ -23,7 +23,7 @@
 
     </head>
     <body>
-        <!-- Preloader Start -->
+     <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -37,7 +37,7 @@
         </div>
 
         <!-- ****** Top Header Area Start ****** -->
-        <div class="top_header_area" style="background-color: white">
+        <div class="top_header_area">
             <div class="container">
                 <div class="row">
                     <div class="col-5 col-sm-6">
@@ -56,28 +56,43 @@
                                     <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="search-hidden-form justify-content-end align-items-center ">
-                                    <form action="MainController" method="GET">
+                                    <form action="MainController" method="POST">
                                         <input type="text" name="search" id="search-anything"
                                                placeholder="Search Anything...">
-                                        <input type="submit" name="action" value="Search" class="d-none">
+                                        <input type="submit" name="action" value="SearchHome" class="d-none">
                                         <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                                     </form>
                                 </div>
                             </div>
+                            <c:if test="${LOGIN_USER ==null}" >
                             <div class="login_register_area d-flex col-4 col-sm-4">
-                                <li class="nav-item dropdown">
+                                <div class="login">
+                                    <a href="login.jsp">Sign in</a>
+                                </div>
+                                <div class="register">
+                                    <a href="register.html">Sign up</a>
+                                </div>
+                            </div>
+                            </c:if>
+                            <c:if test="${LOGIN_USER !=null}">
+                                  <div class="login_register_area d-flex col-4 col-sm-4">
+                            <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>Hi Long</h7></a>
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="view-public-info.html">Your Profile</a>
+                                        <a class="dropdown-item" href="#">Your Profile</a>
 
-                                        <a class="dropdown-item" href="changepass.html">Change Password</a>
-                                        <a class="dropdown-item" href="myfavorite.html">Your Saved</a>
-                                        <a class="dropdown-item" href="mainpage.html" >Log Out</a>
+                                        <a class="dropdown-item" href="#">Change Password</a>
+                                        <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                        <form action="MainController" method="POST">
+                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                        </form>
+                                        
 
                                     </div>
                                 </li>
-                            </div>
+                        </div>
+                            </c:if>
                         </div>
                     </div>
 
@@ -88,7 +103,7 @@
         <!-- ****** Top Header Area End ****** -->
 
         <!-- ****** Header Area Start ****** -->
-        <header class="header_area" style="background-color: white; border-bottom: 1px solid #ebebeb">
+        <header class="header_area">
             <div class="container">
                 <div class="row">
                     <!-- Logo Area Start -->
@@ -108,12 +123,19 @@
                             <!-- Menu Area Start -->
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                                 <ul class="navbar-nav" id="yummy-nav">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" href="mainpage.jsp">Home <span
+                                    <li class="nav-item active">
+                                        <c:if test="${LOGIN_USER == null}">
+                                            <a class="nav-link" href="mainpage.jsp">Home <span
                                                 class="sr-only">(current)</span></a>
+                                        </c:if>
+                                         <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="mainpage_user.jsp">Home <span
+                                                class="sr-only">(current)</span></a>
+                                        </c:if>
+                                        
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="recipespage.jsp">Recipes</a>
+                                        <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="categories.jsp">Categories</a>
@@ -124,14 +146,14 @@
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                             <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
 
-                                            <a class="dropdown-item" href="#">My favorites</a>
-                                            <a class="dropdown-item" href="myfavorite.html">Saved</a>
+                                            <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
 
                                         </div>
                                     </li>
 
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="planpage.jsp">Meal Plan</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
                                     </li>
 
                                 </ul>
@@ -196,85 +218,57 @@
 
                             <h2 class="dialog-header" style="border-bottom: solid 1px    "> Add Recipes </h2>
                             <form class="form" id="form"  style=" overflow-y: scroll; height: 50%; margin-left: 15%" >
+                                <c:if test="${size == 0 and user != null}">
+                                    <p class="text-center align-content-lg-center">Don't have anything here</p>
+                                </c:if>
 
-                                <div class="single-widget-area popular-post-widget" style="width: 80%; ">
-                                    <!-- Single Popular Post -->
-                                    <!-- Single Popular Post -->
-                                    <div class="single-populer-post d-flex">
-                                        <img src="img/sidebar-img/2.jpg" alt="">
-                                        <div class="post-content">
-                                            <a href="#">
-                                                <h6>The 8 Best Gastro Pubs In Bath</h6>
-                                            </a>
-                                            <p>Tuesday, October 3, 2017</p>
+
+
+                                <c:if test="${user != null}">
+                                    <c:forEach var="save" items="${save}">
+                                        <div class="col-12 col-md-12 col-lg-12 my-favorite">
+                                            <div class="single-post wow fadeInUp" data-wow-delay=".4s">
+                                                <!-- Post Thumb -->
+                                                <div class="row">
+                                                    <div class="post-thumb col-4 col-md-4 col-lg-4">
+                                                        <a>
+                                                            <img src="${save.imageRecipe}" alt="" style="height: 180px; width: 100%; margin-bottom: 10px">
+                                                        </a>
+                                                    </div>
+                                                    <!-- Post Content -->
+                                                   
+                                                     
+                                                    <div class="post-content col-8 col-md-8 col-lg-8">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-10 col-md-10 col-lg-10" style="text-align: center">
+                                                                <a href=" <c:url value="/recipe/recipeDetail.do?recipeID=${save.recipeID}"/>"
+                                                                   <h4 class="post-headline" style="text-align: center; font-size: 27px">${save.recipeName}</h4>
+                                                                </a>
+                                                            </div>
+                                                                <div class="col-2 col-md-2 col-lg-2">4
+                                                                   
+                                                                        <input type="radio" name="checkbox" value="1">
+                                                                  
+                                                                    
+                                                                </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <label class="checkboxRadio">
-                                            <input name="a" type="radio"  />
-                                            <span class="primary"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Single Popular Post -->
-                                    <div class="single-populer-post d-flex">
-                                        <img src="img/sidebar-img/3.jpg" alt="">
-                                        <div class="post-content">
-                                            <a href="#">
-                                                <h6>Zermatt Unplugged the best festival</h6>
-                                            </a>
-                                            <p>Tuesday, October 3, 2017</p>
-                                        </div>
-                                        <label class="checkboxRadio">
-                                            <input name="3" type="radio"  />
-                                            <span class="primary"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Single Popular Post -->
-                                    <div class="single-populer-post d-flex">
-                                        <img src="img/sidebar-img/4.jpg" alt="">
-                                        <div class="post-content">
-                                            <a href="#">
-                                                <h6>Harrogate's Top 10 Independent Eats</h6>
-                                            </a>
-                                            <p>Tuesday, October 3, 2017</p>
-                                        </div>
-                                        <label class="checkboxRadio">
-                                            <input name="2" type="radio"  />
-                                            <span class="primary"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Single Popular Post -->
-                                    <div class="single-populer-post d-flex">
-                                        <img src="img/sidebar-img/5.jpg" alt="">
-                                        <div class="post-content">
-                                            <a href="#">
-                                                <h6>Eating Out On A Budget In Oxford</h6>
-                                            </a>
-                                            <p>Tuesday, October 3, 2017</p>
-                                        </div>
-                                        <label class="checkboxRadio" style="margin-left: 10px">
-                                            <input name="1" type="radio"  />
-                                            <span class="primary"></span>
-                                        </label>
-                                    </div>
-
-
-
-                                    <!--  <label class="form-label" id="valueFromMyButton" for="name">Recipe name</label>
-                                      <input class="input" type="text" id="name" maxlength="36">
-                                      <label class="form-label" id="valueFromMyButton" for="count">Time</label>
-                                      <input class="input" type="number" id="count" min="0" max="1000000" maxlength="7">
-                                      <input type="button" value="Cancel" class="button" id="cancel-button">
-                                      <input type="button" value="OK" class="button button-white" id="ok-button">
-                                    -->
-
-                                </div>
-
+                                    </c:forEach> 
+                                </c:if>
                             </form>
-                            <form class="form" id="form" style="margin:auto; display: table; padding-top: 30px "  >
-                                <div class="single-widget-area popular-post-widget" >
-                                    <input type="button" value="Cancel" class="button" id="cancel-button">
-                                    <input type="button" value="OK" class="button button-white" id="ok-button">
-                                </div>
-                            </form>
+
+                                
+                               <form action="MainController" method="POST" class="form" id="form" style="margin:auto; display: table; padding-top: 30px "  >
+                                    <div class="single-widget-area popular-post-widget" >
+                                        <input type="button" value="Cancel" class="button" id="cancel-button">
+                                        <input type="submit" name="action" value="Ok" class="button button-white" id="ok-button">
+                                    </div>
+                                </form>                                 
                         </div>
                     </div>
                 </div>
@@ -360,7 +354,24 @@
         <script src="calendar/js/main.js"></script>
         <!-- Active JS -->
         <script src="js/active.js"></script>
-
+        <script>
+            document.getElementById("ok-button").addEventListener("click", function () {
+                var day = document.getElementsByClassName("active-date").value;
+                var month = document.getElementsByClassName("active-month").value;
+                var year = document.getElementById("label").value;
+                // G?i giá tr? ??n servlet b?ng AJAX request
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        // X? lý ph?n h?i t? servlet (n?u c?n)
+                        console.log("Values sent successfully");
+                    }
+                };
+                xhttp.open("POST", "AddRecipeController.java", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("day=" + encodeURIComponent(day) + "&month=" + encodeURIComponent(month) + "&year=" + encodeURIComponent(year));
+            });
+        </script>
 
 
     </body>
@@ -584,17 +595,17 @@
     li.paginate_button.page-item {
         z-index: 0;
     }
-    
-.widget-title>h6 {
-    background: #5ea4cc;
-    height: 55px;
-    width: 100%;
-    font-size: 16px;
-    line-height: 52px;
-    border-radius: 2px;
-    margin-bottom: 0px;
-    text-transform: uppercase;
-} 
+
+    .widget-title>h6 {
+        background: #5ea4cc;
+        height: 55px;
+        width: 100%;
+        font-size: 16px;
+        line-height: 52px;
+        border-radius: 2px;
+        margin-bottom: 0px;
+        text-transform: uppercase;
+    } 
 
 
 </style>

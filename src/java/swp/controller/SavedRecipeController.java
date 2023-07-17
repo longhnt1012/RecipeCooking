@@ -29,7 +29,6 @@ public class SavedRecipeController extends HttpServlet {
         UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
         try {
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
-                    
                     int userID = Integer.parseInt(request.getParameter("userID"));
                     SavedRecipesDAO sfDAO = new SavedRecipesDAO();
                     SavedRecipesDTO check = sfDAO.getOneSaved(recipeID, userID);
@@ -43,7 +42,6 @@ public class SavedRecipeController extends HttpServlet {
                         response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
                     }
                     
-
                 } catch (Exception e) {
                     log("Error at SavedRecipeController " + e.toString());
                 }

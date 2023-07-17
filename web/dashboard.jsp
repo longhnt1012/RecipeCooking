@@ -140,7 +140,7 @@
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading"><a href="newhtml.html">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController">Homepage</a></li>
                                 <li class="app-sidebar__heading"><a href="LoadDashboardController">Dashboard</a></li>
                                 <li class="app-sidebar__heading">
                                     <a href="#">
@@ -175,7 +175,6 @@
                         <div class="tabs-animation">
                             <main>
                                 <h1>DASHBOARD</h1>
-
                                 <div class="insights">
                                     <div class="sales">
                                         <span class="material-symbols-outlined">analytics</span>
@@ -235,35 +234,35 @@
                                     <!----------------------- END INCOME ----------------------->
                                 </div>
                                 <!----------------------- END INSIGHTS ----------------------->
-                                
+
                                 <div class="tabs-animation" style="margin-top: 30px; border-radius: 2rem; ">
                                     <!-- Recipes Table Start -->
-                                    <div class="card mb-3">
-                                        <div class="card-header-tab card-header">
-                                            <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa-solid fa-utensils"></i> Recent-Recipes Table
+                                    <div class="main-card mb-3 card">
+                                        <div class="card-header">
+                                            <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Recent Recipes
                                             </div>
-
                                         </div>
-                                        <!-- Recipes Table Content Start -->
-                                        <div class="card-body">
-                                            <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
+                                        <div class="table-responsive">
+                                            <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
                                                 <thead>
                                                     <tr>
+                                                        <th class="text-center">#</th>
                                                         <th class="text-center">Recipe's Name</th>
                                                         <th class="text-center">Date Posted</th>
                                                         <th class="text-center">Cooking Time(minute)</th>
+                                                        <th class="text-center">By Cooker</th>
                                                         <th class="text-center">Status</th>
-                                                        <th class="text-center">Details</th>
+                                                        <th class="text-center">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
                                                     <c:forEach var="recipe" items="${LIST_RECENT_RECIPE}">
-                                                        <c:if test="${recipe.status == true}">
                                                         <tr>
+                                                            <td class="text-center text-muted" style="width: 80px;">#${recipe.recipeID}</td>
                                                             <td class="text-center">${recipe.recipeName}</td>
                                                             <td class="text-center">${recipe.datePost}</td>
                                                             <td class="text-center">${recipe.cookingTime}</td>
+                                                            <td class="text-center">${recipe.userName}</td>
                                                             <c:if test="${recipe.status == 'true'}">
                                                                 <td class="text-center">
                                                                     <div class="badge badge-success">Active</div>
@@ -275,7 +274,6 @@
                                                                     <div class="badge badge-danger">Inactive</div>
                                                                 </td>
                                                             </c:if>
-
                                                             <td class="text-center">
                                                                 <form action="ManageRecipeController" method="POST">
                                                                     <input type="hidden" name="recipeID" value="${recipe.recipeID}"/>
@@ -283,26 +281,266 @@
                                                                 </form>
                                                             </td>
                                                         </tr>
-                                                        </c:if>
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <!-- Recipes Table Content End -->
+                                        <div class="d-block p-4 text-center card-footer">
+                                            <form action="LoadRecipesController" method="POST">
+                                                <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg" type="submit">
+                                                    <span class="mr-2 opacity-7"><i class="fa fa-cog fa-spin"></i>
+                                                    </span>
+                                                    <span class="mr-1">View All Recipes</span>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <!-- Recipes Table End -->
                                 </div>
                             </main>
                             <!----------------------- END MAIN ----------------------->
-                            
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card-shadow-primary card-border mb-3 card">
+                                        <div class="dropdown-menu-header">
+                                            <div class="dropdown-menu-header-inner bg-primary">
+                                                <div class="menu-header-content">
+                                                    <h4 class="menu-header-title text-capitalize mb-0 fsize-3">Top User Creative</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-chart-wrapper chart-wrapper-relative">
+                                            <canvas id="topUserCreateMost"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card-shadow-primary card-border mb-3 card">
+                                        <div class="dropdown-menu-header">
+                                            <div class="dropdown-menu-header-inner bg-primary">
+                                                <div class="menu-header-content">
+                                                    <h4 class="menu-header-title text-capitalize mb-0 fsize-3">Top Rating Recipe</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="p-0 list-group-item">
+                                                <div class="row">
+                                                    <div class="center-elem col-md-6">
+                                                        <div class="center-elem w-100">
+                                                            <canvas id="topRatingRecipe"></canvas>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <c:forEach varStatus="counter" var="topRecipe" items="${LIST_TOP_5}">
+                                                            <c:if test="${counter.count == 1}">
+                                                                <div class="widget-chart">
+                                                                    <div class="widget-chart-content">
+                                                                        <div class="widget-numbers mt-0 text-danger">
+                                                                            <small>Top ${counter.count}</small><br>
+                                                                            ${String.format("%.2f", topRecipe.scoreUser)}
+                                                                        </div>
+                                                                        <div class="widget-subheading">${topRecipe.recipeName}</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="divider mt-0 mb-0 mr-2"></div>
+                                                            </c:if>
+                                                            <c:if test="${counter.count == 2}">
+                                                                <div class="widget-chart">
+                                                                    <div class="widget-chart-content">
+                                                                        <div class="widget-numbers mt-0 text-primary">
+                                                                            <small>Top ${counter.count}</small><br>
+                                                                            ${String.format("%.2f", topRecipe.scoreUser)}
+                                                                        </div>
+                                                                        <div class="widget-subheading">${topRecipe.recipeName}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-card mb-3 card">
+                                <div class="card-header-tab card-header">
+                                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Recent FeedBack Tables</div>
+                                </div>
+                                <div class="card-body">
+                                    <table data-toggle="table" data-sort-name="name" data-sort-order="desc">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="name" data-sortable="true">
+                                                    Date of post
+                                                </th>
+                                                <th data-field="stargazers_count" data-sortable="true">
+                                                    Feedback
+                                                </th>
+                                                <th data-field="forks_count" data-sortable="true">
+                                                    Recipe
+                                                </th>
+                                                <th data-field="description" data-sortable="true">
+                                                    By cooker
+                                                </th>
+                                                <th data-field="status" data-sortable="true">
+                                                    Status
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="recentFeedBack" items="${LIST_RECENT_FEEDBACK}">
+                                                <tr>
+                                                    <td class="text-center">${recentFeedBack.feedbackDate}</td>
+                                                    <td class="text-center">${recentFeedBack.content}</td>
+                                                    <td class="text-center">${recentFeedBack.recipeName}</td>
+                                                    <td class="text-center">${recentFeedBack.userName}</td>
+                                                    <c:if test="${recentFeedBack.status == true}">
+                                                        <td class="text-center">
+                                                            <div class="badge badge-success">Active</div>
+                                                        </td>
+                                                    </c:if>
+
+                                                    <c:if test="${recentFeedBack.status == false}">
+                                                        <td class="text-center">
+                                                            <div class="badge badge-danger">Inactive</div>
+                                                        </td>
+                                                    </c:if>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-block p-4 text-center card-footer">
+                                            <form action="LoadFeedbacksController" method="POST">
+                                                <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg" type="submit">
+                                                    <span class="mr-2 opacity-7"><i class="fa fa-cog fa-spin"></i>
+                                                    </span>
+                                                    <span class="mr-1">View All FeedBacks</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <script type="text/javascript" src="js/Admin.js"></script>
-        <script type="text/javascript" src="chrome-extension://cdockenadnadldjbbgcallicgledbeoc/toolbar/bundle.min.js"></script>
-        <script>${message}</script>
+        <script>
+            ${message}
+            //Top 5 Recipe chart
+            function buildChart1(arr1, arr2) {
+                var ctx = document.getElementById("topRatingRecipe");
+                var topRecipe = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: arr1,
+                        datasets: [{
+                                data: arr2,
+                                backgroundColor: ['#ff003d', '#0579fc', '#fcc203', '#22fc05', '#f77305'],
+                                hoverBackgroundColor: ['#d92550', '#3771ab', '#b5952d', '#3b8731', '#c46e27'],
+                                hoverBorderColor: "rgba(234, 236, 244, 1)"
+                            }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10
+                        },
+                        legend: {
+                            display: false
+                        },
+                        cutoutPercentage: 80
+                    }
+                });
+            }
+            //Call chart
+            let arr1 = [
+            <c:forEach var="topRecipe" items="${LIST_TOP_5}">
+                '<c:out value="${topRecipe.recipeName}"/>',
+            </c:forEach>
+            ];
+            let arr2 = [
+            <c:forEach var="topRecipe" items="${LIST_TOP_5}">
+                parseFloat('<c:out value="${topRecipe.scoreUser}"/>'),
+            </c:forEach>
+            ];
+            buildChart1(arr1, arr2);
+
+            //Top 3 Users create most recipes
+            function buildChart2(arr1, arr2) {
+                var ctx = document.getElementById("topUserCreateMost");
+                var topCreating = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: arr3,
+                        datasets: [{
+                                label: 'Most Creating Recipes',
+                                data: arr4,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(201, 203, 207, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(255, 159, 64)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(153, 102, 255)',
+                                    'rgb(201, 203, 207)'
+                                ],
+                                borderWidth: 1
+                            }]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false
+                                    },
+                                    ticks: {
+                                        maxTicksLimit: 6
+                                    },
+                                    maxBarThickness: 25
+                                }],
+                            yAxes: [{
+                                    ticks: {beginAtZero: true}
+                                }]
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                });
+            }
+            let arr3 = [
+            <c:forEach var="item" items="${LIST_TOP_3}">
+                '<c:out value="${item.key}"/>',
+            </c:forEach>
+            ];
+            let arr4 = [
+            <c:forEach var="item" items="${LIST_TOP_3}">
+                <c:out value="${item.value}"/>,
+            </c:forEach>
+            ];
+            buildChart2(arr3, arr4);
+        </script>
     </body>
 </html>
 

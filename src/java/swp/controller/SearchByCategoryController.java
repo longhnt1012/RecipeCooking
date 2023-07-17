@@ -1,52 +1,62 @@
+package swp.controller;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swp.controller;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp.ro.FavoriteRecipes.FavoriteRecipesDAO;
-import swp.ro.FavoriteRecipes.FavoriteRecipesDTO;
-import swp.ro.User.UserDTO;
-import swp.ro.savedRecipes.SavedRecipesDAO;
+import swp.ro.Recipe.RecipeDAO;
+import swp.ro.Recipe.RecipeDTO;
+
 
 /**
  *
- * @author Thành Long
+ * @author Admin
  */
-@WebServlet(name = "FavoriteRecipesController", urlPatterns = {"/FavoriteRecipesController"})
-public class FavoriteRecipesController extends HttpServlet {
+@WebServlet(name = "SearchByCategoryController", urlPatterns = {"/SearchByCategoryController"})
+public class SearchByCategoryController extends HttpServlet {
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "recipePage.jsp";
 
-      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        String url = ERROR;
         try {
-                    int recipeID = Integer.parseInt(request.getParameter("recipeID")); 
-                    int userID = Integer.parseInt(request.getParameter("userID"));
-                    FavoriteRecipesDAO sfDAO = new FavoriteRecipesDAO();
-                    FavoriteRecipesDTO check = sfDAO.getOneFavorite(recipeID, userID);
-                    if (check == null) {
-                        FavoriteRecipesDTO favorite = new FavoriteRecipesDTO();
-                        favorite.setRecipeID(recipeID);
-                        favorite.setUserID(userID);
-                        sfDAO.addFavoriteByID(userID, recipeID);
-                        response.sendRedirect("MainController?action=RecipeDetail&recipeID=" + recipeID);
-                    }else {
-                        response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
-                    }
-                    
-                } catch (Exception e) {
-                    log("Error at FavoriteRecipeController " + e.toString());
-                }
-
+            RecipeDAO recipeDao = new RecipeDAO();
+            String categoryName = request.getParameter("categoryName");
+            List<RecipeDTO> listRecipes = recipeDao.getListCategotyRecipe(categoryName);
+            if(listRecipes.size() > 0) {
+                request.removeAttribute("list");
+                request.setAttribute("list", listRecipes);
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR", "SAI ROI");
+            }
+        } catch (Exception e) {
+            log("Error at SearchController" + e.toString());
+        }finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

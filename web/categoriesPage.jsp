@@ -188,11 +188,11 @@ and open the template in the editor.
                             <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
                                 <img src="img/category-img/${item.image}" alt="">
                                 <div class="catagory-title">
-                                    <c:url var="search" value="ManageCategoryOfRecipeController">
-                                        <c:param name="categoryID" value="${item.categoryID}"></c:param>
-                                        <c:param name="action" value="Search"></c:param>
+                                    <c:url var="searchByCategory" value="MainController">
+                                        <c:param name="categoryName" value="${item.categoryName}"></c:param>
+                                        <c:param name="action" value="SearchByCategory"></c:param>
                                     </c:url>
-                                    <a href="${search}">
+                                    <a href="${searchByCategory}">
                                         <h5>${item.categoryName}</h5>
                                     </a>
                                 </div>

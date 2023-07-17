@@ -12,13 +12,13 @@ public class IngredientDTO {
     private int ingredientID;
     private String ingredientName;
     private int recipeID;
-    private double quantity;
+    private float quantity;
     private String unit;
 
     public IngredientDTO() {
     }
 
-    public IngredientDTO(int ingredientID, String ingredientName, int recipeID, double quantity, String unit) {
+    public IngredientDTO(int ingredientID, String ingredientName, int recipeID, float quantity, String unit) {
         this.ingredientID = ingredientID;
         this.ingredientName = ingredientName;
         this.recipeID = recipeID;
@@ -50,11 +50,11 @@ public class IngredientDTO {
         this.recipeID = recipeID;
     }
 
-    public double getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
@@ -65,11 +65,10 @@ public class IngredientDTO {
     public void setUnit(String unit) {
         this.unit = unit;
     }
-
+   
     @Override
     public String toString() {
-        return "IngredientDTO{" + "ingredientID=" + ingredientID + ", ingredientName=" + ingredientName + ", recipeID=" + recipeID + ", quantity=" + quantity + ", unit=" + unit + '}';
+        return "IngredientDTO{" + "ingredientID=" + ingredientID + ", ingredientName=" + ingredientName + '}';
     }
-
     
 }

@@ -16,6 +16,7 @@ public class RatingDTO {
     private int userID;
     private int recipeID ;
     private double scoreUser;
+    private String recipeName;
 
     public RatingDTO() {
     }
@@ -25,6 +26,14 @@ public class RatingDTO {
         this.userID = userID;
         this.recipeID = recipeID;
         this.scoreUser = scoreUser;
+    }
+
+    public RatingDTO(int rateID, int userID, int recipeID, double scoreUser, String recipeName) {
+        this.rateID = rateID;
+        this.userID = userID;
+        this.recipeID = recipeID;
+        this.scoreUser = scoreUser;
+        this.recipeName = recipeName;
     }
 
     public int getRateID() {
@@ -57,6 +66,14 @@ public class RatingDTO {
 
     public void setScoreUser(double scoreUser) {
         this.scoreUser = scoreUser;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     @Override

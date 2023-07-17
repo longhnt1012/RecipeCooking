@@ -12,15 +12,36 @@ public class SavedRecipesDTO {
     private int savedRecipeID;
     private int recipeID;
     private int userID;
-
+    private String img;
+    private String recipeName;
     public SavedRecipesDTO() {
     }
 
-    public SavedRecipesDTO(int savedRecipeID, int recipeID, int userID) {
+    public SavedRecipesDTO(int savedRecipeID, int recipeID, int userID, String img, String recipeName) {
         this.savedRecipeID = savedRecipeID;
         this.recipeID = recipeID;
         this.userID = userID;
+        this.img = img;
+        this.recipeName = recipeName;
     }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+  
 
     public int getSavedRecipeID() {
         return savedRecipeID;

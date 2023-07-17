@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,10 +23,7 @@
     </head>
 
     <body>
-        <c:if test="${sessionScope.LOGIN_USER == null }">
-            <c:redirect url="loginPage.html"></c:redirect>
-        </c:if>
-        <!-- Preloader Start -->
+       <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -60,28 +56,43 @@
                                     <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="search-hidden-form justify-content-end align-items-center ">
-                                    <form action="MainController" method="GET">
+                                    <form action="MainController" method="POST">
                                         <input type="text" name="search" id="search-anything"
                                                placeholder="Search Anything...">
-                                        <input type="submit" name="action" value="Search" class="d-none">
+                                        <input type="submit" name="action" value="SearchHome" class="d-none">
                                         <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                                     </form>
                                 </div>
                             </div>
+                            <c:if test="${LOGIN_USER ==null}" >
                             <div class="login_register_area d-flex col-4 col-sm-4">
-                                <li class="nav-item dropdown">
+                                <div class="login">
+                                    <a href="login.jsp">Sign in</a>
+                                </div>
+                                <div class="register">
+                                    <a href="register.html">Sign up</a>
+                                </div>
+                            </div>
+                            </c:if>
+                            <c:if test="${LOGIN_USER !=null}">
+                                  <div class="login_register_area d-flex col-4 col-sm-4">
+                            <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>Hi Long${sessionScope.USER_ID.fullName}</h7></a>
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="view-public-info.html">Your Profile</a>
 
                                         <a class="dropdown-item" href="changepass.html">Change Password</a>
                                         <a class="dropdown-item" href="myfavorite.html">Your Saved</a>
-                                        <a class="dropdown-item" href="mainpage.html" >Log Out</a>
+                                        <form action="MainController" method="POST">
+                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                        </form>
+                                        
 
                                     </div>
                                 </li>
-                            </div>
+                        </div>
+                            </c:if>
                         </div>
                     </div>
 
@@ -117,7 +128,7 @@
                                                 class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="recipespage.jsp">Recipes</a>
+                                        <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="categories.jsp">Categories</a>
@@ -153,7 +164,7 @@
                         <div class="col-sm-5">
                             <h2>Create Recipes</h2>
                         </div>
-
+                        
                     </div>
                     <div class="container">
                         <form action="MainController" method="POST">
@@ -163,33 +174,97 @@
                             </div>
                             <div class="row">
                                 <h4 class="post-headline mt-15">Image</h4>
-                                <input class="form-control" type="file" name="image" placeholder="Give your recipe image"/>
+                                <input class="form-control" type="text" name="recipeImage" placeholder="Give your recipe image"/>
                             </div>
-                            <!--   <div class="row justify-content-center mt-15">
-                                   <button class="btn" type="button" name="recipeImage">Add source</button>
-                               </div> -->
                             <div class="row">
                                 <label class="post-headline mt-15"><h4>Description</h4></label>
-                                <input class="form-control" type="text" name="description" placeholder="Introduce your recipe"/>
+                                <input class="form-control" type="text" name="recipeDescription" placeholder="Introduce your recipe"/>
                             </div>
-                            <!--Cooking Time -->
-                            <h4 class="post-headline row mt-15">Cooking Time</h4>
-                            
                             <div class="row">
-                                <div class="col-6 hihi">
-                                    <input  class="form-control" step="0.1" type="number" min="1" name="cookingTime" placeholder="Time..."/>
+                                <label class="post-headline mt-15"><h4>Ingredients</h4></label>
+                            </div>
+                            <div class="row" >
+
+                                <div class="col-8" style="margin-left: -25px">
+                                    <input class="form-control" type="text" name="nameIngredients" placeholder="Typing Ingredients" style="margin-left: 10px; margin-right: 10px" >
                                 </div>
-                                <div class="col-6" style="display: inline-table,margin-top: 2px">
-                                    <h5>minutes</h5>
+
+                                <div class="col-2"> 
+                                    <input class="form-control" type="text" name="amountIngredients" min="1" placeholder="Amount" style="margin-left: 10px" >
+                                </div>
+                                <div class="col-2 ">
+                                    <select class="form-control" name="unitIngredients" style="margin-left: 10px;padding: 5px; text-align: center">
+                                        <option value="g" >g</option>
+                                        <option value="Cup">cup</option>
+                                        <option value="tsp">tsp</option>
+                                        <option value="Tbsp">Tbsp</option>
+                                        <option value="Dessertspoon">Dessertspoon</option>
+                                        <option value="kg">Kg</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                            <div class="row mt-4">
+                                <h6>+ Add More Ingredients</h6>
+                            </div>
+
+                            <h4 class="post-headline row mt-15">Cooking Time</h4>
+                            <div class="row">
+                                <div class="col-5 hihi">
+                                    <input class="form-control" type="text" name="recipeCookingTime" placeholder="Time..."/>
+                                </div>
+                                <div class="col-6" style="display: inline-table">
+                                        <h5>minutes</h5>
 
                                 </div>
                             </div>
-                            <!--submit-->
-                            <div class="table-title-1 row">                                
-                                <div class="col-sm-12">
-                                    <input type="submit" name="action" value="CreateRecipe" data-target="#addProductModal" data-toggle="modal" class="btn">
+                            <h4 class="post-headline row mt-15">Stepping</h4>
+                            <div class="row" >
+                                <div class="col-2 hihi">
+                                    <input class="form-control" type="number" name="recipeStepping" placeholder="Type step ..."/>
+                                </div>
+                                <div class="col-10 hihi1">
+                                    <input class="form-control" type="text" name="recipeStepping" placeholder="Instructions...."/>
+                                </div>  
+                                <div class="row mt-4" style="margin-bottom: 40px;margin-left: 0px">
+                                    <h6>+ Add More Ingredients</h6>
                                 </div>
                             </div>
+                            <!-- <h4 class="post-headline row mt-15">Nutritional: Per Serving</h4>
+                             <div class="row">
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15"><h6 style="text-align: center">Calories</h6></div>
+                                     <div class="row">
+                                         <input type="number" name="calories" placeholder="Calories" min="0" >
+                                     </div>
+                                 </div>
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15">Fat</div>
+                                     <div class="row">
+                                         <input type="number" name="fat" placeholder="Fat" min="0">
+                                     </div>
+                                 </div>
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15">Protein</div>
+                                     <div class="row">
+                                         <input type="number" name="protein" placeholder="Protein" min="0">
+                                     </div>
+                                 </div>
+                                 <div class="col-3 col-md-3 col-lg-3">
+                                     <div class="row mt-15 mb-15">Carbs</div>
+                                     <div class="row">
+                                         <input type="number" name="carbs" placeholder="Carbs" min="0">
+                                     </div>
+                                 </div>
+                             </div>
+                            -->
+                            <div class="table-title-1 row">
+                                <div class="col-sm-12">
+                                    <a data-target="#addProductModal" data-toggle="modal" class="btn">Save</a>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -213,9 +288,6 @@
         </footer>
         <!-- Jquery-2.2.4 js -->
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
-        <script src="js/addMore/addMoreS.js"></script>
-        <script src="js/addMore/addMoreI.js"></script>
-
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>
         <!-- Bootstrap-4 js -->
@@ -227,40 +299,39 @@
     </body>
     <style>
         .table-title-1 {
-            padding-bottom: 15px;
-            color: #fff;
-            padding: 16px 30px;
-            margin: -20px -25px 10px;
-            border-radius: 20px 20px 0 0;
-        }
-        .table-title-1 h2 {
-            margin: 5px 0 0;
-            font-size: 24px;
-        }
-        .table-title-1 .btn {
-            float: right;
-            font-size: 15px;
-            background: #fc6c3f;
-            min-width: 50px;
-            border-radius: 2px;
-            border: 2px solid #959695;
-            outline: none !important;
-        }
-        .table-title-1 .btn:hover {
-            color: white;
-            background-color: #e86c46;
-        }
+    padding-bottom: 15px;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 20px 20px 0 0;
+}
+.table-title-1 h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+}
+.table-title-1 .btn {
+    float: right;
+    font-size: 15px;
+    background: #fc6c3f;
+    min-width: 50px;
+    border-radius: 2px;
+    border: 2px solid #959695;
+    outline: none !important;
+}
+.table-title-1 .btn:hover {
+    color: white;
+    background-color: #e86c46;
+}
 
-        .table-title-1 .btn i {
-            float: left;
-            font-size: 21px;
-            margin-right: 5px;
-        }
-        .table-title-1 .btn span {
-            color: black;
-            float: left;
-            margin-top: 2px;
+.table-title-1 .btn i {
+    float: left;
+    font-size: 21px;
+    margin-right: 5px;
+}
+.table-title-1 .btn span {
+    color: black;
+    float: left;
+    margin-top: 2px;
 
-        }
-
+}      
     </style>

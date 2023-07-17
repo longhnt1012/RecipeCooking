@@ -143,6 +143,8 @@ public class MainController extends HttpServlet {
                 url = LOAD_FEEDBACKS_CONTROLLER;
             } else if (LOAD_CATEGORY_OF_RECIPE.equals(action)) {
                 url = LOAD_CATEGORY_OF_RECIPE_CONTROLLER;
+            }else if (SEARCH_BY_CATEGORY.equals(action)) {
+                url = SEARCH_BY_CATEGORY_CONTROLLER;
             }
             else {
                 request.setAttribute("ERROR", "Your ACTION is not support!!!");

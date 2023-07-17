@@ -4,8 +4,8 @@
  */
 package swp.ro.MealPlanning;
 
-import java.util.Date;
-
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -15,15 +15,17 @@ public class MealPlanningDTO {
     private int planningID;
     private int userID;
     private int savedRecipeID;
+  
     private Date date;
 
     public MealPlanningDTO() {
     }
 
-    public MealPlanningDTO(int planningID, int userID, int savedRecipeID, Date date) {
+    public MealPlanningDTO(int planningID, int userID, int savedRecipeID,  Date date) {
         this.planningID = planningID;
         this.userID = userID;
         this.savedRecipeID = savedRecipeID;
+      
         this.date = date;
     }
 
@@ -50,6 +52,8 @@ public class MealPlanningDTO {
     public void setSavedRecipeID(int savedRecipeID) {
         this.savedRecipeID = savedRecipeID;
     }
+
+   
 
     public Date getDate() {
         return date;

@@ -23,6 +23,8 @@ import swp.ro.User.UserDTO;
 public class FavoriteRecipesDAO {
     private static final String SEARCH = "select count(*) AS totalCount from FavoriteRecipes fr where recipeID=?";
     private static final String COMMENT_COUNT = "SELECT COUNT(*) AS totalComments FROM FavoriteRecipes WHERE recipeID=?";
+    
+    
     public Map<Integer, Integer> getListLike(List<RecipeDTO> list) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -30,7 +32,7 @@ public class FavoriteRecipesDAO {
         Map<Integer, Integer> map = new HashMap<>();
         int totalComments = 0;
         try {
-            conn = DBUtil.makeConnection();
+            conn = DBUtil.getConnection1();
             if (conn != null) {
                 for (RecipeDTO recipe : list) {
 //                    ptm = conn.prepareStatement(SEARCH);
@@ -64,7 +66,7 @@ public class FavoriteRecipesDAO {
         }
         return map;
     }
-    public int getTotalCommentsForRecipe(int recipeID) throws SQLException {
+    public int getTotalCommentsForRecipe(int recipeID) throws SQLException, ClassNotFoundException {
         int totalComments = 0;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -72,7 +74,7 @@ public class FavoriteRecipesDAO {
 
         try {
             // Kết nối đến cơ sở dữ liệu (DBUtil.makeConnection() là phương thức giả định)
-            conn = DBUtil.makeConnection();
+            conn = DBUtil.getConnection1();
 
             if (conn != null) {
                 // Chuẩn bị truy vấn SQL
@@ -101,4 +103,89 @@ public class FavoriteRecipesDAO {
 
         return totalComments;
     }
+    
+    public int totalFavoriteORecipe(int recipeID) throws SQLException, ClassNotFoundException {
+        Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement("select count(*) from FavoriteRecipes where recipeID = ?");
+        stm.setInt(1, recipeID);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+     public void addFavoriteByID(int recipeID, int userID) throws SQLException, ClassNotFoundException {
+        Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement("insert FavoriteRecipes values(?,?)");
+        stm.setInt(1, recipeID);
+        stm.setInt(2, userID);
+        stm.executeUpdate();
+        con.close();
+    }
+
+    public void removeFavoriteRecipe(int userID,int recipeID) throws SQLException, ClassNotFoundException {
+         Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement("delete FavoriteRecipes where userID= ? and recipeID = ?");
+        stm.setInt(1, userID);
+        stm.setInt(2, recipeID);
+        stm.executeUpdate();
+        con.close();
+    }
+    public FavoriteRecipesDTO getFavoriteRecipeID(int recipeID, int userID) throws SQLException, ClassNotFoundException {
+        FavoriteRecipesDTO favorite = null;
+         Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement("select * from FavoriteRecipes a join Recipe b "
+                + "on a.recipeID = b.recipeID "
+                + "join [User] c on b.userID = c.userID "
+                + "where a.recipeID = ? and a.userID = ?");
+        stm.setInt(1, recipeID);
+        stm.setInt(2, userID);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            favorite = new FavoriteRecipesDTO();
+            favorite.setFavoriteRecipeID(rs.getInt("favoriteRecipeID"));
+            favorite.setRecipeID(rs.getInt("recipeID"));
+            favorite.setRecipeName(rs.getString("recipeName"));
+            favorite.setUserID(rs.getInt("userID"));
+        }
+        con.close();
+        return favorite;
+    }
+    public FavoriteRecipesDTO getOneFavorite(int recipeID, int userID) throws SQLException, ClassNotFoundException {
+        FavoriteRecipesDTO favorite = null;
+         Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement("select * from FavoriteRecipes where recipeID = ? and userID = ?");
+        stm.setInt(1, recipeID);
+        stm.setInt(2, userID);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            favorite = new FavoriteRecipesDTO();
+            favorite.setFavoriteRecipeID(rs.getInt("favoriteRecipeID"));
+            favorite.setRecipeID(rs.getInt("recipeID"));
+            favorite.setUserID(rs.getInt("userID"));
+        }
+        con.close();
+        return favorite;
+    }
+    public List<FavoriteRecipesDTO> getFavorite(int userID) throws SQLException, ClassNotFoundException {
+        List<FavoriteRecipesDTO> list = null;
+        Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement("select * from FavoriteRecipes a join [Recipe] b on a.recipeID = b.recipeID "
+                + "join [User] c on b.userID = c.userID where a.userID = ?");
+        stm.setInt(1, userID);
+        ResultSet rs = stm.executeQuery();
+        list = new ArrayList<>();
+        while (rs.next()) {
+            FavoriteRecipesDTO favorite = new FavoriteRecipesDTO();
+            favorite.setFavoriteRecipeID(rs.getInt("favoriteRecipeID"));
+            favorite.setRecipeID(rs.getInt("recipeID"));
+            favorite.setImg(rs.getString("image"));
+            favorite.setRecipeName(rs.getString("recipeName"));
+            favorite.setUserID(rs.getInt("userID"));
+            list.add(favorite);
+        }
+        con.close();
+        return list;
+    }
+  
 }

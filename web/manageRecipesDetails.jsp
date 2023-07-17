@@ -182,7 +182,7 @@
                                         <div class="dropdown-menu-header-inner bg-success">
                                             <div class="menu-header-content">
                                                 <div class="avatar-icon-wrapper btn-hover-shine mb-2 avatar-icon-xl">
-                                                    <div class="avatar-icon rounded"><img src="${requestScope.recipeDetail.image}" alt="Avatar 6"></div>
+                                                    <div class="avatar-icon rounded"><img src="${requestScope.recipeDetail.imageRecipe}" alt="Avatar 6"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -247,18 +247,6 @@
                                                                         <div class="widget-heading">Description</div>
                                                                         <div class="widget-subheading opacity-10">
                                                                             <span class="pr-2">${requestScope.recipeDetail.description}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <div class="widget-content p-0">
-                                                                <div class="widget-content-wrapper">
-                                                                    <div class="widget-content-left flex2">
-                                                                        <div class="widget-heading">Instruction</div>
-                                                                        <div class="widget-subheading opacity-10">
-                                                                            <span class="pr-2">${requestScope.recipeDetail.instruction}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

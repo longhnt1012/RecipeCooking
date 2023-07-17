@@ -244,7 +244,7 @@
                                         By <a href="#" style="font-size: 14px;">${recipe.userName}</a>
                                     </div>
                                     <div class="star-rating">
-                                        <form action="<c:url value="/recipe/rating.do?userID=${LOGIN_USER.userID}&recipeID=${recipe.recipeID}"/>" method="post">
+                                        <form action="<c:url value="MainController?action=RecipeDetail&userID=${LOGIN_USER.userID}&recipeID=${recipe.recipeID}"/>" method="post">
                                             <c:if test="${LOGIN_USER == null}">
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(1)" data-toggle="modal" data-target="#Login"></button>
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(2)" data-toggle="modal" data-target="#Login"></button>
@@ -384,7 +384,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-5 col-lg-5 mt-5">
-                        <h4 style="background-color: #fafafa;border: solid 2px">Ingredients</h4>
+                        <h4 style="background-color: #fafafa; border: solid 2px">Ingredients</h4>
                         <div  style="border: solid 2px">
                             <ul style="background-color: #fafafa">
                                 <li>- 450g chicken breasts</li>
