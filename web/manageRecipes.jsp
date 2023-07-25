@@ -137,7 +137,7 @@
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading"><a href="newhtml.html">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController">Homepage</a></li>
                                 <li class="app-sidebar__heading"><a href="LoadDashboardController">Dashboard</a></li>
                                 <li class="app-sidebar__heading">
                                     <a href="#">
@@ -146,17 +146,17 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="LoadAccountsController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadUsers" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Accounts
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadRecipesController"  class="mm-active" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadRecipes" class="mm-active" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Recipes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadFeedbacksController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadFeedbacks" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon">
                                                 </i>Manage Feedbacks
                                             </a>
@@ -215,27 +215,23 @@
                                                             <c:when test="${recipe.status == 'false'}">
                                                                 <form action="ManageRecipeController" method="POST">
                                                                     <input type="hidden" name="recipeID" value="${recipe.recipeID}"/>
-                                                                    <button type="submit" name="action" value="Unblock" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Unblock</button>
+                                                                    <button type="submit" name="action" value="Unblock" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-unlock-alt" aria-hidden="true"></i></button>
                                                                 </form>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <form action="ManageRecipeController" method="POST">
                                                                     <input type="hidden" name="recipeID" value="${recipe.recipeID}"/>
-                                                                    <button type="submit" name="action" value="Block" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Block</button>
+                                                                    <button type="submit" name="action" value="Block" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-lock" aria-hidden="true"></i></button>
                                                                 </form>
-                                                                <form action="LoadCategoryOfRecipesController" method="POST">
+                                                                <form action="ManageRecipeController" method="POST">
                                                                     <input type="hidden" name="recipeID" value="${recipe.recipeID}"/>
-                                                                    <button type="submit" name="action" value="Tag" id="PopoverCustomT-1" style="margin-top:10px" class="btn btn-primary btn-sm">Tag</button>
+                                                                    <button type="submit" name="action" value="Tag" id="PopoverCustomT-1" style="margin-top:10px" class="btn btn-primary btn-sm"><i class="fa fa-tag" aria-hidden="true"></i></button>
                                                                 </form>
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <form action="ManageRecipeController" method="POST">
                                                             <input type="hidden" name="recipeID" value="${recipe.recipeID}"/>
-                                                            <button type="submit" name="action" value="Delete" id="PopoverCustomT-1" style="margin:10px 0px" class="btn btn-primary btn-sm">Delete</button>
-                                                        </form>
-                                                        <form action="ManageRecipeController" method="POST">
-                                                            <input type="hidden" name="recipeID" value="${recipe.recipeID}"/>
-                                                            <button type="submit" name="action" value="Detail" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
+                                                            <button type="submit" name="action" value="Detail" id="PopoverCustomT-1" class="btn btn-primary btn-sm" style="margin-top:10px"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>

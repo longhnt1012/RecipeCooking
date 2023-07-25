@@ -138,7 +138,7 @@
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading"><a href="newhtml.html">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController">Homepage</a></li>
                                 <li class="app-sidebar__heading"><a href="LoadDashboardController">Dashboard</a></li>
                                 <li class="app-sidebar__heading">
                                     <a href="#">
@@ -147,17 +147,17 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="LoadAccountsController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadUsers" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Accounts
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadRecipesController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadRecipes" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Recipes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadFeedbacksController" class="mm-active" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadFeedbacks" class ="mm-active" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon">
                                                 </i>Manage Feedbacks
                                             </a>
@@ -233,19 +233,19 @@
                                                             <c:when test="${feedback.status == false}">
                                                                 <form action="ManageFeedbackController" method="POST">
                                                                     <input type="hidden" name="feedbackID" value="${feedback.feedBackID}"/>
-                                                                    <button type="submit" name="action" value="Unblock" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Unblock</button>
+                                                                    <button type="submit" name="action" value="Unblock" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-unlock-alt" aria-hidden="true"></i></button>
                                                                 </form>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <form action="ManageFeedbackController" method="POST">
                                                                     <input type="hidden" name="feedbackID" value="${feedback.feedBackID}"/>
-                                                                    <button type="submit" name="action" value="Block" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Block</button>
+                                                                    <button type="submit" name="action" value="Block" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-lock" aria-hidden="true"></i></button>
                                                                 </form>
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <form action="ManageFeedbackController" method="POST">
                                                             <input type="hidden" name="feedbackID" value="${feedback.feedBackID}"/>
-                                                            <button style="margin-top: 10px" type="submit" name="action" value="Delete" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Delete</button>
+                                                            <button style="margin-top: 10px" type="submit" name="action" value="Delete" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>

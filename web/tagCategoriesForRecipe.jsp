@@ -77,17 +77,10 @@
                                         <div class="widget-chart-content">
                                             <div class="icon-wrapper rounded-circle">
                                                 <div class="icon-wrapper-bg opacity-9 bg-focus"></div>
-                                                <i class="fa-solid fa-user-secret"></i>
+                                                <i class="fa-solid fa-user-secret" style="color: #3ac47d"></i>
                                             </div>
                                             <div class="widget-numbers">
-                                                <span>344k</span>
-                                            </div>
-                                            <div class="widget-subheading pt-2">
-                                                Profile views since last login
-                                            </div>
-                                            <div class="widget-description text-danger">
-                                                <span class="pr-1"><span>176%</span></span>
-                                                <i class="fa fa-arrow-left"></i>
+                                                <span>${sessionScope.user.userName}</span>
                                             </div>
                                         </div>
                                         <div class="widget-chart-wrapper">
@@ -115,26 +108,26 @@
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading"><a href="newhtml.html">Homepage</a></li>
-                                <li class="app-sidebar__heading"><a href="LoadDashboardController">Dashboard</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController?action=LoadDashboard">Dashboard</a></li>
                                 <li class="app-sidebar__heading">
                                     <a href="#">
                                         Features
                                         <i class="metismenu-state-icon fa-solid fa-angle-up caret-left"></i>
                                     </a>
-                                    <ul class="mm-collapse mm-show">
+                                    <ul>
                                         <li>
-                                            <a href="LoadAccountsController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadUsers" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Accounts
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadRecipesController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadRecipes" class="mm-active" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Recipes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadFeedbacksController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadFeedbacks" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon">
                                                 </i>Manage Feedbacks
                                             </a>

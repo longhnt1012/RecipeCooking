@@ -69,7 +69,7 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_BY_CATEGORY = "SearchByCategory";
     private static final String SEARCH_BY_CATEGORY_CONTROLLER = "SearchByCategoryController";
     //Admin flow
-     private static final String LOAD_USERS = "LoadUsers";
+    private static final String LOAD_USERS = "LoadUsers";
     private static final String LOAD_USERS_CONTROLLER = "LoadUsersController";
     private static final String LOAD_RECIPES = "LoadRecipes";
     private static final String LOAD_RECIPES_CONTROLLER = "LoadRecipesController";
@@ -77,6 +77,8 @@ public class MainController extends HttpServlet {
     private static final String LOAD_FEEDBACKS_CONTROLLER = "LoadFeedbacksController";
     private static final String LOAD_CATEGORY_OF_RECIPE = "LoadCategoryOfRecipe";
     private static final String LOAD_CATEGORY_OF_RECIPE_CONTROLLER = "LoadCategoryOfRecipeController";
+    private static final String LOAD_DASHBOARD = "LoadDashboard";
+    private static final String LOAD_DASHBOARD_CONTROLLER = "LoadDashboardController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -145,11 +147,14 @@ public class MainController extends HttpServlet {
                 url = LOAD_CATEGORY_OF_RECIPE_CONTROLLER;
             }else if (SEARCH_BY_CATEGORY.equals(action)) {
                 url = SEARCH_BY_CATEGORY_CONTROLLER;
+            }else if (LOAD_DASHBOARD.equals(action)) {
+                url = LOAD_DASHBOARD_CONTROLLER;
             }
             else {
                 request.setAttribute("ERROR", "Your ACTION is not support!!!");
             }
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

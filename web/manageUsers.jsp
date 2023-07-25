@@ -137,7 +137,7 @@
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading"><a href="newhtml.html">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController">Homepage</a></li>
                                 <li class="app-sidebar__heading"><a href="LoadDashboardController">Dashboard</a></li>
                                 <li class="app-sidebar__heading">
                                     <a href="#">
@@ -146,17 +146,17 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="LoadAccountsController"  class="mm-active" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadUsers" class="mm-active" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Accounts
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadRecipesController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadRecipes" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Recipes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadFeedbacksController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadFeedbacks" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon">
                                                 </i>Manage Feedbacks
                                             </a>
@@ -185,7 +185,7 @@
                                         </div>
                                 </div>
                                 <div class="card-body">
-                                    <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
+                                    <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered" data-sort-name="role" data-sort-order="desc">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">User's Name</th>
@@ -237,23 +237,19 @@
                                                                     <c:when test="${user.status == true}">
                                                                         <form action="ManageAccountController" method="POST">
                                                                             <input type="hidden" name="userID" value="${user.userID}"/>
-                                                                            <button type="submit" name="action" value="Block" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Block</button>
+                                                                            <button type="submit" name="action" value="Block" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-lock" aria-hidden="true"></i></button>
                                                                         </form>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <form action="ManageAccountController" method="POST">
                                                                             <input type="hidden" name="userID" value="${user.userID}"/>
-                                                                            <button type="submit" name="action" value="Unblock" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Unblock</button>
+                                                                            <button type="submit" name="action" value="Unblock" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="fa fa-lock" aria-hidden="true"></i></button>
                                                                         </form>
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <form action="ManageAccountController" method="POST">
                                                                     <input type="hidden" name="userID" value="${user.userID}"/>
-                                                                    <button type="submit" name="action" value="Delete" id="PopoverCustomT-1" class="btn btn-primary btn-sm" style="margin: 10px 0px">Delete</button>
-                                                                </form>
-                                                                <form action="ManageAccountController" method="POST">
-                                                                    <input type="hidden" name="userID" value="${user.userID}"/>
-                                                                    <button type="submit" name="action" value="Detail" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Detail</button>
+                                                                    <button type="submit" name="action" value="Detail" id="PopoverCustomT-1" class="btn btn-primary btn-sm" style="margin-top: 10px"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                                                                 </form>
                                                             </td>
                                                         </c:when>

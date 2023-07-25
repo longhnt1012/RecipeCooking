@@ -58,7 +58,6 @@ public class LoadCategoryOfRecipesController extends HttpServlet {
         try {
             String recipeID = request.getParameter("recipeID");
             String action = request.getParameter("action");
-            if ("Tag".equals(action)) {
                 recipe = recipeDao.getOne(Integer.parseInt(recipeID));
                 cor = corDao.getByRecipeID(Integer.parseInt(recipeID));
                 listcategory = categoryDao.getListCategories();
@@ -67,7 +66,6 @@ public class LoadCategoryOfRecipesController extends HttpServlet {
                 request.setAttribute("RECIPE", recipe);
                 request.setAttribute("COR", cor);
                 url = SUCCESS;
-            }
         } catch (Exception e) {
             request.setAttribute("message", e);
         } finally {

@@ -103,12 +103,6 @@ public class ManageAccountController extends HttpServlet {
                 case "Create":
                     url = "CreateAccountController";
                     break;
-                case "Delete":
-                    if(dao.deleteAccount(Integer.parseInt(userID))) {
-                        request.setAttribute("message", "alert('Delete Success')");
-                        url = SUCCESS;
-                    }
-                    break;
                 default:
                     throw new Exception();
             }

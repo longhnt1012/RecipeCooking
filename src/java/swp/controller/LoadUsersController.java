@@ -8,23 +8,27 @@ package swp.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import swp.ro.Recipe.RecipeDAO;
-import swp.ro.Recipe.RecipeDTO;
+import javax.servlet.http.HttpSession;
+import swp.ro.User.UserDAO;
+import swp.ro.User.UserDTO;
+
 
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ManageRecipeController", urlPatterns = {"/ManageRecipeController"})
-public class ManageRecipeController extends HttpServlet {
-    private static final String SUCCESS = "LoadRecipesController";
-    private static final String ERROR = "error.jsp";
+@WebServlet(name = "LoadUsersController", urlPatterns = {"/LoadUsersController"})
+public class LoadUsersController extends HttpServlet {
+    public static final String SUCCESS = "manageUsers.jsp";
+    public static final String ERROR = "error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,44 +42,18 @@ public class ManageRecipeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        RecipeDAO dao = new RecipeDAO();
-        RecipeDTO recipe = new RecipeDTO();
         try {
-            String recipeID = request.getParameter("recipeID");
-            String action = request.getParameter("action");
-            if ("Block".equals(action)) {
-                recipe = dao.getOne(Integer.parseInt(recipeID));
-                if (recipe != null) {
-                    recipe.setStatus(false);
-                    if (dao.update(recipe)) {
-                        url = SUCCESS;
-                    } else {
-                        url = ERROR;
-                    }
-                } else {
-                    url = ERROR;
-                }
-            } else if ("Unblock".equals(action)) {
-                recipe = dao.getOne(Integer.parseInt(recipeID));
-                if (recipe != null) {
-                    recipe.setStatus(true);
-                    if (dao.update(recipe)) {
-                        url = SUCCESS;
-                    } else {
-                        url = ERROR;
-                    }
-                } else {
-                    url = ERROR;
-                }
-            } else if (action.equals("Detail")) {
-                recipe = dao.getOne(Integer.parseInt(recipeID));
-                request.setAttribute("recipeDetail", recipe);
-                url = "manageRecipesDetails.jsp";
-            }  else if (action.equals("Tag")) {
-                url = "LoadCategoryOfRecipesController";
+            UserDAO dao = new UserDAO();
+            List<UserDTO> listUser = dao.selectAll();
+            if (listUser.size() > 0) {
+                HttpSession session = request.getSession();
+                session.setAttribute("LIST_USERS", listUser);
+                url = SUCCESS;
+            } else {
+                request.setAttribute("message", "Co loi tai readUserController");
             }
         } catch (Exception e) {
-            request.setAttribute("message", "Error at ManageRecipeController");
+            e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

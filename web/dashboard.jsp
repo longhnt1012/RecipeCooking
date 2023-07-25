@@ -149,17 +149,17 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="LoadAccountsController"  class="mm-active" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadUsers" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Accounts
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadRecipesController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadRecipes" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Recipes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadFeedbacksController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadFeedbacks" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon">
                                                 </i>Manage Feedbacks
                                             </a>

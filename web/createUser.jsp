@@ -141,25 +141,26 @@
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading"><a href="newhtml.html">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="MainController">Homepage</a></li>
+                                <li class="app-sidebar__heading"><a href="LoadDashboardController">Dashboard</a></li>
                                 <li class="app-sidebar__heading">
                                     <a href="#">
                                         Features
-                                        <i class="metismenu-state-icon fa-solid fa-angle-down caret-left"></i>
+                                        <i class="metismenu-state-icon fa-solid fa-angle-up caret-left"></i>
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="LoadUsersController"  class="mm-active" style="margin: 10px 0xp;">
-                                                <i class="metismenu-icon"></i>Manage Users
+                                            <a href="MainController?action=LoadUsers" style="margin: 10px 0xp;">
+                                                <i class="metismenu-icon"></i>Manage Accounts
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadRecipesController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadRecipes" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon"></i>Manage Recipes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="LoadFeedbacksController" style="margin: 10px 0xp;">
+                                            <a href="MainController?action=LoadFeedbacks" style="margin: 10px 0xp;">
                                                 <i class="metismenu-icon">
                                                 </i>Manage Feedbacks
                                             </a>
