@@ -23,6 +23,7 @@ import swp.ro.User.UserDTO;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
+<<<<<<< HEAD
     private static final String ERROR = "login.jsp";
     private static final String LOGIN_PAGE = "login.jsp";
     private static final String US = "US";
@@ -30,6 +31,14 @@ public class LoginController extends HttpServlet {
     private static final String AD = "AD";
     private static final String AD_PAGE = "LoadDashboardController";
 
+=======
+    private static final String LOGIN_PAGE="login.jsp";
+    private static final String US="US";
+    private static final String US_PAGE="mainpage_user.jsp";
+    private static final String AD ="ADMIN";
+    private static final String AD_PAGE = "LoadDashboardController";
+    
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

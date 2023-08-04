@@ -31,6 +31,10 @@ public class SavedRecipeController extends HttpServlet {
         try{
             int userID = user.getUserID();
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
+<<<<<<< HEAD
+=======
+                    int userID = Integer.parseInt(request.getParameter("userID"));
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     SavedRecipesDAO sfDAO = new SavedRecipesDAO();
                     SavedRecipesDTO check = sfDAO.getOneSaved(recipeID, userID);
                     if (check == null) {
@@ -43,7 +47,6 @@ public class SavedRecipeController extends HttpServlet {
                         response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
                     }
                     
-
                 } catch (Exception e) {
                     log("Error at SavedRecipeController " + e.toString());
                 }

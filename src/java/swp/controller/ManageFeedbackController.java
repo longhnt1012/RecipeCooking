@@ -12,11 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 import swp.ro.feedback.FeedBackDAO;
 import swp.ro.feedback.FeedBackDTO;
 import swp.ro.User.UserDAO;
 import swp.ro.User.UserDTO;
+=======
+import swp.ro.feedback.FeedBackDAO;
+import swp.ro.feedback.FeedBackDTO;
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
 /**
  *
@@ -24,10 +30,15 @@ import swp.ro.User.UserDTO;
  */
 @WebServlet(name = "ManageFeedbackController", urlPatterns = {"/ManageFeedbackController"})
 public class ManageFeedbackController extends HttpServlet {
+<<<<<<< HEAD
 
     private static final String SUCCESS = "LoadFeedbacksController";
     private static final String ERROR = "error.jsp";
 
+=======
+    private static final String SUCCESS = "LoadFeedbacksController";
+    private static final String ERROR = "error.jsp";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,6 +52,7 @@ public class ManageFeedbackController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         FeedBackDAO dao = new FeedBackDAO();
         FeedBackDTO feedback = new FeedBackDTO();
@@ -88,6 +100,49 @@ public class ManageFeedbackController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("message", "You don't have permission");
+=======
+        FeedBackDAO dao = new FeedBackDAO();
+        FeedBackDTO feedback = new FeedBackDTO();
+        boolean check = false;
+        try {
+            String feedbackID = request.getParameter("feedbackID");
+            String action = request.getParameter("action");
+            if ("Block".equals(action)) {
+                feedback = dao.getOne(Integer.parseInt(feedbackID));
+                if (feedback != null) {
+                    feedback.setStatus(false);
+                    if(dao.Update(feedback)) {
+                        url = SUCCESS;
+                    } else {
+                        url = ERROR;
+                    }
+                } else {
+                    url = ERROR;
+                }
+            } else if ("Unblock".equals(action)) {
+                feedback = dao.getOne(Integer.parseInt(feedbackID));
+                if (feedback != null) {
+                    feedback.setStatus(true);
+                    if(dao.Update(feedback)) {
+                        url = SUCCESS;
+                    } else {
+                        url = ERROR;
+                    }
+                } else {
+                    url = ERROR;
+                }
+            } else if (action.equals("Detail")) {
+                feedback = dao.getOne(Integer.parseInt(feedbackID));
+                if (feedback != null) {
+                    request.setAttribute("feedback_detail", feedback);
+                    url = "feedbackDetail.jsp";
+                }
+            } else if (action.equals("Delete")) {
+                check = dao.Delete(Integer.parseInt(feedbackID));
+                if(check) {
+                    url = SUCCESS;
+                }
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             request.setAttribute("message", "Error at ManageFeedbackController");

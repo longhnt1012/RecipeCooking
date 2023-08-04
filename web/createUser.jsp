@@ -20,7 +20,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
     <body>
+<<<<<<< HEAD
         <c:if test="${sessionScope.LOGIN_USER=='AD'}">
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
             <div class="app-header header-shadow">
                 <div class="app-header__logo">
@@ -183,7 +186,11 @@
                                             <div class="dropdown-menu-header-inner bg-success">
                                                 <div class="menu-header-content">
                                                     <h5 class="widget-heading">Avatar</h5>
+<<<<<<< HEAD
                                                     <input class="avatar-icon-wrapper btn-hover-shine mb-2 avatar-icon-xl rounded" type="file" name="imageUser"/>
+=======
+                                                    <input class="avatar-icon-wrapper btn-hover-shine mb-2 avatar-icon-xl rounded" type="file" name="imageProfile"/>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                                 </div>
                                             </div>
                                         </div>
@@ -303,7 +310,10 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         </c:if>
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         
         <script type="text/javascript">${message};</script>
         <script type="text/javascript" src="js/Admin.js"></script>

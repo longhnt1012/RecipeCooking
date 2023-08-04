@@ -6,6 +6,7 @@ package swp.ro.feedback;
 
 import DBUtil.DBUtil;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ import swp.ro.Recipe.RecipeDTO;
  * @author truc0
  */
 public class FeedBackDAO {
+<<<<<<< HEAD
      private static final String GET_ALL_FEEDBACK = "SELECT * FROM [Feedback] a JOIN [Recipe] b ON a.recipeID = b.recipeID JOIN [User] c ON a.userID = c.userID ";
     private static final String GET_ONE = "select * from FeedBack a "
             + "join [Recipe] b on a.recipeID = b.recipeID "
@@ -80,6 +82,24 @@ public class FeedBackDAO {
     public List<FeedBackDTO> getAllFeedback() throws SQLException, ClassNotFoundException {
         List<FeedBackDTO> list = null;
         Connection con = DBUtil.getConnection();
+=======
+
+    private static final String GET_ALL_FEEDBACK = "SELECT * FROM [Feedback] a JOIN [Recipe] b ON a.recipeID = b.recipeID JOIN [User] c ON a.userID = c.userID ";
+    private static final String GET_ONE = "select * from FeedBack a "
+            + "join [Recipe] b on a.recipeID = b.recipeID "
+            + "join [User] c on b.userID = c.userID "
+            + "where a.feedbackID = ?";
+    private static final String UPDATE = "update Feedback set [content] = ?, [recipeID] = ?, [userID] = ?, [feedbackDate] = ?, [status] = ? where [feedbackID] = ?";
+    private static final String DELETE = "DELETE [Feedback] WHERE feedbackID = ?";
+    private static final String RECENT_FEEDBACKS = "SELECT TOP 5 * FROM FeedBack a \n"
+            + "JOIN [Recipe] b ON a.recipeID = b.recipeID \n"
+            + "JOIN [User] c ON b.userID = c.userID \n"
+            + "ORDER BY a.feedBackDate DESC";
+
+    public List<FeedBackDTO> getAllFeedback() throws SQLException, ClassNotFoundException {
+        List<FeedBackDTO> list = null;
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement(GET_ALL_FEEDBACK);
         ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
@@ -100,7 +120,11 @@ public class FeedBackDAO {
 
     public List<FeedBackDTO> getComments(int recipeID) throws SQLException, ClassNotFoundException {
         List<FeedBackDTO> list = null;
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select * from FeedBack a "
                 + "join Recipe b on a.recipeID = b.recipeID "
                 + "join [User] c on a.userID = c.userID "
@@ -113,7 +137,11 @@ public class FeedBackDAO {
             feedback.setFeedBackID(rs.getInt("feedBackID"));
             feedback.setContent(rs.getString("content"));
             feedback.setUserID(rs.getInt("userID"));
+<<<<<<< HEAD
             feedback.setUserName(rs.getString("userName"));
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             feedback.setFeedbackDate(rs.getDate("feedbackDate"));
             feedback.setRecipeID(rs.getInt("recipeID"));
             feedback.setStatus(rs.getBoolean("status"));
@@ -129,7 +157,11 @@ public class FeedBackDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             ptm = conn.prepareStatement(GET_ONE);
             ptm.setInt(1, feedBackID);
             rs = ptm.executeQuery();
@@ -172,7 +204,11 @@ public class FeedBackDAO {
     }
 
     public void removeCmts(int feedBackID) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement(DELETE);
         stm.setInt(1, feedBackID);
         int count = stm.executeUpdate();
@@ -204,7 +240,11 @@ public class FeedBackDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (conn != null) {
                 ptm = conn.prepareStatement(DELETE);
                 ptm.setInt(1, feedbackID);
@@ -228,7 +268,11 @@ public class FeedBackDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE);
                 ptm.setString(1, updatefeedback.getContent());
@@ -259,7 +303,11 @@ public class FeedBackDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             ptm = conn.prepareStatement(RECENT_FEEDBACKS);
             rs = ptm.executeQuery();
             while(rs.next()) {
@@ -288,6 +336,7 @@ public class FeedBackDAO {
         }
         return list;
     }
+<<<<<<< HEAD
 //    public List<FeedBackDTO> getAllFeedback() throws SQLException, ClassNotFoundException {
 //        List<FeedBackDTO> list = null;
 //        Connection con = DBUtil.getConnection();
@@ -394,4 +443,6 @@ public class FeedBackDAO {
 //        int count = stm.executeUpdate();
 //        con.close();
 //    }
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 }

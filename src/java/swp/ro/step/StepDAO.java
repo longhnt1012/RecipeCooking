@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+<<<<<<< HEAD
 package swp.ro.Step;
+=======
+package swp.ro.step;
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
 import DBUtil.DBUtil;
 import java.sql.Connection;
@@ -14,6 +18,7 @@ import java.util.List;
 
 /**
  *
+<<<<<<< HEAD
  * @author My PC
  */
 public class StepDAO {
@@ -21,6 +26,13 @@ public class StepDAO {
     private static final String INSERT_STEP="INSERT INTO Step (recipeID,stepNumber,instructions) Values(?,?,?)";
      private static final String GET_STEPS_BY_RECIPEID = "SELECT * FROM [Step] WHERE recipeID = ?";
     private static final String UPDATE_STEP = "UPDATE [Step] SET instructions = ? WHERE recipeID = ? AND stepNumber = ? ";
+=======
+ * @author Admin
+ */
+public class StepDAO {
+
+    private static final String GET_STEPS_BY_RECIPEID = "SELECT * FROM [Step] WHERE recipeID = ?";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
     public List<StepDTO> getStepsByRecipeID(int recipeID) throws SQLException {
         List<StepDTO> list = new ArrayList<>();
@@ -28,13 +40,21 @@ public class StepDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             ptm = conn.prepareStatement(GET_STEPS_BY_RECIPEID);
             ptm.setInt(1, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 int stepID = rs.getInt("stepID");
+<<<<<<< HEAD
                 String stepNumber = rs.getString("stepNumber");
+=======
+                int stepNumber = rs.getInt("stepNumber");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 String instructions = rs.getString("instructions");
                 list.add(new StepDTO(stepID, recipeID, stepNumber, instructions));
             }
@@ -53,6 +73,7 @@ public class StepDAO {
         }
         return list;
     }
+<<<<<<< HEAD
     
     public boolean updateStep(StepDTO updateStep) throws SQLException {
         boolean checkUpdate = false;
@@ -168,3 +189,6 @@ public class StepDAO {
     }
  
 }
+=======
+}
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71

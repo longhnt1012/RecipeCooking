@@ -26,7 +26,11 @@ import swp.ro.Category.CategoryDTO;
 public class LoadCategoriesController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
+<<<<<<< HEAD
     private static final String SUCCESS = "categories.jsp";
+=======
+    private static final String SUCCESS = "categoriesPage.jsp";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

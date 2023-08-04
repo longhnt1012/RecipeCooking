@@ -5,6 +5,10 @@
  */
 package swp.controller;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,16 +22,26 @@ import javax.servlet.http.HttpSession;
 import swp.ro.User.UserDAO;
 import swp.ro.User.UserDTO;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "LoadUsersController", urlPatterns = {"/LoadUsersController"})
 public class LoadUsersController extends HttpServlet {
+<<<<<<< HEAD
 
     public static final String SUCCESS = "manageUsers.jsp";
     public static final String ERROR = "error.jsp";
 
+=======
+    public static final String SUCCESS = "manageUsers.jsp";
+    public static final String ERROR = "error.jsp";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,6 +55,7 @@ public class LoadUsersController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
         try {
@@ -55,6 +70,17 @@ public class LoadUsersController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("message", "You don't have permission");
+=======
+        try {
+            UserDAO dao = new UserDAO();
+            List<UserDTO> listUser = dao.selectAll();
+            if (listUser.size() > 0) {
+                HttpSession session = request.getSession();
+                session.setAttribute("LIST_USERS", listUser);
+                url = SUCCESS;
+            } else {
+                request.setAttribute("message", "Co loi tai readUserController");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             e.printStackTrace();

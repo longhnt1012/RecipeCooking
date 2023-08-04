@@ -17,8 +17,8 @@ public class RecipeDTO {
     private String recipeName;
     private Date datePost;
     private String description;
-    private double cookingTime;
-    private String image;
+    private float cookingTime;
+    private String imageRecipe;    
     private boolean status;
     private String meal;
     private String userName;
@@ -26,19 +26,24 @@ public class RecipeDTO {
     public RecipeDTO() {
     }
 
+<<<<<<< HEAD
     public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, double cookingTime, String image, boolean status, String meal, String userName) {
+=======
+    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, float cookingTime, String imageRecipe, boolean status, String userName) {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         this.recipeID = recipeID;
         this.userID = userID;
         this.recipeName = recipeName;
         this.datePost = datePost;
         this.description = description;
         this.cookingTime = cookingTime;
-        this.image = image;
+        this.imageRecipe = imageRecipe;
         this.status = status;
         this.meal = meal;
         this.userName = userName;
     }
 
+<<<<<<< HEAD
     public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, double cookingTime, String image, String meal, boolean status) {
         this.recipeID = recipeID;
         this.userID = userID;
@@ -79,6 +84,9 @@ public class RecipeDTO {
     }
 
     public int getRecipeID() {
+=======
+   public int getRecipeID() {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         return recipeID;
     }
 
@@ -118,20 +126,28 @@ public class RecipeDTO {
         this.description = description;
     }
 
-    public double getCookingTime() {
+    public float getCookingTime() {
         return cookingTime;
     }
 
-    public void setCookingTime(double cookingTime) {
+    public void setCookingTime(float cookingTime) {
         this.cookingTime = cookingTime;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageRecipe() {
+        return imageRecipe;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageRecipe(String imageRecipe) {
+        this.imageRecipe = imageRecipe;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public boolean isStatus() {
@@ -141,5 +157,9 @@ public class RecipeDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 }

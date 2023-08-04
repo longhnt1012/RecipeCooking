@@ -64,6 +64,7 @@ public class MainController extends HttpServlet {
     private static final String FAVORITE_PAGE_CONTROLLER = "FavoritePageController";
     private static final String REMOVE_FROM_FAVPROTE = "RemoveFromFavorite";
     private static final String REMOVE_FROM_FAVORITE_CONTROLLER = "RemoveFromFavoriteController";
+<<<<<<< HEAD
     private static final String PLANNING_PAGE = "PlanningPage";
     private static final String PLANNING_PAGE_CONTROLLER = "PlanningPageController";
     private static final String CREATE_RECIPE = "CreateRecipe";
@@ -92,6 +93,14 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_BY_CATEGORY_CONTROLLER = "SearchByCategoryController";
     private static final String REMOVE_RECIPE_BY_ID = "RemoveRecipeByRecipeID";
     private static final String REMOVE_RECIPE_BY_ID_CONTROLLER = "RemoveRecipeByRecipeIDController";
+=======
+    private static final String PLANNING_PAGE="PlanningPage";
+    private static final String PLANNING_PAGE_CONTROLLER="PlanningPageController";
+    private static final String LOAD_CATEGORY = "LoadCategories";
+    private static final String LOAD_CATEGORY_CONTROLLER = "LoadCategoriesController";
+    private static final String SEARCH_BY_CATEGORY = "SearchByCategory";
+    private static final String SEARCH_BY_CATEGORY_CONTROLLER = "SearchByCategoryController";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     //Admin flow
     private static final String LOAD_USERS = "LoadUsers";
     private static final String LOAD_USERS_CONTROLLER = "LoadUsersController";
@@ -103,6 +112,7 @@ public class MainController extends HttpServlet {
     private static final String LOAD_CATEGORY_OF_RECIPE_CONTROLLER = "LoadCategoryOfRecipeController";
     private static final String LOAD_DASHBOARD = "LoadDashboard";
     private static final String LOAD_DASHBOARD_CONTROLLER = "LoadDashboardController";
+<<<<<<< HEAD
     private static final String LOAD_EDIT_RECIPE = "LoadRecipeDetailForEdit";
     private static final String LOAD_EDIT_RECIPE_CONTROLLER = "LoadRecipeDetailForEditController";
     private static final String EDIT_RECIPE = "EditRecipe";
@@ -118,6 +128,9 @@ public class MainController extends HttpServlet {
     private static final String FILTER = "Filter";
     private static final String FILTER_CONTROLLER = "FilterController";
 
+=======
+    
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -220,15 +233,33 @@ public class MainController extends HttpServlet {
                 url = REMOVE_RECIPE_BY_ID_CONTROLLER;
             }else if(PLANNING_PAGE.equals(action)){
                 url=PLANNING_PAGE_CONTROLLER;
+<<<<<<< HEAD
             } else if(SAVE_RECIPE_PLAN.equals(action)){
                 url=SAVE_RECIPE_PLAN_CONTROLLER;
             }else if(FILTER.equals(action)){
                 url = FILTER_CONTROLLER;
+=======
+            }else if (LOAD_CATEGORY.equals(action)) {
+                url = LOAD_CATEGORY_CONTROLLER;
+            } else if (LOAD_USERS.equals(action)) {
+                url = LOAD_USERS_CONTROLLER;
+            } else if (LOAD_RECIPES.equals(action)) {
+                url = LOAD_RECIPES_CONTROLLER;
+            } else if (LOAD_FEEDBACKS.equals(action)) {
+                url = LOAD_FEEDBACKS_CONTROLLER;
+            } else if (LOAD_CATEGORY_OF_RECIPE.equals(action)) {
+                url = LOAD_CATEGORY_OF_RECIPE_CONTROLLER;
+            }else if (SEARCH_BY_CATEGORY.equals(action)) {
+                url = SEARCH_BY_CATEGORY_CONTROLLER;
+            }else if (LOAD_DASHBOARD.equals(action)) {
+                url = LOAD_DASHBOARD_CONTROLLER;
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
             else {
                 request.setAttribute("ERROR", "Your ACTION is not support!!!");
             }
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

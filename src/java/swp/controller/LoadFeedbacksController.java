@@ -5,6 +5,10 @@
  */
 package swp.controller;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -13,20 +17,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+<<<<<<< HEAD
 import swp.ro.User.UserDTO;
 import swp.ro.feedback.FeedBackDAO;
 import swp.ro.feedback.FeedBackDTO;
 
+=======
+import swp.ro.feedback.FeedBackDAO;
+import swp.ro.feedback.FeedBackDTO;
+
+
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "LoadFeedbacksController", urlPatterns = {"/LoadFeedbacksController"})
 public class LoadFeedbacksController extends HttpServlet {
+<<<<<<< HEAD
 
     private static final String SUCCESS = "manageFeedbacks.jsp";
     private static final String ERROR = "error.jsp";
 
+=======
+    private static final String SUCCESS = "manageFeedbacks.jsp";
+    private static final String ERROR = "error.jsp";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,6 +57,7 @@ public class LoadFeedbacksController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
         try {
@@ -55,6 +73,18 @@ public class LoadFeedbacksController extends HttpServlet {
             } else {
                 request.setAttribute("message", "You don't have permission");
             } 
+=======
+        try {
+            FeedBackDAO dao = new FeedBackDAO();
+            List<FeedBackDTO> listFeedbacks = dao.getAllFeedback();
+            if (listFeedbacks.size() > 0) {
+                HttpSession session = request.getSession();
+                session.setAttribute("LIST_FEEDBACKS", listFeedbacks);
+                url = SUCCESS;
+            } else {
+                request.setAttribute("message", "Have error at LoadFeedbacksController");
+            }
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

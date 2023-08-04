@@ -14,12 +14,18 @@ public class UserDTO {
     private String password;
     private String imageUser;
     private String role;
+<<<<<<< HEAD
     private boolean status;
     private String code;
+=======
+    private boolean status;  
+    private String imageProfile;
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
     public UserDTO() {
     }
 
+<<<<<<< HEAD
     public UserDTO(String gmail, String code) {
         this.gmail = gmail;
         this.code = code;
@@ -27,6 +33,9 @@ public class UserDTO {
     
 
     public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String imageUser, String role, boolean status) {
+=======
+    public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String role, boolean status, String imageProfile) {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         this.userID = userID;
         this.userName = userName;
         this.dob = dob;
@@ -37,6 +46,7 @@ public class UserDTO {
         this.imageUser = imageUser;
         this.role = role;
         this.status = status;
+        this.imageProfile = imageProfile;
     }
 
     public int getUserID() {
@@ -119,8 +129,22 @@ public class UserDTO {
         this.status = status;
     }
 
+<<<<<<< HEAD
     public String getCode() {
         return code;
+=======
+    public String getImageProfile() {
+        return imageProfile;
+    }
+
+    public void setImageProfile(String imageProfile) {
+        this.imageProfile = imageProfile;
+    }
+    
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", role=" + role + ", status=" + status + '}';
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     }
 
     public void setCode(String code) {

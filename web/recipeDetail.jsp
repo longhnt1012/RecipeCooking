@@ -90,7 +90,11 @@
                                         <a href="login.jsp">Sign in</a>
                                     </div>
                                     <div class="register">
+<<<<<<< HEAD
                                         <a href="SignUp.jsp">Sign up</a>
+=======
+                                        <a href="register.html">Sign up</a>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                     </div>
                                 </div>
                             </c:if>
@@ -100,6 +104,7 @@
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+<<<<<<< HEAD
                                             <a class="dropdown-item" href="MainController?action=MyProfile&userID=${LOGIN_USER.userID}">My Profile</a>
                                             <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
                                             <form action="MainController" method="POST">
@@ -107,6 +112,17 @@
                                             </form>
 
 
+=======
+                                            <a class="dropdown-item" href="#">Your Profile</a>
+
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                            </form>
+
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                         </div>
                                     </li>
                                 </div>
@@ -147,7 +163,11 @@
                                                     class="sr-only">(current)</span></a>
                                             </c:if>
                                             <c:if test="${LOGIN_USER != null}">
+<<<<<<< HEAD
                                             <a class="nav-link" href="mainpage.jsp">Home <span
+=======
+                                            <a class="nav-link" href="mainpage_user.jsp">Home <span
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                                     class="sr-only">(current)</span></a>
                                             </c:if>
 
@@ -224,7 +244,11 @@
                             <div class="col-12">
                                 <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                     <div class="post-thumb">
+<<<<<<< HEAD
                                         <img src="${recipe.image}" alt="Recipe Image"/>
+=======
+                                        <img src="${recipe.imageRecipe}" alt="StuffedChicken"/>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                     </div>  
                                 </div>
                             </div>
@@ -283,6 +307,7 @@
                                         By <a href="#" style="font-size: 14px;">${recipe.userName}</a>
                                     </div>
                                     <div class="star-rating">
+<<<<<<< HEAD
                                         <c:if test="${avgStar >= 1}">
                                             <span class="fa fa-star <c:if test="${avgStar >= 1}">checked</c:if>"></span>
                                             <span class="fa fa-star <c:if test="${avgStar >= 2}">checked</c:if>"></span>
@@ -310,6 +335,9 @@
 
                                         <div class="star-rating">
 
+=======
+                                        <form action="<c:url value="MainController?action=RecipeDetail&userID=${LOGIN_USER.userID}&recipeID=${recipe.recipeID}"/>" method="post">
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                             <c:if test="${LOGIN_USER == null}">
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(1)" data-toggle="modal" data-target="#Login"></button>
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(2)" data-toggle="modal" data-target="#Login"></button>
@@ -449,6 +477,7 @@
                 </div>
                 <div class="row"> 
                     <div class="col-12 col-md-5 col-lg-5 mt-5">
+<<<<<<< HEAD
                         <h4 style="background-color: #fafafa">Ingredients</h4>
                         <ul style="background-color: #fafafa">
                             <c:forEach var="ingre" items="${ingredient}">
@@ -460,6 +489,25 @@
                         <h4 style="background-color: #fafafa">Steps</h4>
                         <div  style="background-color: #fafafa">
                             <c:forEach var="step" items="${step}"> 
+=======
+                        <h4 style="background-color: #fafafa; border: solid 2px">Ingredients</h4>
+                        <div  style="border: solid 2px">
+                            <ul style="background-color: #fafafa">
+                                <li>- 450g chicken breasts</li>
+                                <li>- 120g cream cheese</li>
+                                <li>- 2 tbsp green pesto</li>
+                                <li>- 2 tbsp Parmesan cheese, finely grated</li>
+                                <li>- ½ tsp avocado oil</li>
+                                <li>- ¼ tsp sea salt</li>
+                                <li>- ¼ tsp ground black pepper</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5 col-lg-5 mt-5">
+                        <h4 style="background-color: #fafafa; border: solid 2px">Steps</h4>
+                        <div  style="background-color: #fafafa; border: solid 2px">
+                            <c:forEach var="step" items="${LIST_STEP}">
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                 <h5>Step ${step.stepNumber}:</h5>
                                 <p>${step.instructions}</p>
                             </c:forEach>
@@ -468,7 +516,7 @@
                     </div>
                 </div>
                 <!--Comment -->
-                <div class="container mt-9 mb-9">
+                <div class="container mt-9 mb-9 m-md-5">
                     <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-12" >
                             <div class="card">

@@ -27,24 +27,34 @@ public class FavoriteRecipesController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+<<<<<<< HEAD
         UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
         if (user != null ) {
          try {      
             int userID = user.getUserID();
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
+=======
+        UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        try {
+                    int recipeID = Integer.parseInt(request.getParameter("recipeID")); 
+                    int userID = Integer.parseInt(request.getParameter("userID"));
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     FavoriteRecipesDAO sfDAO = new FavoriteRecipesDAO();
                     FavoriteRecipesDTO check = sfDAO.getOneFavorite(recipeID, userID);
                     if (check == null) {
                         FavoriteRecipesDTO favorite = new FavoriteRecipesDTO();
                         favorite.setRecipeID(recipeID);
                         favorite.setUserID(userID);
+<<<<<<< HEAD
                         sfDAO.addFavoriteByID(recipeID, userID);
+=======
+                        sfDAO.addFavoriteByID(userID, recipeID);
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                         response.sendRedirect("MainController?action=RecipeDetail&recipeID=" + recipeID);
                     }else {
                         response.sendRedirect("MainController?action=RecipeDetail&recipeID=" + recipeID);
                     }
                     
-
                 } catch (Exception e) {
                     log("Error at FavoriteRecipeController " + e.toString());
                 }

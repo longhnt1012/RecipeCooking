@@ -3,8 +3,12 @@
 <%@page import="swp.ro.Recipe.RecipeDTO"%>
 <%@page import="swp.ro.Recipe.RecipeDTO"%>
 <%@page import="java.util.List"%>
+<<<<<<< HEAD
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,7 +81,11 @@
                                         <a href="login.jsp">Sign in</a>
                                     </div>
                                     <div class="register">
+<<<<<<< HEAD
                                         <a href="SignUp.jsp">Sign up</a>
+=======
+                                        <a href="register.html">Sign up</a>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                     </div>
                                 </div>
                             </c:if>
@@ -87,6 +95,7 @@
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+<<<<<<< HEAD
                                             <a class="dropdown-item" href="MainController?action=MyProfile&userID=${LOGIN_USER.userID}">My Profile</a>
                                             <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
                                             <form action="MainController" method="POST">
@@ -94,6 +103,17 @@
                                             </form>
 
 
+=======
+                                            <a class="dropdown-item" href="#">Your Profile</a>
+
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="Log out">
+                                            </form>
+
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                         </div>
                                     </li>
                                 </div>
@@ -134,7 +154,11 @@
                                                     class="sr-only">(current)</span></a>
                                             </c:if>
                                             <c:if test="${LOGIN_USER != null}">
+<<<<<<< HEAD
                                             <a class="nav-link" href="mainpage.jsp">Home <span
+=======
+                                            <a class="nav-link" href="mainpage_user.jsp">Home <span
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                                     class="sr-only">(current)</span></a>
                                             </c:if>
 
@@ -257,7 +281,42 @@
                     <div class="col-12 col-md-12 col-lg-12 " style="text-align: center;">
                         <h2 style="margin-bottom: 30px;">Featuring Recipes</h2>
                     </div>
+<<<<<<< HEAD
                     <%
+=======
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <ul class="toptrending">
+                            <li style="margin-bottom: 30px;">
+                                <div class="row">
+                                    <div class="col-6 col-md-6">
+                                        <%
+                                            List<RecipeDTO> listRecipe = (List<RecipeDTO>) session.getAttribute("SEARCH_LIST_NAME_RECIPE");
+                                            Map<String, Integer> listRating = (Map<String, Integer>) session.getAttribute("LIST_RATING_RECIPE");
+                                            Map<String, Integer> listTotalRating = (Map<String, Integer>) session.getAttribute("LIST_TOTAL_RATING");
+                                        %>
+                                        <%
+                                            for (RecipeDTO list : listRecipe) {
+                                                if (list.getRecipeName().equals("Homemade Pho")) {
+                                        %>
+                                        <img src="<%=list.getImageRecipe()%>" alt="" style="width: 100%;">
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <a href="MainController?action=SearchHome&searchRecipe=Homemade Pho"><h3>Homemade Pho</h3></a>
+
+                                        <div class="post-comment-share-area d-flex">
+                                            <!-- Post Favourite -->
+
+                                            <!-- Post Comments -->
+                                            <div class="post-comments" style="margin-bottom: 10px;">
+                                                <a href="asia.html"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
+                                            </div>
+                                            <!-- Post Share -->
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
                         Map<Integer, Double> listAvgTop6RatingRecipe = (Map<Integer, Double>) session.getAttribute("AVG_TOP_6_RATING_RECIPE");
                         Map<Integer, Double> listAvgRandomRatingRecipe = (Map<Integer, Double>) session.getAttribute("AVG_RANDOM_RATING_RECIPE");
@@ -348,8 +407,87 @@
                                     <h4 class="post-headline"><%=listTop6Recipe.getRecipeName()%></h4>
                                 </a>
 
+<<<<<<< HEAD
                             </div>
                         </div>
+=======
+                            </li>
+                            <li style="margin-bottom: 30px;">
+                                <div class="row">
+                                    <div class="col-6 col-md-6">
+                                        <%
+                                            for (RecipeDTO list : listRecipe) {
+                                                if (list.getRecipeName().equals("Beefsteak")) {
+                                        %>
+                                        <img src="<%=list.getImageRecipe()%>" alt="" style="width: 100%;">
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                        <img src="img/sidebar-img/steak_10_b1b1397477ea4c8ca1f215989632a614_1024x1024.jpg"
+                                             alt="" style="width: 100%;">
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <a href="MainController?action=SearchHome&searchRecipe=Beefsteak">
+                                            <h5>Beefsteak</h5>
+                                        </a>
+
+                                        <div class="post-comment-share-area d-flex">
+                                            <!-- Post Favourite -->
+
+                                            <!-- Post Comments -->
+                                            <div class="post-comments" style="margin-bottom: 10px;">
+                                                <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
+                                            </div>
+                                            <!-- Post Share -->
+
+                                        </div>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
+                                        <span > 264 ratings</span>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li style="margin-bottom: 30px;">
+                                <div class="row">
+                                    <div class="col-6 col-md-6">
+                                        <img src="img/sidebar-img/chikenfries.jpg" alt="" style="width: 100%;height: 95%;">
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <a href="MainController?action=SearchHome&searchRecipe=Chicken Fries"><h5>Chicken Fries</h5></a>
+
+                                        <div class="post-comment-share-area d-flex">
+                                            <!-- Post Favourite -->
+
+                                            <!-- Post Comments -->
+                                            <div class="post-comments" style="margin-bottom: 10px;">
+                                                <a href="america.html "><i class="" aria-hidden="true"></i>Raw Food Diet</a>
+                                            </div>
+                                            <!-- Post Share -->
+
+                                        </div>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
+                                        <span > 240 ratings</span>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     </div>
                     <%
 
@@ -547,3 +685,4 @@
         <!-- Active JS -->
         <script src="js/active.js"></script>
     </body>
+</html>

@@ -80,7 +80,7 @@ public class SavedRecipesDAO {
             save.setSavedRecipeID(rs.getInt("savedRecipeID"));
             save.setRecipeID(rs.getInt("recipeID"));
             save.setRecipeName(rs.getString("recipeName"));
-            save.setImg(rs.getString("image"));
+            save.setImg(rs.getString("imageRecipe"));
             save.setUserID(rs.getInt("userID"));
         }
         con.close();

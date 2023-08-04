@@ -12,8 +12,13 @@ public class RatingDTO {
 
     private int rateID;
     private int userID;
+<<<<<<< HEAD
     private int recipeID;
     private int scoreUser;
+=======
+    private int recipeID ;
+    private double scoreUser;
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     private String recipeName;
 
     public RatingDTO() {
@@ -26,7 +31,11 @@ public class RatingDTO {
         this.scoreUser = scoreUser;
     }
 
+<<<<<<< HEAD
     public RatingDTO(int rateID, int userID, int recipeID, int scoreUser, String recipeName) {
+=======
+    public RatingDTO(int rateID, int userID, int recipeID, double scoreUser, String recipeName) {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         this.rateID = rateID;
         this.userID = userID;
         this.recipeID = recipeID;
@@ -73,7 +82,11 @@ public class RatingDTO {
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     @Override
     public String toString() {
         return "RatingDTO{" + "rateID=" + rateID + ", userID=" + userID + ", recipeID=" + recipeID + ", scoreUser=" + scoreUser + '}';

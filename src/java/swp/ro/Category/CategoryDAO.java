@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import swp.ro.Recipe.RecipeDTO;
 
 public class CategoryDAO {
@@ -27,6 +28,45 @@ public class CategoryDAO {
             listcategories.add(cate);
         }
         con.close();
+=======
+
+/**
+ *
+ * @author truc0
+ */
+public class CategoryDAO {
+    private static final String SHOWALL = "SELECT * FROM [Category]";
+    private static final String SEARCHBYCATEGORY = "SELECT categoryID FROM [Category] WHERE categoryName = ?";
+
+    public List<CategoryDTO> getListCategories() throws SQLException {
+        List<CategoryDTO> listcategories = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getConnection1();
+            ptm = conn.prepareCall(SHOWALL);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int categoryID = rs.getInt("categoryID");
+                String categoryName = rs.getString("categoryName");
+                String image = rs.getString("image");
+                listcategories.add(new CategoryDTO(categoryID, categoryName, image));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         return listcategories;
     }
 
@@ -36,15 +76,23 @@ public class CategoryDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             ptm = conn.prepareCall(SEARCHBYCATEGORY);
             ptm.setString(1, categoryName);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 int categoryID = rs.getInt("categoryID");
+<<<<<<< HEAD
                 String imageCate = rs.getString("imageString");
                 category.setCategoryID(categoryID);
                 category.setImageCate(imageCate);
+=======
+                category.setCategoryID(categoryID);
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,6 +109,7 @@ public class CategoryDAO {
         }
         return category;
     }
+<<<<<<< HEAD
 
     public List<RecipeDTO> getCategoriesFromFilter(String categoryName) throws SQLException, ClassNotFoundException {
         List<RecipeDTO> list = null;
@@ -148,4 +197,6 @@ public class CategoryDAO {
         con.close();
         return list;
     }
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 }

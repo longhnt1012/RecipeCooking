@@ -61,6 +61,10 @@ public class LoadCategoryOfRecipesController extends HttpServlet {
                 recipe = recipeDao.getOne(Integer.parseInt(recipeID));
                 cor = corDao.getByRecipeID(Integer.parseInt(recipeID));
                 listcategory = categoryDao.getListCategories();
+<<<<<<< HEAD
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 request.setAttribute("LIST_CATEGORY", listcategory);
                 request.setAttribute("RECIPE", recipe);
                 request.setAttribute("COR", cor);

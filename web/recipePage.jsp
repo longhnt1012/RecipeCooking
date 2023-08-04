@@ -189,6 +189,7 @@
                             <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
                                 <h2 style="margin-bottom: 30px;">All Recipes</h2>
                             </div>
+<<<<<<< HEAD
                             <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
                                 <div class="row">
                                     <div class="col-8">
@@ -197,6 +198,37 @@
                                                     filter_alt
                                                 </span>Filter</button>
                                         </div>                                  
+=======
+                            <c:forEach var="recipe" items="${list}">
+                                <c:if test="${recipe.status == 'true'}">
+                                    <div class="col-md-4">
+                                        <div class="single-post wow fadeInUp" data-wow-delay=".4s">
+                                            <!-- Post Thumb -->
+                                            <div class="post-thumb">
+                                                <img src="${recipe.imageRecipe}" alt="" style="height:220px ;width: 350px">
+                                            </div>
+                                            <!-- Post Content -->
+                                            <div class="post-content">
+                                                <div class="post-meta d-flex">
+                                                    <div class="post-author-date-area d-flex">
+                                                        <!-- Post Author -->
+                                                        <div class="post-author">
+                                                            <a href="#">By ${recipe.userName}</a>
+                                                        </div>
+                                                        <!-- Post Date -->
+                                                    </div>
+                                                    <!-- Post Comment & Share Area -->
+                                                    
+                                                    </div>
+                                                    <a href="MainController?action=RecipeDetail&recipeID=${recipe.recipeID}" >
+                                                    <h4 class="post-headline">
+                                                        ${recipe.recipeName}
+                                                    </h4>
+                                                </a>
+
+                                            </div>
+                                        </div>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                     </div>
                                     <div class="col-4">
                                         <div class=" justify-content-end align-items-center single-post wow fadeInUp" data-wow-delay=".04s">

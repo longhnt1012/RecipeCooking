@@ -30,7 +30,11 @@ public class UserDAO {
             + " WHERE r.recipeID=c.recipeID ) as[RC] inner join [Category] c on [RC].categoryID=c.categoryID where c.categoryName=?)";
     private static final String CHECK_DUPLICATE = "SELECT gmail FROM [User] WHERE gmail = ? COLLATE SQL_Latin1_General_CP1_CS_AS";
     //Admin
+<<<<<<< HEAD
     public static final String CREATE_USER = "INSERT INTO [User] VALUES(?, ?, ?, ?, ?, ?, ?, 'US', 'true')";
+=======
+    public static final String CREATE_USER = "INSERT INTO [User] VALUES(?, ?, ?, ?, ?, ?, ?, 'USER', 'true')";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     public static final String DELETE_USER = "DELETE [Rating] WHERE userID = ?\n"
             + "DELETE [Feedback] WHERE userID = ?\n"
             + "DELETE [Recipe] WHERE userID = ?\n"
@@ -47,7 +51,10 @@ public class UserDAO {
             + "WHERE r.status = 'true' AND u.status = 'true'\n"
             + "GROUP BY u.userName\n"
             + "ORDER BY totalRecipe DESC";
+<<<<<<< HEAD
     private static final String SEARCH_LIST_USER = "select * from [User] where userID in (select DISTINCT userID from [Recipe])";
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
     public List<UserDTO> getListUser() throws SQLException {
         List<UserDTO> listUser = new ArrayList<>();
@@ -60,8 +67,13 @@ public class UserDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_LIST_USER);
                 rs = ptm.executeQuery();
+<<<<<<< HEAD
                 while (rs.next()) {
                     UserDTO user = new UserDTO();
+=======
+                if (rs.next()) {
+                    user = new UserDTO();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     user.setUserID(rs.getInt("userID"));
                     user.setUserName(rs.getString("userName"));
                     user.setDob(rs.getDate("dob"));
@@ -89,6 +101,7 @@ public class UserDAO {
         return listUser;
     }
 
+<<<<<<< HEAD
     public UserDTO login(String gmail, String password) throws SQLException, NoSuchAlgorithmException, ClassNotFoundException {
         UserDTO user = null;
         Connection con = DBUtil.getConnection();
@@ -152,6 +165,10 @@ public class UserDAO {
         }
         return loginUser;
     }
+=======
+        return user;
+    }
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
     public List<UserDTO> getListSearchUser(String search) throws SQLException {
         Connection conn = null;
@@ -237,6 +254,7 @@ public class UserDAO {
         return listUser;
     }
 
+<<<<<<< HEAD
     public UserDTO getOne(int userID) throws SQLException, ClassNotFoundException {
         UserDTO user = null;
         Connection con = DBUtil.getConnection();
@@ -417,12 +435,19 @@ public class UserDAO {
     }
     
 
+=======
+    //Admin method
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     public boolean createUser(UserDTO acc) throws SQLException {
         boolean check = true;
         Connection con = null;
         PreparedStatement stm = null;
         try {
+<<<<<<< HEAD
             con = DBUtil.getConnection();
+=======
+            con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (con != null) {
                 stm = con.prepareStatement(CREATE_USER);
                 stm.setString(1, acc.getUserName());
@@ -432,7 +457,11 @@ public class UserDAO {
                 stm.setString(4, acc.getPhone());
                 stm.setString(5, acc.getGmail());
                 stm.setString(6, acc.getPassword());
+<<<<<<< HEAD
                 stm.setString(7, acc.getImageUser());
+=======
+                stm.setString(7, acc.getImageProfile());
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -454,7 +483,11 @@ public class UserDAO {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             con = DBUtil.getConnection();
+=======
+            con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (con != null) {
                 stm = con.prepareStatement(CHECK_DUPLICATE);
                 stm.setString(1, email);
@@ -484,7 +517,11 @@ public class UserDAO {
         Connection con = null;
         PreparedStatement stm = null;
         try {
+<<<<<<< HEAD
             con = DBUtil.getConnection();
+=======
+            con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (con != null) {
                 stm = con.prepareStatement(DELETE_USER);
                 stm.setInt(1, userID);
@@ -509,16 +546,36 @@ public class UserDAO {
         return check;
     }
 
+<<<<<<< HEAD
     public boolean blockUser(int userID, boolean status) throws SQLException, ClassNotFoundException {
+=======
+    public boolean update(UserDTO updateUser) throws SQLException, ClassNotFoundException {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         boolean checkUpdate = false;
         Connection conn = null;
         PreparedStatement stm = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
             if (conn != null) {
                 stm = conn.prepareStatement("update [User] set [status] = ? where userID = ?");
                 stm.setInt(2, userID);
                 stm.setBoolean(1, status);
+=======
+            conn = DBUtil.getConnection1();
+            if (conn != null) {
+                stm = conn.prepareStatement(UPDATE);
+                stm.setString(1, updateUser.getUserName());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                stm.setString(2, sdf.format(updateUser.getDob()));
+                stm.setBoolean(3, updateUser.isGender());
+                stm.setString(4, updateUser.getPhone());
+                stm.setString(5, updateUser.getGmail());
+                stm.setString(6, updateUser.getPassword());
+                stm.setString(7, updateUser.getRole());
+                stm.setBoolean(8, updateUser.isStatus());
+                stm.setInt(9, updateUser.getUserID());
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 checkUpdate = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -536,7 +593,11 @@ public class UserDAO {
 
     public List<UserDTO> selectAll() throws SQLException, ClassNotFoundException {
         List<UserDTO> list = null;
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement(SELECT_ALL);
         ResultSet rs = stm.executeQuery();
         list = new ArrayList<>();
@@ -551,15 +612,47 @@ public class UserDAO {
             user.setPassword(rs.getString("password"));
             user.setRole(rs.getString("role"));
             user.setStatus(rs.getBoolean("status"));
+<<<<<<< HEAD
             user.setImageUser(rs.getString("imageUser"));
+=======
+            user.setImageProfile(rs.getString("imageProfile"));
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             list.add(user);
         }
         con.close();
         return list;
     }
 
+<<<<<<< HEAD
     public int countUsers() throws SQLException, ClassNotFoundException {
         Connection con = DBUtil.getConnection();
+=======
+    public UserDTO getOne(int userID) throws SQLException, ClassNotFoundException {
+        UserDTO user = null;
+        Connection con = DBUtil.getConnection1();
+        PreparedStatement stm = con.prepareStatement(GET_ONE);
+        stm.setInt(1, userID);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            user = new UserDTO();
+            user.setUserID(rs.getInt("userID"));
+            user.setUserName(rs.getString("userName"));
+            user.setDob(rs.getDate("dob"));
+            user.setGender(rs.getBoolean("gender"));
+            user.setPhone(rs.getString("phone"));
+            user.setGmail(rs.getString("gmail"));
+            user.setPassword(rs.getString("password"));
+            user.setImageProfile(rs.getString("imageProfile"));
+            user.setRole(rs.getString("role"));
+            user.setStatus(rs.getBoolean("status"));
+        }
+        con.close();
+        return user;
+    }
+
+    public int countUsers() throws SQLException, ClassNotFoundException {
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement(COUNT_USER);
         ResultSet rs = stm.executeQuery();
         int count = 0;
@@ -582,18 +675,30 @@ public class UserDAO {
         }
         return count;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     public Map<String, Integer> Top3UsersCreateMostRecipes() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         Map<String, Integer> list = new HashMap();
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(TOP_3_USERS_MOST_CREATE_REIPCES);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+=======
+            conn = DBUtil.getConnection1();
+            if(conn != null) {
+                ptm = conn.prepareStatement(TOP_3_USERS_MOST_CREATE_REIPCES);
+                rs = ptm.executeQuery();
+                while(rs.next()) {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     int total = rs.getInt("totalRecipe");
                     String userName = rs.getString("userName");
                     list.put(userName, total);
@@ -601,7 +706,11 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+<<<<<<< HEAD
         } finally {
+=======
+        }finally {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (rs != null) {
                 rs.close();
             }
@@ -614,5 +723,8 @@ public class UserDAO {
         }
         return list;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 }

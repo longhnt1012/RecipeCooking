@@ -5,6 +5,10 @@
  */
 package swp.controller;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,10 +16,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 import swp.ro.Recipe.RecipeDAO;
 import swp.ro.Recipe.RecipeDTO;
 import swp.ro.User.UserDTO;
+=======
+import swp.ro.Recipe.RecipeDAO;
+import swp.ro.Recipe.RecipeDTO;
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
 /**
  *
@@ -23,10 +33,15 @@ import swp.ro.User.UserDTO;
  */
 @WebServlet(name = "ManageRecipeController", urlPatterns = {"/ManageRecipeController"})
 public class ManageRecipeController extends HttpServlet {
+<<<<<<< HEAD
 
     private static final String SUCCESS = "LoadRecipesController";
     private static final String ERROR = "error.jsp";
 
+=======
+    private static final String SUCCESS = "LoadRecipesController";
+    private static final String ERROR = "error.jsp";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,6 +57,7 @@ public class ManageRecipeController extends HttpServlet {
         String url = ERROR;
         RecipeDAO dao = new RecipeDAO();
         RecipeDTO recipe = new RecipeDTO();
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
         try {
@@ -81,6 +97,41 @@ public class ManageRecipeController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("message", "You don't have permission");
+=======
+        try {
+            String recipeID = request.getParameter("recipeID");
+            String action = request.getParameter("action");
+            if ("Block".equals(action)) {
+                recipe = dao.getOne(Integer.parseInt(recipeID));
+                if (recipe != null) {
+                    recipe.setStatus(false);
+                    if (dao.update(recipe)) {
+                        url = SUCCESS;
+                    } else {
+                        url = ERROR;
+                    }
+                } else {
+                    url = ERROR;
+                }
+            } else if ("Unblock".equals(action)) {
+                recipe = dao.getOne(Integer.parseInt(recipeID));
+                if (recipe != null) {
+                    recipe.setStatus(true);
+                    if (dao.update(recipe)) {
+                        url = SUCCESS;
+                    } else {
+                        url = ERROR;
+                    }
+                } else {
+                    url = ERROR;
+                }
+            } else if (action.equals("Detail")) {
+                recipe = dao.getOne(Integer.parseInt(recipeID));
+                request.setAttribute("recipeDetail", recipe);
+                url = "manageRecipesDetails.jsp";
+            }  else if (action.equals("Tag")) {
+                url = "LoadCategoryOfRecipesController";
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             request.setAttribute("message", "Error at ManageRecipeController");

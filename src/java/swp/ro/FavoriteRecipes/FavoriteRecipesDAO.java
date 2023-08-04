@@ -23,6 +23,7 @@ import swp.ro.User.UserDTO;
 public class FavoriteRecipesDAO {
     private static final String SEARCH = "select count(*) AS totalCount from FavoriteRecipes fr where recipeID=? AND [STATUS]=1";
     private static final String COMMENT_COUNT = "SELECT COUNT(*) AS totalComments FROM FavoriteRecipes WHERE recipeID=?";
+<<<<<<< HEAD
     private static final String COUNT_COMMENT = "SELECT COUNT(*) AS totalComment FROM feedback WHERE recipeID=? AND [STATUS]=1";
 
     public Map<Integer, Integer> getListComment(List<RecipeDTO> list) throws SQLException {
@@ -59,6 +60,9 @@ public class FavoriteRecipesDAO {
         }
         return map;
     }
+=======
+    
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     
     public Map<Integer, Integer> getListLike(List<RecipeDTO> list) throws SQLException {
         Connection conn = null;

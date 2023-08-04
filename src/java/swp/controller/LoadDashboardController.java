@@ -13,7 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import swp.ro.Recipe.RecipeDAO;
 import swp.ro.Recipe.RecipeDTO;
 import swp.ro.User.UserDAO;
@@ -46,6 +49,7 @@ public class LoadDashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
         try {
@@ -86,6 +90,42 @@ public class LoadDashboardController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("message", "You don't have permission");
+=======
+        try {
+            // Total user
+            UserDAO userdao = new UserDAO();
+            int totalUser = userdao.countUsers();
+
+            //Count and Load recent recipes
+            RecipeDAO recipedao = new RecipeDAO();
+            List<RecipeDTO> listRecipe = recipedao.recentRecipes();
+            int totalRecipe = recipedao.countRecipes();
+
+            //Count and Load recent feedbacks
+            FeedBackDAO feedbackdao = new FeedBackDAO();
+            List<FeedBackDTO> listFeedBack = feedbackdao.getRecentFeedbacks();
+            int totalFeedBack = feedbackdao.getTotalComments();
+
+            //Get top 5 of recipe
+            RatingDAO ratingdao = new RatingDAO();
+            List<RatingDTO> listTop5 = ratingdao.listRecipesTop5();
+
+            //Get top 3 users create most recipes
+            Map<String, Integer> listTop3Most = userdao.Top3UsersCreateMostRecipes();
+
+            if (totalUser != 0 && !listRecipe.isEmpty() && totalRecipe != 0 && !listFeedBack.isEmpty()
+                    && totalFeedBack != 0 && !listTop5.isEmpty() && !listTop3Most.isEmpty()) {
+                request.setAttribute("TOTAL_USER", totalUser);
+                request.setAttribute("LIST_RECENT_RECIPE", listRecipe);
+                request.setAttribute("LIST_RECENT_FEEDBACK", listFeedBack);
+                request.setAttribute("TOTAL_RECIPE", totalRecipe);
+                request.setAttribute("TOTAL_FEEDBACK", totalFeedBack);
+                request.setAttribute("LIST_TOP_5", listTop5);
+                request.setAttribute("LIST_TOP_3", listTop3Most);
+                url = SUCCESS;
+            } else {
+                request.setAttribute("message", "Error at LoadDashboardController");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             e.printStackTrace();

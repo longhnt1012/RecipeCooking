@@ -5,6 +5,10 @@
  */
 package swp.controller;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,11 +18,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 import swp.ro.CategoryOfRecipes.CategoryOfRecipesDAO;
 import swp.ro.CategoryOfRecipes.CategoryOfRecipesDTO;
 import swp.ro.User.UserDAO;
 import swp.ro.User.UserDTO;
+=======
+import swp.ro.CategoryOfRecipes.CategoryOfRecipesDAO;
+import swp.ro.CategoryOfRecipes.CategoryOfRecipesDTO;
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
 /**
  *
@@ -46,6 +56,7 @@ public class ManageCategoryOfRecipeController extends HttpServlet {
         //categoryOfRecipe
         CategoryOfRecipesDAO corDao = new CategoryOfRecipesDAO();
         List<CategoryOfRecipesDTO> corList = new ArrayList<>();
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
         try {
@@ -77,6 +88,36 @@ public class ManageCategoryOfRecipeController extends HttpServlet {
                         url = SUCCESS;
                     }
                 }
+=======
+        try {
+            String action = request.getParameter("action");
+            boolean checkInsert = false;
+            boolean checkDelete = false;
+            //Check action
+            if ("Tag".equals(action)) {
+                String[] selectedCategoryIds = request.getParameterValues("selectedCategory");
+                String[] removedCategoryIds = request.getParameterValues("removedCategory");
+                String recipeID = request.getParameter("recipeID");
+                corList = corDao.getByRecipeID(Integer.parseInt(recipeID));
+                //check type of category
+                if (selectedCategoryIds != null) {
+                    for (String selectedCategoryId : selectedCategoryIds) {
+                        checkInsert = corDao.insert(Integer.parseInt(selectedCategoryId), Integer.parseInt(recipeID));
+                    }
+                    request.setAttribute("message", "alert('Tag Category for Recipe SUCCESS')");
+                }
+                if (removedCategoryIds != null) {
+                    for (String removedCategoryId : removedCategoryIds) {
+                        checkDelete = corDao.delete(Integer.parseInt(removedCategoryId), Integer.parseInt(recipeID));
+                    }
+                    request.setAttribute("message", "alert('Remove Category for Recipe SUCCESS')");
+                }
+                //Success or error
+                if (checkInsert || checkDelete) {
+                    url = SUCCESS;
+                }
+            } 
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 //            else if ("Search".equals(action)) {
 //                String categoryID = request.getParameter("categoryID");
 //                corList = corDao.searchByCategoryID(Integer.parseInt(categoryID));
@@ -86,9 +127,12 @@ public class ManageCategoryOfRecipeController extends HttpServlet {
 //                    url = "recipeSearchByCategories.jsp";
 //                }
 //            }
+<<<<<<< HEAD
             } else {
                 request.setAttribute("message", "You don't have permission");
             }
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         } catch (Exception e) {
             request.setAttribute("message", "HAVE ERROR AT ManageCategoryOfRecipeController");
         } finally {

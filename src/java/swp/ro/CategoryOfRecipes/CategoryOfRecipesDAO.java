@@ -9,6 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+/**
+ *
+ * @author truc0
+ */
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 public class CategoryOfRecipesDAO {
     private static final String GET_ALL = "SELECT * FROM CategoryOfRecipes A \n"
             + "JOIN Category B ON A.categoryID = B.categoryID\n"
@@ -27,17 +34,29 @@ public class CategoryOfRecipesDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
             ptm = conn.prepareStatement(GET_ALL);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 int ID = rs.getInt("corID");
+=======
+            conn = DBUtil.getConnection1();
+            ptm = conn.prepareStatement(GET_ALL);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int corID = rs.getInt("corID");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 int categoryID = rs.getInt("categoryID");
                 int recipeID = rs.getInt("recipeID");
                 String categoryName = rs.getString("categoryName");
                 String recipeName = rs.getString("recipeName");
                 boolean status = rs.getBoolean("status");
+<<<<<<< HEAD
                 list.add(new CategoryOfRecipesDTO(ID, recipeID, categoryID, categoryName, recipeName, status));
+=======
+                list.add(new CategoryOfRecipesDTO(corID, recipeID, categoryID, categoryName, recipeName, status));
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,17 +80,29 @@ public class CategoryOfRecipesDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             ptm = conn.prepareStatement(GET_BY_RECIPEID);
             ptm.setInt(1, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()){
+<<<<<<< HEAD
                 int ID = rs.getInt("corID");
+=======
+                int corID = rs.getInt("corID");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 int categoryID = rs.getInt("categoryID");
                 String categoryName = rs.getString("categoryName");
                 String recipeName = rs.getString("recipeName");
                 boolean status = rs.getBoolean("status");
+<<<<<<< HEAD
                 list.add(new CategoryOfRecipesDTO(ID, categoryID, recipeID, categoryName, recipeName, status));
+=======
+                list.add(new CategoryOfRecipesDTO(corID, categoryID, recipeID, categoryName, recipeName, status));
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +125,11 @@ public class CategoryOfRecipesDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (conn != null) {
                 ptm = conn.prepareStatement(TAG_CATEGORIES_RECIPES);
                 ptm.setInt(1, categoryID);
@@ -119,7 +154,11 @@ public class CategoryOfRecipesDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (conn != null) {
                 ptm = conn.prepareStatement(DELETE_CATEGORIES_RECIPES);
                 ptm.setInt(1, categoryID);
@@ -145,7 +184,11 @@ public class CategoryOfRecipesDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             ptm = conn.prepareStatement(SEARCH_BY_CATEGORIESID);
             ptm.setInt(1, categoryID);
             rs = ptm.executeQuery();

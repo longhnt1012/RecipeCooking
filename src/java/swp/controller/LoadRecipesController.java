@@ -5,6 +5,10 @@
  */
 package swp.controller;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -12,11 +16,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 import swp.ro.Recipe.RecipeDAO;
 import swp.ro.Recipe.RecipeDTO;
 import swp.ro.User.UserDTO;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 /**
  *
  * @author Admin
@@ -41,6 +53,7 @@ public class LoadRecipesController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+<<<<<<< HEAD
         HttpSession session = request.getSession();
         UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
         try {
@@ -56,6 +69,23 @@ public class LoadRecipesController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("message", "You don't have permission");
+=======
+        try {
+            RecipeDAO dao = new RecipeDAO();
+            List<RecipeDTO> listRecipe = dao.load();
+            UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+            if (listRecipe.size() > 0) {
+                request.setAttribute("LIST_RECIPES", listRecipe);
+                //PHAN QUYEN
+//                if ("ADMIN".equals(user.getRole())) {
+//                    url = SUCCESS_ADMIN;
+//                } else {
+//                    url = SUCCESS_USER;
+//                }
+                url = SUCCESS_ADMIN;
+            } else {
+                request.setAttribute("message", "Have error at LoadRecipesController");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             }
         } catch (Exception e) {
             e.printStackTrace();

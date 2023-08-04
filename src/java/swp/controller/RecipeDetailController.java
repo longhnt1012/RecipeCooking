@@ -25,6 +25,8 @@ import swp.ro.rating.RatingDAO;
 import swp.ro.rating.RatingDTO;
 import swp.ro.savedRecipes.SavedRecipesDAO;
 import swp.ro.savedRecipes.SavedRecipesDTO;
+import swp.ro.step.StepDAO;
+import swp.ro.step.StepDTO;
 
 /**
  *
@@ -47,6 +49,10 @@ public class RecipeDetailController extends HttpServlet {
         int recipeID = Integer.parseInt(request.getParameter("recipeID"));
         UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
         try {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (user == null) {
                 RecipeDAO rDAO = new RecipeDAO();
                 RecipeDTO recipe = rDAO.getOne(recipeID);
@@ -71,6 +77,7 @@ public class RecipeDetailController extends HttpServlet {
                 int sSize = saveDAO.totalSavedORecipe(recipeID);
                 int fSize = favoDAO.totalFavoriteORecipe(recipeID);
                 
+<<<<<<< HEAD
                 IngredientDAO ingreDAO = new IngredientDAO();
                 List<IngredientDTO> ingredient = ingreDAO.getIngreORecipe(recipeID);
 
@@ -85,6 +92,14 @@ public class RecipeDetailController extends HttpServlet {
                 request.setAttribute("nutritional", nutritional);
                 request.setAttribute("ingredient", ingredient);
                 request.setAttribute("step", step);
+=======
+                //Steps of recipe
+                StepDAO stepDAO = new StepDAO();
+                List<StepDTO> listStep = stepDAO.getStepsByRecipeID(recipeID);
+                
+                //Ingredients of recipe
+                
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 request.setAttribute("sSize", sSize);
                 request.setAttribute("fSize", fSize);
                 request.setAttribute("avgStar", avgStar);
@@ -92,7 +107,8 @@ public class RecipeDetailController extends HttpServlet {
                 request.setAttribute("feedbacks", listFeedback);
                 request.setAttribute("noFb", listFeedback.size());
                 request.setAttribute("recipe", recipe);
-
+                request.setAttribute("LIST_STEP", listStep);
+                
                 request.getRequestDispatcher("recipeDetail.jsp").forward(request, response);
             } else {
 

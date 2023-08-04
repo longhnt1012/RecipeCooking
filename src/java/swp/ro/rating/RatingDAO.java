@@ -21,17 +21,21 @@ import swp.ro.Recipe.RecipeDTO;
  */
 public class RatingDAO {
 
+<<<<<<< HEAD
     private static final String RATING_RECIPE_HOME = "SELECT AVG([scoreUser]*1.0) as AVGScore \n"
             + " FROM (SELECT re.recipeID, recipeName,ra.scoreUser, ra.userID FROM [Recipe] re inner join [Rating] ra on re.recipeID=ra.recipeID \n"
             + " where recipeName=? ) AS [R]";
     private static final String RATING_TOTAL_RECIPE = "SELECT SUM([scoreUser]) as SUMScore\n"
             + " FROM (SELECT re.recipeID, recipeName,ra.scoreUser, ra.userID FROM [Recipe] re inner join [Rating] ra on re.recipeID=ra.recipeID \n"
             + " where recipeName=? ) AS [R]";
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     private static final String GET_TOP_5 = "SELECT TOP 5 re.recipeID, recipeName, AVG(ra.scoreUser) AS scoreAvg \n"
             + "FROM [Recipe] re inner join [Rating] ra on re.recipeID=ra.recipeID \n"
             + "WHERE status = 'true'\n"
             + "GROUP BY re.recipeID, re.recipeName\n"
             + "ORDER BY scoreAvg DESC";
+<<<<<<< HEAD
     private static final String RATING_RECIPE = "select sum (scoreUser) as totalScore,recipeID from [rating] group by recipeID having recipeID=?";
     private static final String AVG_RATE_Recipe_FOLLOW_ID = "select recipeID, sum (scoreUser) as totalScore,count(*)as COUNT  from [rating] group by recipeID having recipeID=?  ";
 
@@ -113,6 +117,12 @@ public class RatingDAO {
     public RatingDTO getRatingRecipe(int recipeID, int userID) throws SQLException, ClassNotFoundException {
         RatingDTO rating = null;
         Connection con = DBUtil.getConnection();
+=======
+
+    public RatingDTO getRatingRecipe(int recipeID, int userID) throws SQLException, ClassNotFoundException {
+        RatingDTO rating = null;
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select * from Rating a join Recipe b"
                 + " on a.recipeID = b.recipeID "
                 + "join [User] c on b.userID = c.userID "
@@ -132,7 +142,11 @@ public class RatingDAO {
     }
 
     public void ratingRecipe(RatingDTO rating) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("insert Rating values(?, ?, ?)");
         stm.setInt(1, rating.getUserID());
         stm.setInt(2, rating.getRecipeID());
@@ -143,7 +157,11 @@ public class RatingDAO {
 
     public RatingDTO getOne(int rateID) throws SQLException, ClassNotFoundException {
         RatingDTO rating = null;
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select * from Rating where rateID = ?");
         ResultSet rs = stm.executeQuery();
         while (rs.next()) {
@@ -159,7 +177,11 @@ public class RatingDAO {
 
     public RatingDTO checkReRating(int userID, int recipeID) throws SQLException, ClassNotFoundException {
         RatingDTO rating = null;
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select * from Rating where userID = ? and recipeID = ?");
         stm.setInt(1, userID);
         stm.setInt(2, recipeID);
@@ -176,7 +198,11 @@ public class RatingDAO {
     }
 
     public void reRating(RatingDTO rating) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("update Rating set scoreUser = ? where userID = ? and recipeID = ?");
         stm.setDouble(1, rating.getScoreUser());
         stm.setInt(2, rating.getUserID());
@@ -186,7 +212,11 @@ public class RatingDAO {
     }
 
     public int totalRating(int recipeID) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select count(*) from Rating where recipeID = ?");
         stm.setInt(1, recipeID);
         ResultSet rs = stm.executeQuery();
@@ -197,7 +227,11 @@ public class RatingDAO {
     }
 
     public int totalScoreRecipe(int recipeID) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select SUM(scoreUser) from Rating where recipeID = ?");
         stm.setInt(1, recipeID);
         ResultSet rs = stm.executeQuery();
@@ -208,7 +242,11 @@ public class RatingDAO {
     }
 
     public int totalUserScoreRecipe(int recipeID) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
         Connection con = DBUtil.getConnection();
+=======
+        Connection con = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         PreparedStatement stm = con.prepareStatement("select count(userID) from Rating where recipeID = ?");
         stm.setInt(1, recipeID);
         ResultSet rs = stm.executeQuery();
@@ -217,8 +255,19 @@ public class RatingDAO {
         }
         return 0;
     }
+<<<<<<< HEAD
 
     public Map<String, Double> getListRating() throws SQLException {
+=======
+    private static final String RATING_RECIPE_HOME = "SELECT AVG([scoreUser]) as AVGScore \n"
+            + " FROM (SELECT re.recipeID, recipeName,ra.scoreUser, ra.userID FROM [Recipe] re inner join [Rating] ra on re.recipeID=ra.recipeID \n"
+            + " where recipeName=? ) AS [R]";
+    private static final String RATING_TOTAL_RECIPE = "SELECT SUM([scoreUser]) as SUMScore\n"
+            + " FROM (SELECT re.recipeID, recipeName,ra.scoreUser, ra.userID FROM [Recipe] re inner join [Rating] ra on re.recipeID=ra.recipeID \n"
+            + " where recipeName=? ) AS [R]";
+
+    public Map<String, Integer> getListRating() throws SQLException {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -226,6 +275,7 @@ public class RatingDAO {
         List<String> listNameRecipe = new ArrayList<>();
         Map<String, Double> listRating = new HashMap();
         listNameRecipe.add("Homemade Pho");
+<<<<<<< HEAD
 //        listNameRecipe.add("Easy Spaghetti Bolognese");
 //        listNameRecipe.add("Beefsteak");
 //        listNameRecipe.add("Baked Salmon - Leek parcel");
@@ -240,6 +290,9 @@ public class RatingDAO {
 //        listNameRecipe.add("Baked Salmon - Leek Parcel");
 //        listNameRecipe.add("Pho");
 //        listNameRecipe.add("Broken Rice");
+=======
+        listNameRecipe.add("Broken Rice");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 
         try {
             conn = DBUtil.getConnection();
@@ -250,7 +303,11 @@ public class RatingDAO {
                     rs = ptm.executeQuery();
                     if (rs.next()) {
                         double score = rs.getDouble("AVGScore");
+<<<<<<< HEAD
                         listRating.put(list.toString(), score);
+=======
+                        listRating.put(list.toString(), (int) Math.round(score));
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     }
                 }
 
@@ -279,6 +336,7 @@ public class RatingDAO {
         List<String> listNameRecipe = new ArrayList<>();
         Map<String, Integer> listTotalRating = new HashMap();
         listNameRecipe.add("Homemade Pho");
+<<<<<<< HEAD
 //        listNameRecipe.add("Easy Spaghetti Bolognese");
 //        listNameRecipe.add("Beefsteak");
 //        listNameRecipe.add("Baked Salmon - Leek parcel");
@@ -294,6 +352,10 @@ public class RatingDAO {
 //        listNameRecipe.add("Homemade Pho");
 //        listNameRecipe.add("Broken Rice");
 //        
+=======
+        listNameRecipe.add("Broken Rice");
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
@@ -330,12 +392,20 @@ public class RatingDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
+=======
+            conn = DBUtil.getConnection1();
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_TOP_5);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+<<<<<<< HEAD
                     int scoreAvg = rs.getInt("scoreAvg");
+=======
+                    double scoreAvg = rs.getFloat("scoreAvg");
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                     int recipeID = rs.getInt("recipeID");
                     String recipeName = rs.getString("recipeName");
                     list.add(new RatingDTO(recipeID, recipeID, recipeID, scoreAvg, recipeName));
@@ -355,6 +425,7 @@ public class RatingDAO {
             }
         }
         return list;
+<<<<<<< HEAD
     }
 
     private static final String AVG_RATE_TOP6 = "select recipeID, sum (scoreUser) as totalScore,count(*)as COUNT  from [rating] group by recipeID  order by totalScore DESC";
@@ -471,5 +542,7 @@ public class RatingDAO {
             }
         }
         return listTop;
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     }
 }

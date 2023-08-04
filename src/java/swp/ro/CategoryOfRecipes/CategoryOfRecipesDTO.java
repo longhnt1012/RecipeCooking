@@ -2,7 +2,7 @@
 package swp.ro.CategoryOfRecipes;
 
 public class CategoryOfRecipesDTO {
-    private int ID;
+    private int corID;
     private int categoryID;
     private int recipeID;
     private String categoryName;
@@ -12,8 +12,13 @@ public class CategoryOfRecipesDTO {
     public CategoryOfRecipesDTO() {
     }
 
+<<<<<<< HEAD
     public CategoryOfRecipesDTO(int ID, int categoryID, int recipeID, String categoryName, String recipeName, boolean status) {
         this.ID = ID;
+=======
+    public CategoryOfRecipesDTO(int corID, int categoryID, int recipeID, String categoryName, String recipeName, boolean status) {
+        this.corID = corID;
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         this.categoryID = categoryID;
         this.recipeID = recipeID;
         this.categoryName = categoryName;
@@ -21,12 +26,17 @@ public class CategoryOfRecipesDTO {
         this.status = status;
     }
 
-    public int getID() {
-        return ID;
+    public int getCorID() {
+        return corID;
     }
 
+<<<<<<< HEAD
     public void setID(int corID) {
         this.ID = ID;
+=======
+    public void setCorID(int corID) {
+        this.corID = corID;
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     }
 
     public int getCategoryID() {

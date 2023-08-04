@@ -17,6 +17,7 @@ import java.util.List;
  * @author truc0
  */
 public class IngredientDAO {
+<<<<<<< HEAD
 
     private static final String INSERT_INGREDIENT = "INSERT INTO Ingredient (recipeID,ingredientName,quantity,unit) Values(?,?,?,?)";
     private static final String GET_INGREDIENT_BY_RECIPEID = "SELECT * FROM [Ingredient] WHERE recipeID = ?";
@@ -24,12 +25,17 @@ public class IngredientDAO {
     private static final String ADD_INGREDIENT = "INSERT INTO [Ingredient] VALUES (?,?,?,?)";
     private static final String UPDATE_INGREDIENT_BY_RECIPEID = "UPDATE [Ingredient] SET ingredientName = ?, quantity = ?, unit = ? WHERE recipeID = ? and ingredientID = ?";
 
+=======
+    private static final String GET_INGREDIENT_BY_RECIPEID = "SELECT * FROM [Ingredient] WHERE recipeID = ?";
+    
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     public List<IngredientDTO> getIngredientByRecipeID(int recipeID) throws SQLException {
         List<IngredientDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+<<<<<<< HEAD
             conn = DBUtil.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_INGREDIENT_BY_RECIPEID);
@@ -41,6 +47,13 @@ public class IngredientDAO {
                     double quantity = rs.getDouble("quantity");
                     String unit = rs.getString("unit");
                     list.add(new IngredientDTO(ingredientID, ingredientName, recipeID, quantity, unit));
+=======
+            conn = DBUtil.getConnection1();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_INGREDIENT_BY_RECIPEID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                 }
             }
         } catch (Exception e) {
@@ -58,6 +71,7 @@ public class IngredientDAO {
         }
         return list;
     }
+<<<<<<< HEAD
 
     public List<IngredientDTO> getAllIngredient() throws SQLException, ClassNotFoundException {
         List<IngredientDTO> list = new ArrayList<>();
@@ -183,4 +197,6 @@ public class IngredientDAO {
         return checkUpdate;
     }
 
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 }

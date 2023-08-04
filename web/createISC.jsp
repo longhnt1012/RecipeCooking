@@ -1,6 +1,9 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
 <html lang="en">
 
     <head>
@@ -8,7 +11,10 @@
         <meta name="description" content="">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<<<<<<< HEAD
 
+=======
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
         <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
         <!-- Title -->
@@ -59,14 +65,22 @@
                                     <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="search-hidden-form justify-content-end align-items-center ">
+<<<<<<< HEAD
                                     <form action="MainController" method="POST">
                                         <input type="text" name="search" id="search-anything"
                                                placeholder="Search Anything...">
                                         <input type="submit" name="action" value="SearchHome" class="d-none">
+=======
+                                    <form action="MainController" method="GET">
+                                        <input type="text" name="search" id="search-anything"
+                                               placeholder="Search Anything...">
+                                        <input type="submit" name="action" value="Search" class="d-none">
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                         <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                                     </form>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <c:if test="${LOGIN_USER ==null}" >
                                 <div class="login_register_area d-flex col-4 col-sm-4">
                                     <div class="login">
@@ -94,6 +108,22 @@
                                     </li>
                                 </div>
                             </c:if>
+=======
+                            <div class="login_register_area d-flex col-4 col-sm-4">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>Hi Long${sessionScope.USER_ID.fullName}</h7></a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="view-public-info.html">Your Profile</a>
+
+                                        <a class="dropdown-item" href="changepass.html">Change Password</a>
+                                        <a class="dropdown-item" href="myfavorite.html">Your Saved</a>
+                                        <a class="dropdown-item" href="mainpage.html" >Log Out</a>
+
+                                    </div>
+                                </li>
+                            </div>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                         </div>
                     </div>
 
@@ -116,7 +146,11 @@
                 </div>
 
                 <div class="row">
+<<<<<<< HEAD
                     <div class="col-12" style="border-bottom: 1px solid #eeeeee; margin-bottom: 5px ">
+=======
+                    <div class="col-12">
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                         <nav class="navbar navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav"
                                     aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i
@@ -124,6 +158,7 @@
                             <!-- Menu Area Start -->
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                                 <ul class="navbar-nav" id="yummy-nav">
+<<<<<<< HEAD
                                     <li class="nav-item">
                                         <c:if test="${LOGIN_USER == null}">
                                             <a class="nav-link" href="mainpage.jsp">Home <span
@@ -158,16 +193,41 @@
                                             <a class="dropdown-item" data-toggle="modal" data-target="#Login">Saved</a>
                                             
                                             </c:if>
+=======
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="mainpage.jsp">Home <span
+                                                class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="recipespage.jsp">Recipes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="categories.jsp">Categories</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
+
+                                            <a class="dropdown-item" href="#">My favorites</a>
+                                            <a class="dropdown-item" href="myfavorite.html">Saved</a>
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                         </div>
                                     </li>
 
                                     <li class="nav-item">
+<<<<<<< HEAD
                                         <c:if test="${LOGIN_USER != null}">
                                         <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
                                         </c:if>
                                         <c:if test="${LOGIN_USER == null}">
                                         <a class="nav-link" data-toggle="modal" data-target="#Login">Meal Plan</a>
                                         </c:if>
+=======
+                                        <a class="nav-link" href="planpage.jsp">Meal Plan</a>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                                     </li>
 
                                 </ul>
@@ -188,6 +248,7 @@
 
                     </div>
                     <div class="container">
+<<<<<<< HEAD
 
 
                         <form action="MainController">
@@ -263,6 +324,52 @@
                             </div>
                             <!--<button type="submit" name="action" value="CreateISC">Test</button>
                         </form>-->
+=======
+                        <form action="MainController" method="POST">
+
+                            <!--Ingerdient -->
+                            <div class="row">
+                                <label class="post-headline mt-15"><h4>Ingredients</h4></label>
+                            </div>
+                            <div class="row" >
+
+                                <div class="col-7" style="margin-left: -25px">
+                                    <input class="form-control" type="text" name="ingredientName" placeholder="Typing Ingredients" style="margin-left: 10px; margin-right: 10px" >
+                                </div>
+
+                                <div class="col-2"> 
+                                    <input class="form-control" type="number" step="0.1" name="quantity" min="1" placeholder="Amount" style="margin-left: 10px" >
+                                </div>
+                                <div class="col-2" style="display: inline-table,margin-top: 2px">
+                                    <h5>gram</h5>
+
+                                </div>
+                                <div class="input_fields_wrap" style="margin-top: 20px">
+                                    <button class="add_field_button">+ Add More Ingredients</button>
+                                </div>
+                                <!-- <div class="row" >
+                                     
+                                 </div>-->
+                            </div>
+
+                            <!--Categories -->
+
+
+                            <!-- Stepp  -->
+                            <h4 class="post-headline row mt-15">Stepping</h4>
+                            <div class="row" >
+                                <div class="col-2 hihi">
+                                    <input class="form-control" type="number" min="1" name="stepNumber" placeholder="step ..."/>
+                                </div>
+                                <div class="col-10 hihi1">
+                                    <input class="form-control" type="text" name="instructions" placeholder="Instructions...."/>
+                                </div>  
+                                <div class="input_fields_wrap_Step" style="margin-top: 20px">
+                                    <button class="add_field_button_Step">+ Add More Step</button>
+                                </div>
+                            </div>
+
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
                             <div class="table-title-1 row">
                                 <div class="col-sm-12">
                                     <input type="submit" name="action" value="CreateISC" data-target="#addProductModal" data-toggle="modal" class="btn">
@@ -289,6 +396,7 @@
                 </div>
             </div>
         </footer>
+<<<<<<< HEAD
         <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -393,6 +501,21 @@
         <!-- Active JS -->
         <script src="js/active.js"></script>
 
+=======
+        <!-- Jquery-2.2.4 js -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="js/addMore/addMoreS.js"></script>
+        <script src="js/addMore/addMoreI.js"></script>
+
+        <!-- Popper js -->
+        <script src="js/bootstrap/popper.min.js"></script>
+        <!-- Bootstrap-4 js -->
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <!-- All Plugins JS -->
+        <script src="js/others/plugins.js"></script>
+        <!-- Active JS -->
+        <script src="js/active.js"></script>
+>>>>>>> fce2930ab019cfbb58ddaef83a7a648df06e8d71
     </body>
     <style>
         .table-title-1 {
