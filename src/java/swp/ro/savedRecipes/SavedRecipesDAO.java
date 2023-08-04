@@ -19,7 +19,7 @@ import java.util.List;
 public class SavedRecipesDAO {
     
     public void addSavedByID(int recipeID, int userID) throws SQLException, ClassNotFoundException {
-        Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection();
           
         PreparedStatement stm = con.prepareStatement("insert SavedRecipes values(?,?)");
         stm.setInt(1, recipeID);
@@ -29,7 +29,7 @@ public class SavedRecipesDAO {
     }
 
     public void removeSavedRecipe(int userID,int recipeID) throws SQLException, ClassNotFoundException {
-          Connection con = DBUtil.getConnection1();
+          Connection con = DBUtil.getConnection();
         PreparedStatement stm = con.prepareStatement("delete SavedRecipes where userID= ? and recipeID = ?");
         stm.setInt(1, userID);
         stm.setInt(2, recipeID);
@@ -38,7 +38,7 @@ public class SavedRecipesDAO {
     }
     
     public int totalSavedORecipe(int recipeID) throws SQLException, ClassNotFoundException {
-         Connection con = DBUtil.getConnection1();
+         Connection con = DBUtil.getConnection();
         PreparedStatement stm = con.prepareStatement("select count(*) from SavedRecipes where recipeID = ?");
         stm.setInt(1, recipeID);
         ResultSet rs = stm.executeQuery();
@@ -51,7 +51,7 @@ public class SavedRecipesDAO {
     
     public SavedRecipesDTO getOneSaved(int recipeID, int userID) throws SQLException, ClassNotFoundException {
         SavedRecipesDTO save = null;
-        Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection();
         PreparedStatement stm = con.prepareStatement("select * from SavedRecipes where recipeID = ? and userID = ?");
         stm.setInt(1, recipeID);
         stm.setInt(2, userID);
@@ -67,7 +67,7 @@ public class SavedRecipesDAO {
     }
     public SavedRecipesDTO getSavedRecipeID(int recipeID, int userID) throws SQLException, ClassNotFoundException {
         SavedRecipesDTO save = null;
-        Connection con = DBUtil.getConnection1();
+        Connection con = DBUtil.getConnection();
         PreparedStatement stm = con.prepareStatement("select * from SavedRecipes a join Recipe b "
                 + "on a.recipeID = b.recipeID "
                 + "join [User] c on b.userID = c.userID "
@@ -88,7 +88,7 @@ public class SavedRecipesDAO {
     }
     public List<SavedRecipesDTO> getSaved(int userID) throws SQLException, ClassNotFoundException {
         List<SavedRecipesDTO> list = null;
-          Connection con = DBUtil.getConnection1();
+          Connection con = DBUtil.getConnection();
         PreparedStatement stm = con.prepareStatement("select * from SavedRecipes a join [Recipe] b on a.recipeID = b.recipeID "
                 + "join [User] c on b.userID = c.userID where a.userID = ?");
         stm.setInt(1, userID);

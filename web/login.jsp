@@ -38,36 +38,40 @@
                         <div class="col-md-7">
                             <h3>Login to <strong>Flavorful Creations</strong></h3>
                             <p class="mb-4">Enter your User Name and Password </p>
-                            <form action="MainController" method="post">
+                            <form action="MainController?action=Login" method="post">
                                 <div class="form-group first">
-                                    <label for="userName">Username</label>
-                                    <input type="text" name="userName" required="" class="form-control" placeholder="your-email@gmail.com" id="username">
+                                    <label for="userName">Email</label>
+                                    <input type="text" name="gmail" class="form-control" placeholder="your-email@gmail.com" id="username">
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">Password</label>
-                                    <input type="password" name="password" required="" class="form-control" placeholder="Your Password" id="password">
+                                    <input type="password" name="password" class="form-control" placeholder="Your Password" id="password">
                                 </div>
                                 <div style="padding:5px; text-align: center;border: black 1px solid; background-color: white">
                                     <a href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/LoginGoogle/LoginGoogleHandler&response_type=code
                                        &client_id=686607751603-b60emcsa6gdcl975vbigkvtma4gcdash.apps.googleusercontent.com&approval_prompt=force" style="font-size: ">Login With Google</a>
                                 </div>
-
+                                <div class="error" style="color: red;">${requestScope.ERROR} </div>
                                 <div class="d-flex mb-5 align-items-center">
+                                    
                                     <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
                                         <input type="checkbox" checked="checked"/>
                                         <div class="control__indicator">
                                         </div>
                                     </label>
-                                    <span class="ml-auto"><a href="forgotPassword.html" class="forgot-pass">Forgot Password</a></span> 
+                                    <span class="ml-auto"><a href="forgotPassword.jsp" class="forgot-pass"  style="text-decoration: none">Forgot Password ?</a></span> 
                                 </div>
+                                            
+
+                                
                                 <div class="btn" style="display: inline-table; margin-left: 20px">
                                     <div class="g-recaptcha" data-sitekey="6LcsCv8kAAAAAFrbQiRvDDFPgq7OQCc-y9-QuFTL"></div>
                                     <div id="error"></div>
                                 </div><!--
                                 <input type="submit" value="Log In" class="btn btn-block btn-primary"> -->
-                               
-                                <input type="submit" name="action" value="Login" class="btn btn-block btn-primary">
-                                <input type="reset" value="Reset" class="btn btn-block btn-primary">
+
+                                <input type="submit" name="op" value="Login" class="btn btn-block btn-primary">
+                                <input type="submit" value="Cancel" name="op" class="btn btn-block btn-primary">
                             </form>
                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                             <script>
@@ -95,11 +99,8 @@
 
                 </div>
             </div>
-
         </div>
-         <div class="error">
-             ${requestScope.ERROR}
-    </div>
+
 
 
 

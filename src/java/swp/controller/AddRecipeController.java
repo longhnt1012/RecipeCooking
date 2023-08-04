@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import swp.ro.User.UserDTO;
 
 /**
  *
@@ -24,8 +25,12 @@ public class AddRecipeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=SUCCESS;
-        
+        UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+
+        if (user != null) {String url=SUCCESS;
+        }else {
+            response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

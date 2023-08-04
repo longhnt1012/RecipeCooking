@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import swp.ro.User.UserDTO;
 import swp.ro.rating.RatingDAO;
 import swp.ro.rating.RatingDTO;
 
@@ -22,14 +23,16 @@ import swp.ro.rating.RatingDTO;
 @WebServlet(name = "RatingController", urlPatterns = {"/RatingController"})
 public class RatingController extends HttpServlet {
 
-    
+        private static final String SUCCESS = "MainController?action=RecipeDetail&recipeID=";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        if (user != null) {
+            int userID = user.getUserID();
         String op = request.getParameter("op");
         switch (op) {
             case "one": {
                 try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     int scoreUser = 1;
                     RatingDAO rDAO = new RatingDAO();
@@ -40,13 +43,13 @@ public class RatingController extends HttpServlet {
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.ratingRecipe(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     } else {
                         rating.setUserID(userID);
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.reRating(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -55,7 +58,6 @@ public class RatingController extends HttpServlet {
             }
             case "two": {
                 try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     int scoreUser = 2;
                     RatingDAO rDAO = new RatingDAO();
@@ -66,13 +68,13 @@ public class RatingController extends HttpServlet {
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.ratingRecipe(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                       response.sendRedirect(SUCCESS + recipeID);
                     } else {
                         rating.setUserID(userID);
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.reRating(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -81,7 +83,6 @@ public class RatingController extends HttpServlet {
             }
             case "three": {
                 try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     int scoreUser = 3;
                     RatingDAO rDAO = new RatingDAO();
@@ -92,13 +93,13 @@ public class RatingController extends HttpServlet {
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.ratingRecipe(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     } else {
                         rating.setUserID(userID);
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.reRating(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                       response.sendRedirect(SUCCESS + recipeID);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -107,7 +108,6 @@ public class RatingController extends HttpServlet {
             }
             case "four": {
                 try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     int scoreUser = 4;
                     RatingDAO rDAO = new RatingDAO();
@@ -118,13 +118,13 @@ public class RatingController extends HttpServlet {
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.ratingRecipe(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     } else {
                         rating.setUserID(userID);
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.reRating(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -133,7 +133,6 @@ public class RatingController extends HttpServlet {
             }
             case "five": {
                 try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     int scoreUser = 5;
                     RatingDAO rDAO = new RatingDAO();
@@ -144,19 +143,22 @@ public class RatingController extends HttpServlet {
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.ratingRecipe(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     } else {
                         rating.setUserID(userID);
                         rating.setRecipeID(recipeID);
                         rating.setScoreUser(scoreUser);
                         rDAO.reRating(rating);
-                        response.sendRedirect(request.getContextPath() + "/recipe/recipeDetail.do?recipeID=" + recipeID);
+                        response.sendRedirect(SUCCESS + recipeID);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             }
+        }
+    }else {
+            response.sendRedirect("error.jsp");
         }
     }
 

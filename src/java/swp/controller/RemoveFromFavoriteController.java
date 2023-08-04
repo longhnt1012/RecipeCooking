@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp.ro.FavoriteRecipes.FavoriteRecipesDAO;
+import swp.ro.User.UserDTO;
 
 
 /**
@@ -34,15 +35,20 @@ public class RemoveFromFavoriteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
         
-        try{
-            int userID=Integer.parseInt(request.getParameter("userID"));
+        if (user != null ) {
+         try {
+             int userID = user.getUserID();
             int recipeID=Integer.parseInt(request.getParameter("recipeID"));
             FavoriteRecipesDAO dao=new FavoriteRecipesDAO();
             dao.removeFavoriteRecipe(userID, recipeID);
             response.sendRedirect(request.getContextPath() + "/MainController?action=FavoritePage&userID=" + userID);
         }catch(Exception e){
             log("Error at  RemoveFromFavoriteController" +e.toString());
+        }
+    }else {
+            response.sendRedirect("error.jsp");
         }
     }
 

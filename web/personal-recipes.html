@@ -3,471 +3,368 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
-    <title>Yummy Blog - Food Blog Template</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
-
-    <!-- Core Stylesheet -->
-    <link href="style.css" rel="stylesheet">
-
-    <!-- Responsive CSS -->
-    <link href="css/responsive/responsive.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+        integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
 <body>
-    <!-- Preloader Start -->
-    <div id="preloader">
-        <div class="yummy-load"></div>
+    <div class="container">
+
+        <button>Share this story</button>
     </div>
 
-    <!-- Background Pattern Swither -->
-    <div id="pattern-switcher">
-        Bg Pattern
-    </div>
-    <div id="patter-close">
-        <i class="fa fa-times" aria-hidden="true"></i>
-    </div>
+    <div class="overlay"></div>
+    <div class="share">
+        <h2>Share now</h2>
 
-    <!-- ****** Top Header Area Start ****** -->
-    <div class="top_header_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-5 col-sm-6">
-                    <!--  Top Social bar start -->
-                    <div class="top_social_bar">
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <!--  Login Register Area -->
-                <div class="col-7 col-sm-6">
-                    <div class="signup-search-area d-flex align-items-center justify-content-end">
-                        <div class="col-8 col-sm-8">
-                            <div class="search_button justify-content-end align-items-center d-flex">
-                                <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="search-hidden-form justify-content-end align-items-center ">
-                                <form action="MainController" method="GET">
-                                    <input type="text" name="search" id="search-anything"
-                                        placeholder="Search Anything...">
-                                    <input type="submit" name="action" value="Search" class="d-none">
-                                    <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="login_register_area d-flex col-4 col-sm-4">
-                            <div class="login">
-                                <a href="login.html">Sign in</a>
-                            </div>
-                            <div class="register">
-                                <a href="register.html">Sign up</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--   <div class="signup-search-area d-flex align-items-center justify-content-end">-->
+        <!-- facebook -->
+        <a class="facebook" target="blank"><i class="fab fa-facebook"></i></a>
 
-                <!-- Search Button Area -->
-                <!-- <div class="search-hidden-form">
-                            <form action="#" method="get">
-                                <input type="search" name="search" id="search-anything"
-                                    placeholder="Search Anything...">
-                                <input type="submit" value="" class="d-none">
-                                <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            </form>
-                        </div>
-                        <div class="search_button">
-                            <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        </div>
-                    -->
-                <!-- Search Form -->
-                <!--
-                       
-                    -->
+        <!-- twitter -->
+        <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
 
+        <!-- linkedin -->
+        <a class="linkedin" target="blank"><i class="fab fa-linkedin"></i></a>
 
+        <!-- reddit -->
+        <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
 
-            </div>
-        </div>
-    </div>
-    <!-- ****** Top Header Area End ****** -->
+        <!-- whatsapp-->
+        <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- ****** Header Area Start ****** -->
-    <header class="header_area">
-        <div class="container">
-            <div class="row">
-                <!-- Logo Area Start -->
-                <div class="col-12">
-                    <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">Flavorful Creations</a>
-                    </div>
-                </div>
-            </div>
+        <!-- telegram-->
+        <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
 
-            <div class="row">
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-lg">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav"
-                            aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i
-                                class="fa fa-bars" aria-hidden="true"></i> Menu</button>
-                        <!-- Menu Area Start -->
-                        <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
-                            <ul class="navbar-nav" id="yummy-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Home <span
-                                            class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">Recipes</a>
-
-                                        <a class="dropdown-item" href="single.html">Ingredients</a>
-                                        <a class="dropdown-item" href="static.html">Trending</a>
-                                        <a class="dropdown-item" href="contact.html">Creators</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Categories</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Saved</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">Planner</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Shopping</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ****** Header Area End ****** -->
-
-    <!--Personal Information-->
-    <div style="background-color:rgb(255, 225, 209);">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-4 col-lg-4 "
-                    style="background-color: white; margin-bottom: 50px;margin-top: 50px;border-radius: 10px;">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="personal-head row" style="border-bottom-style: solid; border-color:whitesmoke;">
-                                <div class="col-4 col-md-4 col-lg-4" style="margin-top: 10px;">
-                                    <img src="img/about-img/1.jpg" alt="Personal image"
-                                        style="width: 100%;padding-bottom: 10px;border-radius: 10px;">
-                                </div>
-                                <div class="col-8 col-md-8 col-lg-8 profile-user">
-                                    <h4 style="color:black;margin-top: 27px; ">Hi, Thành Long</h4>
-                                    <a style="border:solid 2px #d54215 ;border-radius: 10px;color:black;padding: 6px 16px;display: inline-block;" href="#view-public-profile">View public profile</a>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 personal-info-a">
-                            <a href="personalinfo.html"  >Personal Info</a>
-                        </div>
-                        <div class="col-12 change-password-a">
-                            <a href="changepass.html" class="" >Change password</a>
-                        </div>
-                        <div class="col-12 saved-items-a">
-                            <a href="myfavorite.html" class="" >Saved Items & Collections</a>
-                        </div>
-                        <div class="col-12 personal-recipes-a">
-                            <a href="#my-recipe" class="">Personal Recipes</a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-12 col-md-8 col-lg-8"  >
-                    <div class="container">
-                        <div class="row">
-                            <div class="personal-info col-12 col-md-12 col-lg-12"
-                                style="background-color: white; margin-bottom: 50px;margin-top: 50px;border-bottom-style: solid; border-color:whitesmoke; border-width: 1px;border-radius: 10px;">
-                                <div class="personal-info-heading col-12 col-md-12 col-lg-12" style="    border-bottom-style: solid;
-                               border-width: 2px;
-                               border-color: whitesmoke;">
-                                    <div class="col-12 col-md-12 col-lg-12" style="margin-top: 30px;">
-                                        <h2>Public Profile</h2>
-                                    </div>
-                                    <div class="col-12 col-md-12 col-lg-12" style="margin-top: 30px; ">
-                                        <p></p>
-
-                                    </div>
-                                    
-
-                                </div>
-                                <div class="personal-info-body col-12 col-md-12 col-lg-12" style="margin-top:10px; ">
-                                    <div class="container">
-                                        <div style="border-style: solid; border-width: 1px;padding:30px ;border-color:black; border-radius:10px; margin-bottom:20px;">
-                                            
-                                            <div class="row">
-
-                                            </div>
-                                           
-                                            
-                                          
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a class="google" target="_blank"><i class="fab fa-google"></i></a>
 
     </div>
-    </div>
-    </div>
+    <script>
+      
+    </script>
+    <script src="script.js"></script>
+    <style>
+        body{
+    margin:0;
+    font-family: 'Nunito';
+    font-size: 24px;
+  
+  }
+  
+  .container{
+    width: 80%;
+    margin: 4em auto;
+  
+   
+  }
+  .container a{
+    
+        border:none;
+        outline: none;
+        padding: 1em 1.5em;
+        font-size: 1rem;
+        margin-top: 2em;
+        cursor: pointer;
+        background: rgb(158, 0, 250);
+        color:white;
+        font-weight: bold;
+        will-change: background;
+        transition: background 1s;
+    
+      
+  }
+  
+  .overlay{
+    opacity: 1;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .share ,.overlay{
+    display: none;
+  }
+  .show-share{
+   display: block; 
+  }
+  .share{
+    position: absolute;
+    left: 0;
+    right:0;
+    top:30%;
+    margin:auto;
+    width: 50%;
+    z-index: 1;
+    padding: 1em;
+    background-color: white;
+    border-radius: 15px;
+  }
+  .share h2{
+    margin:0;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    
+    
+  }
+  .share a{
+    padding:35px;
+    font-size: 30px;
+  }
+  .share button{
+    border:none;
+    padding: .8em 1.2em;
+    margin-top:3em;
+    width: 32%;
+    cursor: pointer;
+  }
 
-    <!-- ****** Instagram Area Start ****** -->
-    <div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/1.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/2.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/3.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/4.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/5.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/6.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/1.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Item -->
-        <div class="instagram_gallery_item">
-            <!-- Instagram Thumb -->
-            <img src="img/instagram-img/2.jpg" alt="">
-            <!-- Hover -->
-            <div class="hover_overlay">
-                <div class="yummy-table">
-                    <div class="yummy-table-cell">
-                        <div class="follow-me text-center">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!-- ****** Our Creative Portfolio Area End ****** -->
-
-    <!-- ****** Footer Social Icon Area Start ****** -->
-    <div class="social_icon_area clearfix">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-social-area d-flex">
-                        <div class="single-icon">
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i><span>facebook</span></a>
-                        </div>
-
-                        <div class="single-icon">
-                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i><span>GOOGLE+</span></a>
-                        </div>
-
-                        <div class="single-icon">
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ****** Footer Social Icon Area End ****** -->
-
-    <!-- ****** Footer Menu Area Start ****** -->
-    <footer class="footer_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-content">
-                        <!-- Logo Area Start -->
-                        <div class="footer-logo-area text-center">
-                            <a href="index.html" class="yummy-logo">Flavorful Creations</a>
-                        </div>
-                        <!-- Menu Area Start -->
-                        <nav class="navbar navbar-expand-lg">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#yummyfood-footer-nav" aria-controls="yummyfood-footer-nav"
-                                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"
-                                    aria-hidden="true"></i> Menu</button>
-                            <!-- Menu Area Start -->
-                            <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Features</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Categories</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Archive</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Contact</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Copywrite Text -->
-                    <div class="copy_right_text text-center">
-                        <p>Copyright @2023 All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                aria-hidden="true"></i> by "Life to eat clean"</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ****** Footer Menu Area End ****** -->
-
-    <!-- Jquery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap-4 js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins JS -->
-    <script src="js/others/plugins.js"></script>
-    <!-- Active JS -->
-    <script src="js/active.js"></script>
+  #share-buttons i {
+    font-size: 100px;
+    margin: 20px;
+  }
+  .facebook {
+        color: #3b5998;
+  }
+  .twitter {
+      color: #55acee;
+  }
+  .linkedin {
+      color: #0077b5;
+  }
+  .reddit {
+      color: #cb2027;
+  }
+  .whatsapp {
+      color: #25D366;
+  }
+  .telegram {
+      color: #229ED9;
+  }
+  .instagram{
+   color:red ;
+  }
+  .facebook, .twitter, .linkedin, .reddit, .whatsapp, .telegram .instagram {
+    opacity: 0.6;
+  }
+  .facebook:hover, .twitter:hover, .linkedin:hover, .reddit:hover, .whatsapp:hover, .telegram:hover, .instagram {
+    opacity: 0.9;
+  }
+    </style>
 </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+let nav = 0;
+let clicked = null;
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+
+const calendar = document.getElementById('calendar');
+const newEventModal = document.getElementById('newEventModal');
+const deleteEventModal = document.getElementById('deleteEventModal');
+const backDrop = document.getElementById('modalBackDrop');
+const eventTitleInput = document.getElementById('eventTitleInput');
+
+
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function openModal(date) {
+ 
+  clicked = date;
+    
+
+  const eventForDay = events.find(e => e.date === clicked);
+  
+  if (eventForDay) {
+   
+    document.getElementById('eventText').innerText =  eventForDay.title;
+  
+    deleteEventModal.style.display = 'block';
+  } else {
+    newEventModal.style.display = 'block';
+  }
+
+  backDrop.style.display = 'block';
+   const formattedDate = new Date(date).toLocaleDateString('en-us', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  
+  document.getElementById('selectedDateInput').value = formattedDate;
+  document.getElementById('selectedDateHidden').value = formattedDate;
+  document.getElementById('eventTitleInput').value = svRecipeID;
+     
+}
+
+
+
+function load() {
+  const dt = new Date();
+
+  if (nav !== 0) {
+    dt.setMonth(new Date().getMonth() + nav);
+  }
+
+  const day = dt.getDate();
+  const month = dt.getMonth();
+  const year = dt.getFullYear();
+
+  const firstDayOfMonth = new Date(year, month, 1);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  
+  const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+  const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+
+  document.getElementById('monthDisplay').innerText = 
+    ${dt.toLocaleDateString('en-us', { month: 'long' })} ${year};
+
+  calendar.innerHTML = '';
+
+  for(let i = 1; i <= paddingDays + daysInMonth; i++) {
+    const daySquare = document.createElement('div');
+    daySquare.classList.add('day');
+
+    const dayString = ${month + 1}/${i - paddingDays}/${year};
+
+    if (i > paddingDays) {
+      daySquare.innerText = i - paddingDays;
+      const eventForDay = events.find(e => e.date === dayString);
+
+      if (i - paddingDays === day && nav === 0) {
+        daySquare.id = 'currentDay';
+      }
+        
+      if (eventForDay && userID) {
+        const eventDiv = document.createElement('div');
+        eventDiv.classList.add('event');
+        eventDiv.innerText = eventForDay.title;
+        daySquare.appendChild(eventDiv);
+      }
+
+      daySquare.addEventListener('click', () => openModal(dayString));
+    } else {
+      daySquare.classList.add('padding');
+    }
+
+    calendar.appendChild(daySquare);    
+  }
+}
+
+function closeModal() {
+  eventTitleInput.classList.remove('error');
+  newEventModal.style.display = 'none';
+  deleteEventModal.style.display = 'none';
+  backDrop.style.display = 'none';
+  eventTitleInput.value = '';
+  clicked = null;
+  load();
+}
+
+function saveEvent() {
+    const selectedRecipeID = eventTitleInput.value;
+  const selectedRecipeName = eventTitleInput.options[eventTitleInput.selectedIndex].text;
+  
+   if (selectedRecipeID) {
+    eventTitleInput.classList.remove('error');
+
+    events.push({
+      date: clicked,
+      title: selectedRecipeName,
+      recipeID: selectedRecipeID,
+     
+    });
+     document.getElementById('svRecipeIDHidden').value = selectedRecipeID;
+    document.getElementById('svRecipeNameHidden').value = selectedRecipeName;
+
+    // Set the value of the hidden input field with the svRecipeID
+   
+    // Submit the form to the servlet
+    const form = document.getElementById('eventForm');
+    form.submit();
+
+    localStorage.setItem('events', JSON.stringify(events));
+    closeModal();
+  } else {
+    eventTitleInput.classList.add('error');
+  }
+}
+document.getElementById('addMoreButton').addEventListener('click', () => {
+  // Get the selected date from the global variable "clicked"
+  if (clicked) {
+    // Open the new event modal
+    newEventModal.style.display = 'block';
+    backDrop.style.display = 'block';
+  }
+});
+
+function addMoreEvent(date){
+    closeModal();
+    clicked = date;
+
+  // Check if an event exists for the selected date
+  const eventForDay = events.find(e => e.date === clicked);
+
+  if (eventForDay) {
+    // If an event exists, display the delete event modal
+    document.getElementById('eventText').innerText = eventForDay.title;
+    deleteEventModal.style.display = 'block';
+  } else {
+    // If no event exists, display the new event modal
+    newEventModal.style.display = 'block';
+  }
+
+  backDrop.style.display = 'block';
+    
+    
+}
+
+
+function deleteEvent() {
+  events = events.filter(e => e.date !== clicked);
+  localStorage.setItem('events', JSON.stringify(events));
+  closeModal();
+}
+
+function initButtons() {
+  document.getElementById('nextButton').addEventListener('click', () => {
+    nav++;
+    load();
+  });
+
+  document.getElementById('backButton').addEventListener('click', () => {
+    nav--;
+    load();
+  });
+
+  document.getElementById('saveButton').addEventListener('click', saveEvent);
+  document.getElementById('cancelButton').addEventListener('click', closeModal);
+  document.getElementById('deleteButton').addEventListener('click', deleteEvent);
+  document.getElementById('closeButton').addEventListener('click', closeModal);
+  document.getElementById('addMoreButton').addEventListener('click', addMoreEvent);
+ 
+}
+
+initButtons();
+load();

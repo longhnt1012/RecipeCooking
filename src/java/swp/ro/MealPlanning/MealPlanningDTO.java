@@ -4,7 +4,7 @@
  */
 package swp.ro.MealPlanning;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 /**
@@ -15,20 +15,22 @@ public class MealPlanningDTO {
     private int planningID;
     private int userID;
     private int savedRecipeID;
-  
-    private Date date;
+    private String recipeName;
+    private String date;
 
     public MealPlanningDTO() {
     }
 
-    public MealPlanningDTO(int planningID, int userID, int savedRecipeID,  Date date) {
+    public MealPlanningDTO(int planningID, int userID, int savedRecipeID, String recipeName, String date) {
         this.planningID = planningID;
         this.userID = userID;
         this.savedRecipeID = savedRecipeID;
-      
+        this.recipeName = recipeName;
         this.date = date;
     }
 
+   
+   
     public int getPlanningID() {
         return planningID;
     }
@@ -53,19 +55,28 @@ public class MealPlanningDTO {
         this.savedRecipeID = savedRecipeID;
     }
 
-   
-
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+   
+
+    
     @Override
     public String toString() {
-        return "MealPlanningDTO{" + "planningID=" + planningID + ", userID=" + userID + ", savedRecipeID=" + savedRecipeID + ", date=" + date + '}';
+        return "MealPlanningDTO{" + "planningID=" + planningID + ", userID=" + userID + ", savedRecipeID=" + savedRecipeID +", recipeName="+recipeName+ ", date=" + date + '}';
     }
     
 }

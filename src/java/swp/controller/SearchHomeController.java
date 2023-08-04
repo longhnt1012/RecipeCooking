@@ -18,59 +18,73 @@ import swp.ro.Recipe.RecipeDAO;
 import swp.ro.Recipe.RecipeDTO;
 import swp.ro.User.UserDAO;
 import swp.ro.User.UserDTO;
+import swp.ro.rating.RatingDAO;
 
- /*
+/*
  * @author truc0
  */
 @WebServlet(name = "SearchHomeController", urlPatterns = {"/SearchHomeController"})
 public class SearchHomeController extends HttpServlet {
-    private static final String SEARCH="searchPage.jsp";
-    //private static final String SEARCH="newjsp.jsp";
-    private static final String ERROR="mainPage.jsp";
-    private static final String SEARCH_RECIPE="recipeDetail.html";
-    
+
+    private static final String SEARCH = "searchPage.jsp";
+    private static final String ERROR = "mainpage.jsp";
+    private static final String SEARCH_RECIPE = "recipeDetail.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            
             String search = request.getParameter("search");
-            String searchRecipe = request.getParameter("searchRecipe");
+            int searchRecipe = 0;
+            if (request.getParameter("searchRecipe") == null) {
+                searchRecipe = -1;
+            } else {
+                searchRecipe = Integer.parseInt(request.getParameter("searchRecipe"));
+            }
             String searchCategory = request.getParameter("searchCategory");
             RecipeDAO daoRecipe = new RecipeDAO();
+            RatingDAO ratingDAO = new RatingDAO();
             UserDAO daoUser = new UserDAO();
             FavoriteRecipesDAO daoFavority = new FavoriteRecipesDAO();
-            if(search!=null){
+            if (search != null) {
                 List<RecipeDTO> listRecipe = daoRecipe.getListSearchRecipe(search);
                 List<UserDTO> listUser = daoUser.getListSearchUser(search);
                 Map<Integer, Integer> favority = daoFavority.getListLike(listRecipe);
+                Map<Integer, Double> rating = ratingDAO.getRatingRecipeFollowID(listRecipe);
+                Map<Integer, Integer> comment = daoFavority.getListComment(listRecipe);
                 request.setAttribute("SEARCH", search);
                 request.setAttribute("SEARCH_LIST_RECIPE", listRecipe);
                 request.setAttribute("SEARCH_LIST_USER", listUser);
                 request.setAttribute("SEARCH_LIST_FAVORITY", favority);
-                url=SEARCH;
+                request.setAttribute("SEARCH_LIST_COMMENT", comment);
+                request.setAttribute("SEARCH_LIST_RATING", rating);
+                url = SEARCH;
             }
-            if(searchCategory!=null){
+            if (searchCategory != null) {
                 List<RecipeDTO> listRecipe = daoRecipe.getListCategotyRecipe(searchCategory);
                 List<UserDTO> listUser = daoUser.getListCategoryUser(searchCategory);
                 Map<Integer, Integer> favority = daoFavority.getListLike(listRecipe);
-                int count = daoFavority.getTotalCommentsForRecipe(1);
+                Map<Integer, Double> rating = ratingDAO.getRatingRecipeFollowID(listRecipe);
+                Map<Integer, Integer> comment = daoFavority.getListComment(listRecipe);
                 request.setAttribute("SEARCH", searchCategory);
                 request.setAttribute("SEARCH_LIST_RECIPE", listRecipe);
                 request.setAttribute("SEARCH_LIST_USER", listUser);
                 request.setAttribute("SEARCH_LIST_FAVORITY", favority);
-                url=SEARCH;
+                request.setAttribute("SEARCH_LIST_COMMENT", comment);
+                request.setAttribute("SEARCH_LIST_RATING", rating);
+                url = SEARCH;
             }
-            if(searchRecipe!=null){
-                String recipe = daoRecipe.getSearchRecipe(searchRecipe);
+            if (searchRecipe >= 0) {
+                RecipeDTO recipe = daoRecipe.getSearchRecipe(searchRecipe);
                 request.setAttribute("SEARCH_RECIPE", recipe);
-                url=SEARCH_RECIPE;
+                url = SEARCH_RECIPE;
             }
         } catch (Exception e) {
-        }finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

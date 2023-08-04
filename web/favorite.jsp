@@ -47,7 +47,7 @@
         </div>
 
         <!-- ****** Top Header Area Start ****** -->
-        <div class="top_header_area">
+       <div class="top_header_area">
             <div class="container">
                 <div class="row">
                     <div class="col-5 col-sm-6">
@@ -75,33 +75,31 @@
                                 </div>
                             </div>
                             <c:if test="${LOGIN_USER ==null}" >
-                            <div class="login_register_area d-flex col-4 col-sm-4">
-                                <div class="login">
-                                    <a href="login.jsp">Sign in</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <div class="login">
+                                        <a href="login.jsp">Sign in</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="SignUp.jsp">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="register">
-                                    <a href="register.html">Sign up</a>
-                                </div>
-                            </div>
                             </c:if>
                             <c:if test="${LOGIN_USER !=null}">
-                                  <div class="login_register_area d-flex col-4 col-sm-4">
-                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="#">Your Profile</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="MainController?action=MyProfile&userID=${LOGIN_USER.userID}">My Profile</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="LogOut">
+                                            </form>
 
-                                        <a class="dropdown-item" href="#">Change Password</a>
-                                        <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
-                                        <form action="MainController" method="POST">
-                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
-                                        </form>
-                                        
 
-                                    </div>
-                                </li>
-                        </div>
+                                        </div>
+                                    </li>
+                                </div>
                             </c:if>
                         </div>
                     </div>
@@ -117,7 +115,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Logo Area Start -->
-                    <div class="col-12">
+                    <div class="col-12" >
                         <div class="logo_area text-center">
                             <a href="mainpage.jsp" class="yummy-logo">Flavorful Creations</a>
                         </div>
@@ -125,7 +123,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" style="border-bottom: 1px solid #eeeeee; margin-bottom: 5px ">
                         <nav class="navbar navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav"
                                     aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i
@@ -133,37 +131,50 @@
                             <!-- Menu Area Start -->
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                                 <ul class="navbar-nav" id="yummy-nav">
-                                    <li class="nav-item active">
+                                    <li class="nav-item">
                                         <c:if test="${LOGIN_USER == null}">
                                             <a class="nav-link" href="mainpage.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                         <c:if test="${LOGIN_USER != null}">
-                                            <a class="nav-link" href="mainpage_user.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                        
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="mainpage.jsp">Home <span
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="categories.jsp">Categories</a>
+                                        <a class="nav-link" href="MainController?action=LoadCategories">Categories</a>
                                     </li>
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown active">
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                            <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
-
+                                           <c:if test="${LOGIN_USER != null}">
+                                            <a class="dropdown-item" href="MainController?action=AddRecipePage&userID=${LOGIN_USER.userID}">Add a recipe</a>
+                                            <a class="dropdown-item" href="MainController?action=MyRecipe&userID=${LOGIN_USER.userID}">My Recipes</a>
                                             <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
                                             <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
-
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER == null}">
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#Login">Add a recipe</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#Login" >My Recipes</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#Login">My favorites</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#Login">Saved</a>
+                                            
+                                            </c:if>
                                         </div>
                                     </li>
 
                                     <li class="nav-item">
+                                        <c:if test="${LOGIN_USER != null}">
                                         <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
+                                        </c:if>
+                                        <c:if test="${LOGIN_USER == null}">
+                                        <a class="nav-link" data-toggle="modal" data-target="#Login">Meal Plan</a>
+                                        </c:if>
                                     </li>
 
                                 </ul>
@@ -172,9 +183,7 @@
                     </div>
                 </div>
             </div>
-        </header>
-<body>
-    
+        </header>    
     
 <div style="background-color: rgba">
     <div class="container">
@@ -233,48 +242,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="footer-content">
-                        <!-- Logo Area Start -->
-                        <div class="footer-logo-area text-center">
-                            <a href="index.html" class="yummy-logo">Flavorful Creations</a>
-                        </div>
-                        <!-- Menu Area Start -->
-                        <nav class="navbar navbar-expand-lg">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#yummyfood-footer-nav" aria-controls="yummyfood-footer-nav"
-                                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"
-                                    aria-hidden="true"></i> Menu</button>
-                            <!-- Menu Area Start -->
-                            <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
-                                   <ul class="navbar-nav" id="yummy-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="mainpage.html">Home <span
-                                            class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="recipespage.jsp">Recipes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="categories.jsp">Categories</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="login.jsp">Add a recipe</a>
-
-                                        <a class="dropdown-item" href="login.jsp">My favorites</a>
-                                        <a class="dropdown-item" href="login.jsp">Saved</a>
-
-                                    </div>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login.html">Meal Plan</a>
-                                </li>
-
-                            </ul>
-                            </div>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -293,6 +260,26 @@
         </div>
     </footer>
     <!-- ****** Footer Menu Area End ****** -->
+    
+    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Please sign in to do anything !!!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="login.jsp"><button type="button" class="btn btn-primary">Sign in</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- Jquery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>

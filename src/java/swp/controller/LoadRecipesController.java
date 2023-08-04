@@ -6,19 +6,27 @@
 package swp.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import swp.ro.Recipe.RecipeDAO;
+import swp.ro.Recipe.RecipeDTO;
+import swp.ro.User.UserDTO;
 
 /**
  *
- * @author Thành Long
+ * @author Admin
  */
-@WebServlet(name = "LogOutController", urlPatterns = {"/LogOutController"})
-public class LogOutController extends HttpServlet {
+@WebServlet(name = "LoadRecipesController", urlPatterns = {"/LoadRecipesController"})
+public class LoadRecipesController extends HttpServlet {
+
+    private static final String SUCCESS_ADMIN = "manageRecipes.jsp";
+    private static final String SUCCESS_USER = "recipes.jsp";
+    private static final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +40,27 @@ public class LogOutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LogOutController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LogOutController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url = ERROR;
+        HttpSession session = request.getSession();
+        UserDTO admin = (UserDTO) session.getAttribute("LOGIN_USER");
+        try {
+            if (admin != null && admin.getRole().equalsIgnoreCase("AD")) {
+                RecipeDAO dao = new RecipeDAO();
+                List<RecipeDTO> listRecipe = dao.load();
+                UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+                if (listRecipe.size() > 0) {
+                    request.setAttribute("LIST_RECIPES", listRecipe);
+                    url = SUCCESS_ADMIN;
+                } else {
+                    request.setAttribute("message", "Have error at LoadRecipesController");
+                }
+            } else {
+                request.setAttribute("message", "You don't have permission");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

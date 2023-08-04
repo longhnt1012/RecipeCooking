@@ -1,7 +1,10 @@
+<%@page import="swp.ro.User.UserDTO"%>
 <%@page import="java.util.Map"%>
 <%@page import="swp.ro.Recipe.RecipeDTO"%>
 <%@page import="swp.ro.Recipe.RecipeDTO"%>
 <%@page import="java.util.List"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +30,7 @@
     </head>
 
     <body>
-       <!-- Preloader Start -->
+        <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -69,33 +72,31 @@
                                 </div>
                             </div>
                             <c:if test="${LOGIN_USER ==null}" >
-                            <div class="login_register_area d-flex col-4 col-sm-4">
-                                <div class="login">
-                                    <a href="login.jsp">Sign in</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <div class="login">
+                                        <a href="login.jsp">Sign in</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="SignUp.jsp">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="register">
-                                    <a href="register.html">Sign up</a>
-                                </div>
-                            </div>
                             </c:if>
                             <c:if test="${LOGIN_USER !=null}">
-                                  <div class="login_register_area d-flex col-4 col-sm-4">
-                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="#">Your Profile</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="MainController?action=MyProfile&userID=${LOGIN_USER.userID}">My Profile</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="LogOut">
+                                            </form>
 
-                                        <a class="dropdown-item" href="#">Change Password</a>
-                                        <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
-                                        <form action="MainController" method="POST">
-                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
-                                        </form>
-                                        
 
-                                    </div>
-                                </li>
-                        </div>
+                                        </div>
+                                    </li>
+                                </div>
                             </c:if>
                         </div>
                     </div>
@@ -130,36 +131,53 @@
                                     <li class="nav-item active">
                                         <c:if test="${LOGIN_USER == null}">
                                             <a class="nav-link" href="mainpage.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                         <c:if test="${LOGIN_USER != null}">
-                                            <a class="nav-link" href="mainpage_user.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                        
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="mainpage.jsp">Home <span
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="categories.jsp">Categories</a>
+                                        <a class="nav-link" href="MainController?action=LoadCategories">Categories</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                            <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
+                                            <c:if test="${LOGIN_USER != null}">
+                                                <a class="dropdown-item" href="MainController?action=AddRecipePage&userID=${LOGIN_USER.userID}">Add a recipe</a>
+                                                <a class="dropdown-item" href="MainController?action=MyRecipe&userID=${LOGIN_USER.userID}">My Recipes</a>
+                                                <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
+                                                <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER == null}">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">Add a recipe</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login" >My Recipes</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">My favorites</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">Saved</a>
 
-                                            <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
-                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
-
+                                            </c:if>
                                         </div>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
+                                        <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
+                                        </c:if>
+                                        <c:if test="${LOGIN_USER == null}">
+                                            <a class="nav-link" data-toggle="modal" data-target="#Login">Meal Plan</a>
+                                        </c:if>
                                     </li>
-
+                                    <li class="nav-item">
+                                        <c:if test="${LOGIN_USER.role == 'AD'}">
+                                            <a class="nav-link" href="LoadDashboardController">Dashboard</a>
+                                        </c:if>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
@@ -239,244 +257,104 @@
                     <div class="col-12 col-md-12 col-lg-12 " style="text-align: center;">
                         <h2 style="margin-bottom: 30px;">Featuring Recipes</h2>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <ul class="toptrending">
-                            <li style="margin-bottom: 30px;">
-                                <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <%
-                                            List<RecipeDTO> listRecipe = (List<RecipeDTO>) session.getAttribute("SEARCH_LIST_NAME_RECIPE");
-                                            Map<String, Integer> listRating = (Map<String, Integer>) session.getAttribute("LIST_RATING_RECIPE");
-                                            Map<String, Integer> listTotalRating = (Map<String, Integer>) session.getAttribute("LIST_TOTAL_RATING");
-                                        %>
-                                        <%
-                                            for (RecipeDTO list : listRecipe) {
-                                                if (list.getRecipeName().equals("Homemade Pho")) {
-                                        %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
-                                        <%
-                                                    break;
-                                                }
-                                            }
-                                        %>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <a href="MainController?action=SearchHome&searchRecipe=Homemade Pho"><h3>Homemade Pho</h3></a>
+                    <%
 
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-
-                                            <!-- Post Comments -->
-                                            <div class="post-comments" style="margin-bottom: 10px;">
-                                                <a href="asia.html"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                            </div>
-                                            <!-- Post Share -->
-
+                        Map<Integer, Double> listAvgTop6RatingRecipe = (Map<Integer, Double>) session.getAttribute("AVG_TOP_6_RATING_RECIPE");
+                        Map<Integer, Double> listAvgRandomRatingRecipe = (Map<Integer, Double>) session.getAttribute("AVG_RANDOM_RATING_RECIPE");
+                        List<RecipeDTO> listTop6 = (List<RecipeDTO>) session.getAttribute("LIST_TOP_6_RECIPE");
+                        List<RecipeDTO> listRandomRecipe = (List<RecipeDTO>) session.getAttribute("LIST_RANDOM_RECIPE");
+                        List<UserDTO> listUser = (List<UserDTO>) session.getAttribute("LIST_USER");
+                    %>
+                    <%
+                        for (RecipeDTO listTop6Recipe : listTop6) {
+                    %>
+                    <div class="col-md-4">
+                        <div class="single-post wow fadeInUp" data-wow-delay=".4s">
+                            <!-- Post Thumb -->
+                            <div class="post-thumb">
+                                <img src="<%=listTop6Recipe.getImage()%>" alt="" style="height:220px ;width: 350px">
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                    <div class="post-author-date-area d-flex">
+                                        <!-- Post Author -->
+                                        <div class="post-author">
+                                            <a href="#">
+                                                <%
+                                                    for (UserDTO listUser1 : listUser) {
+                                                        if (listUser1.getUserID() == listTop6Recipe.getUserID()) {
+                                                %>
+                                                <%=listUser1.getUserName()%>
+                                                <%
+                                                            break;
+                                                        }
+                                                    }
+                                                %>
+                                            </a>
                                         </div>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 1) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 2) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 3) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") >= 4) {
-                                              %>checked
-                                              <%
-                                                  }%>"></span>
-                                        <span class="fa fa-star <% if (listRating.get("Pho") == 5) {
-                                              %>checked
-                                              <%}%>"></span>
-                                        <span > <%=listTotalRating.get("Pho")%> ratings</span>
+                                        <!-- Post Date -->
 
                                     </div>
+                                    <!-- Post Comment & Share Area -->
+                                    <%
+                                        if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) >= 1) {
+                                    %>
+                                    <span class="fa fa-star <% if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) >= 1) {
+                                          %>checked
+                                    <%
+                                        }%>"></span>
+                                    <span class="fa fa-star <% if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) >= 2) {
+                                          %>checked
+                                    <%
+                                        }%>"></span>
+                                    <span class="fa fa-star <% if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) >= 3) {
+                                          %>checked
+                                    <%
+                                        }%>"></span>
+                                    <span class="fa fa-star <% if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) >= 4) {
+                                          %>checked
+                                    <%
+                                        }%>"></span>
+                                    <span class="fa fa-star <% if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) == 5) {
+                                          %>checked
+                                          <%}%>"></span>
+
+                                    <%
+                                        }
+                                    %>
+
+                                    <%
+                                        if (listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID()) == 0) {
+                                    %>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <%
+                                        }
+                                    %>
+
+                                    <span > 
+                                       ( <%=listAvgTop6RatingRecipe.get(listTop6Recipe.getRecipeID())%> /5 )
+                                    </span>
+
+
+                                    <a href="#" style="color: gray; font-size: 15px">|<%=listTop6Recipe.getDatePost()%></a>
 
                                 </div>
+                                <a href="MainController?action=RecipeDetail&recipeID=<%= listTop6Recipe.getRecipeID()%>">
+                                    <h4 class="post-headline"><%=listTop6Recipe.getRecipeName()%></h4>
+                                </a>
 
-                            </li>
-                            <li style="margin-bottom: 30px;">
-                                <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <%
-                                            for (RecipeDTO list : listRecipe) {
-                                                if (list.getRecipeName().equals("Beefsteak")) {
-                                        %>
-                                        <img src="<%=list.getImage()%>" alt="" style="width: 100%;">
-                                        <%
-                                                    break;
-                                                }
-                                            }
-                                        %>
-                                        <img src="img/sidebar-img/steak_10_b1b1397477ea4c8ca1f215989632a614_1024x1024.jpg"
-                                             alt="" style="width: 100%;">
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <a href="MainController?action=SearchHome&searchRecipe=Beefsteak">
-                                            <h5>Beefsteak</h5>
-                                        </a>
-
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-
-                                            <!-- Post Comments -->
-                                            <div class="post-comments" style="margin-bottom: 10px;">
-                                                <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                            </div>
-                                            <!-- Post Share -->
-
-                                        </div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                        <span > 264 ratings</span>
-
-                                    </div>
-
-                                </div>
-
-                            </li>
-                            <li style="margin-bottom: 30px;">
-                                <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <img src="img/sidebar-img/chikenfries.jpg" alt="" style="width: 100%;height: 95%;">
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <a href="MainController?action=SearchHome&searchRecipe=Chicken Fries"><h5>Chicken Fries</h5></a>
-
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-
-                                            <!-- Post Comments -->
-                                            <div class="post-comments" style="margin-bottom: 10px;">
-                                                <a href="america.html "><i class="" aria-hidden="true"></i>Raw Food Diet</a>
-                                            </div>
-                                            <!-- Post Share -->
-
-                                        </div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                        <span > 240 ratings</span>
-
-                                    </div>
-
-                                </div>
-
-                            </li>
-
-                        </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <ul class="toptrending">
-                            <li style="margin-bottom: 30px;">
-                                <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <img src="img/sidebar-img/download (1).jpeg" alt="" style="width: 100%;">
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <a href="MainController?action=SearchHome&searchRecipe=Easy Spaghetti Bolognese">
-                                            <h4>Easy spaghetti Bolognese
-                                            </h4>
-                                        </a>
+                    <%
 
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-
-                                            <!-- Post Comments -->
-                                            <div class="post-comments" style="margin-bottom: 10px;">
-                                                <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                            </div>
-                                            <!-- Post Share -->
-
-                                        </div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                        <span > 300 ratings</span>
-
-                                    </div>
-
-                                </div>
-
-                            </li>
-                            <li style="margin-bottom: 30px;">
-                                <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <img src="img/sidebar-img/Salmon-and-potato-parcels.jpg" alt=""
-                                             style="width: 100%;height: 95%;">
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <a href="MainController?action=SearchHome&searchRecipe=Baked Salmon-Leek Parcel">
-                                            <h5>Baked Salmon & Leek parcel
-                                            </h5>
-                                        </a>
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-
-                                            <!-- Post Comments -->
-                                            <div class="post-comments" style="margin-bottom: 10px;">
-                                                <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                            </div>
-                                            <!-- Post Share -->
-
-                                        </div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                        <span > 300 ratings</span>
-
-                                    </div>
-
-                                </div>
-
-                            </li>
-                            <li style="margin-bottom: 30px;">
-                                <div class="row">
-                                    <div class="col-6 col-md-6">
-                                        <img src="img/sidebar-img/Aubergine&bean.png" alt="" style="width: 100%; ">
-                                    </div>
-                                    <div class="col-6 col-md-6">
-
-                                        <h5>Aubergine & chickpea stew
-                                        </h5>
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-
-                                            <!-- Post Comments -->
-                                            <div class="post-comments" style="margin-bottom: 10px;">
-                                                <a href="#"><i class="" aria-hidden="true"></i>Healthy Main Dishes</a>
-                                            </div>
-                                            <!-- Post Share -->
-
-                                        </div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                        <span > 300 ratings</span>
-
-                                    </div>
-
-                                </div>
-
-                            </li>
-
-                        </ul>
-                    </div>
+                        }
+                    %>
 
                 </div>
             </div>
@@ -491,11 +369,15 @@
                             <div class="col-12 col-md-12 col-lg-12" style="text-align: center;">
                                 <h2 style="margin-bottom: 30px;">Suggest Recipes</h2>
                             </div>
+
+                            <%
+                                for (RecipeDTO listRandom6Recipe : listRandomRecipe) {
+                            %>
                             <div class="col-md-4">
                                 <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                     <!-- Post Thumb -->
                                     <div class="post-thumb">
-                                        <img src="img/sidebar-img/bakedkalechips.jpeg" alt="" style="height:220px ;width: 350px">
+                                        <img src="<%=listRandom6Recipe.getImage()%>" alt="" style="height:220px ;width: 350px">
                                     </div>
                                     <!-- Post Content -->
                                     <div class="post-content">
@@ -503,297 +385,91 @@
                                             <div class="post-author-date-area d-flex">
                                                 <!-- Post Author -->
                                                 <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
+                                                    <a href="#">
+                                                        <%
+                                                            for (UserDTO listUser1 : listUser) {
+                                                                if (listUser1.getUserID() == listRandom6Recipe.getUserID()) {
+                                                        %>
+                                                        <%=listUser1.getUserName()%>
+                                                        <%
+                                                                    break;
+                                                                }
+                                                            }
+                                                        %>
+                                                    </a>
                                                 </div>
                                                 <!-- Post Date -->
 
                                             </div>
                                             <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked" style="margin-right: 10px;"></span>
-                                            <span > 300 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Baked Kale Chips">
-                                            <h4 class="post-headline">Baked Kale Chips
-                                            </h4>
-                                        </a>
+                                            <!--style="margin-right: 10px;"-->
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/salmon.jpeg" alt="" style="width: 350px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
+                                            <%
+                                                if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) != null) {
+                                            %>
+                                            <span class="fa fa-star <% if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) >= 1) {
+                                                  %>checked
+                                                  <%
+                                                }%>"></span>
+                                            <span class="fa fa-star <% if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) >= 2) {
+                                                  %>checked
+                                                  <%
+                                                }%>"></span>
+                                            <span class="fa fa-star <% if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) >= 3) {
+                                                  %>checked
+                                                  <%
+                                                }%>"></span>
+                                            <span class="fa fa-star <% if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) >= 4) {
+                                                  %>checked
+                                                  <%
+                                                }%>"></span>
+                                            <span class="fa fa-star <% if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) == 5) {
+                                                  %>checked
+                                                  <%}%>"></span>
 
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
+                                            <%
+                                                }
+                                            %>
+
+                                            <%
+                                                if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) == null) {
+                                            %>
                                             <span class="fa fa-star "></span>
-                                            <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                            <span > 242 ratings</span>
+                                            <span class="fa fa-star "></span>
+                                            <span class="fa fa-star "></span>
+                                            <span class="fa fa-star "></span>
+                                            <span class="fa fa-star "></span>
+                                            <%
+                                                }
+                                            %>
+                                            <span >
+                                                <%if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) != null) {
+                                                %>
+                                                (<%=listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID())%>
+                                                <%
+                                                        }%>
+                                                <%if (listAvgRandomRatingRecipe.get(listRandom6Recipe.getRecipeID()) == null) {
+                                                %>
+                                                (0
+                                                <%}%>/5)</span>
+                                                
+                                            <a href="#" style="color: gray; font-size: 15px">|<%=listRandom6Recipe.getDatePost()%></a>
+
                                         </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Maple Salmon">
-                                            <h4 class="post-headline">Maple Salmon
+                                        <a href="MainController?action=RecipeDetail&recipeID=<%= listRandom6Recipe.getRecipeID()%>">
+                                            <h4 class="post-headline"><%=listRandom6Recipe.getRecipeName()%>
                                             </h4>
                                         </a>
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/Miso_soup_blog_lg.jpg" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                            <span > 300 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Miso Soup">
-                                            <h4 class="post-headline">Miso Soup
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/green-salad.jpg" alt="" style="width: 350px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked" style="margin-right: 10px;"></span>
-                                            <span > 30 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Green Salad">
-                                            <h4 class="post-headline">Green Salad
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/hambuger.jpeg" alt="" style="width: 320px;height: 220px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                            <span > 150 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Hambuger Vegetables">
-                                            <h4 class="post-headline">Hambuger Vegetables
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/best-pineapple-banana-smoothie-served-in-glassed-topped-with-fresh-pineapple-and-mint-leaves.jpg" alt="" style="width: 350px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                            <span > 300 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Pineapple and Banana Smoothie">
-                                            <h4 class="post-headline">Pineapple and Banana Smoothie
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/Salmon-and-potato-parcels.jpg" alt="" style="width: 350px;height: 220px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked" style="margin-right: 10px;"></span>
-                                            <span > 230 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Baked Salmon - Leek Parcel">
-                                            <h4 class="post-headline">Baked Salmon & Leek Parcel
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg" alt="" style="width: 320px;height: 220px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked" style="margin-right: 10px;"></span>
-                                            <span > 1050 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Pho">
-                                            <h4 class="post-headline">Pho
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-post wow fadeInUp" data-wow-delay=".4s">
-                                    <!-- Post Thumb -->
-                                    <div class="post-thumb">
-                                        <img src="img/sidebar-img/comtam.jpg" alt="" style="width: 350px;height: 220px">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <div class="post-meta d-flex">
-                                            <div class="post-author-date-area d-flex">
-                                                <!-- Post Author -->
-                                                <div class="post-author">
-                                                    <a href="#">By Thành Long</a>
-                                                </div>
-                                                <!-- Post Date -->
-
-                                            </div>
-                                            <!-- Post Comment & Share Area -->
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star" style="margin-right: 10px;"></span>
-                                            <span > 300 ratings</span>
-                                        </div>
-                                        <a href="MainController?action=SearchHome&searchRecipe=Broken Rice">
-                                            <h4 class="post-headline">Broken Rice
-                                            </h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
+                            <%
+                                }
+                            %>  
                             <div class="col-12 col-md-12 col-lg-12" style="text-align:  center;margin-top:30px">
 
-                                <a class="show-more-button" href="recipespage.jsp" style="border-radius: 30px;">Show more</a>
+                                <a class="show-more-button" href="MainController?action=RecipePage" style="border-radius: 30px;">Show more</a>
 
                             </div>
 
@@ -819,51 +495,6 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="footer-content">
-                            <!-- Logo Area Start -->
-                            <div class="footer-logo-area text-center">
-                                <a href="index.html" class="yummy-logo">Flavorful Creations</a>
-                            </div>
-                            <!-- Menu Area Start -->
-                            <nav class="navbar navbar-expand-lg">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                        data-target="#yummyfood-footer-nav" aria-controls="yummyfood-footer-nav"
-                                        aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"
-                                                                                        aria-hidden="true"></i> Menu</button>
-                                <!-- Menu Area Start -->
-                                <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
-                                    <ul class="navbar-nav" id="yummy-nav">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="mainpage.html">Home <span
-                                                    class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <div>
-                                                <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
-                                            </div>
-
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="categories.jsp">Categories</a>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
-                                            <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                                <a class="dropdown-item" href="login.jsp">Add a recipe</a>
-
-                                                <a class="dropdown-item" href="login.jsp">My favorites</a>
-                                                <a class="dropdown-item" href="login.jsp">Saved</a>
-
-                                            </div>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="login.html">Meal Plan</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -881,6 +512,28 @@
                 </div>
             </div>
         </footer>
+
+        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Please sign in to do anything !!!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="login.jsp"><button type="button" class="btn btn-primary">Sign in</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- ****** Footer Menu Area End ****** -->
 
         <!-- Jquery-2.2.4 js -->

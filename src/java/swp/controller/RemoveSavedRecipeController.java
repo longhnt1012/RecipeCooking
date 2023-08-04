@@ -22,20 +22,24 @@ import swp.ro.savedRecipes.SavedRecipesDAO;
 @WebServlet(name = "RemoveSavedRecipeController", urlPatterns = {"/RemoveSavedRecipeController"})
 public class RemoveSavedRecipeController extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
-         try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
-                    int recipeID = Integer.parseInt(request.getParameter("recipeID"));
-                    SavedRecipesDAO sfDAO = new SavedRecipesDAO();
-                    sfDAO.removeSavedRecipe(userID, recipeID);
-                   response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+
+        if (user != null ) {
+            try {
+                int userID = user.getUserID();
+                int recipeID = Integer.parseInt(request.getParameter("recipeID"));
+                SavedRecipesDAO sfDAO = new SavedRecipesDAO();
+                sfDAO.removeSavedRecipe(userID, recipeID);
+                response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

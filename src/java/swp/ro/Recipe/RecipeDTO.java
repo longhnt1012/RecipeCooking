@@ -4,41 +4,62 @@
  */
 package swp.ro.Recipe;
 
-
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
  * @author truc0
  */
-
 public class RecipeDTO {
+
     private int recipeID;
     private int userID;
     private String recipeName;
     private Date datePost;
-    private String instruction;
     private String description;
     private double cookingTime;
     private String image;
     private boolean status;
+    private String meal;
     private String userName;
-    
 
     public RecipeDTO() {
     }
 
-    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String instruction, String description, double cookingTime, String image, boolean status, String userName) {
+    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, double cookingTime, String image, boolean status, String meal, String userName) {
         this.recipeID = recipeID;
         this.userID = userID;
         this.recipeName = recipeName;
         this.datePost = datePost;
-        this.instruction = instruction;
         this.description = description;
         this.cookingTime = cookingTime;
         this.image = image;
         this.status = status;
+        this.meal = meal;
         this.userName = userName;
+    }
+
+    public RecipeDTO(int recipeID, int userID, String recipeName, Date datePost, String description, double cookingTime, String image, String meal, boolean status) {
+        this.recipeID = recipeID;
+        this.userID = userID;
+        this.recipeName = recipeName;
+        this.datePost = datePost;
+        this.description = description;
+        this.cookingTime = cookingTime;
+        this.image = image;
+        this.status = status;
+        this.meal = meal;
+    }
+
+    public RecipeDTO(int userID, String recipeName, Date datePost, String description, double cookingTime, String image, String meal, boolean status) {
+        this.userID = userID;
+        this.recipeName = recipeName;
+        this.datePost = datePost;
+        this.description = description;
+        this.cookingTime = cookingTime;
+        this.image = image;
+        this.status = status;
+        this.meal = meal;
     }
 
     public String getUserName() {
@@ -49,7 +70,13 @@ public class RecipeDTO {
         this.userName = userName;
     }
 
-   
+    public String getMeal() {
+        return meal;
+    }
+
+    public void setMeal(String meal) {
+        this.meal = meal;
+    }
 
     public int getRecipeID() {
         return recipeID;
@@ -81,14 +108,6 @@ public class RecipeDTO {
 
     public void setDatePost(Date datePost) {
         this.datePost = datePost;
-    }
-
-    public String getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
     }
 
     public String getDescription() {
@@ -123,10 +142,4 @@ public class RecipeDTO {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "RecipeDTO{" + "recipeID=" + recipeID + ", userID=" + userID + ", recipeName=" + recipeName + ", datePost=" + datePost + ", instruction=" + instruction + ", description=" + description + ", cookingTime=" + cookingTime + ", image=" + image + ", status=" + status + '}';
-    }
-
-    
 }

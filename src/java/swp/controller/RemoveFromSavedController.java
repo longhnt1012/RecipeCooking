@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import swp.ro.User.UserDTO;
 import swp.ro.savedRecipes.SavedRecipesDAO;
 
 /**
@@ -25,15 +26,19 @@ public class RemoveFromSavedController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        if (user != null ) {
         try{
-            int userID=Integer.parseInt(request.getParameter("userID"));
+            int userID = user.getUserID();
             int recipeID=Integer.parseInt(request.getParameter("recipeID"));
             SavedRecipesDAO dao=new SavedRecipesDAO();
             dao.removeSavedRecipe(userID, recipeID);
             response.sendRedirect(request.getContextPath() + "/MainController?action=SavedPage&userID=" + userID);
         }catch(Exception e){
             log("Error at  RemoveFromSavedController" +e.toString());
+        }
+    }else {
+            response.sendRedirect("error.jsp");
         }
     }
 

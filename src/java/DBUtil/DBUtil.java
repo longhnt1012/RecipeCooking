@@ -19,7 +19,7 @@ public class DBUtil {
    private static final String userName="sa";
     private static final String passWord="12345";
     
-    public static Connection getConnection1() throws SQLException, ClassNotFoundException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url="jdbc:sqlserver://localhost:1433;databaseName=RecipeOrganizer";

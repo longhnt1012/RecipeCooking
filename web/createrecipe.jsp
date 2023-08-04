@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +24,10 @@
     </head>
 
     <body>
-       <!-- Preloader Start -->
+        <c:if test="${sessionScope.LOGIN_USER == null }">
+            <c:redirect url="loginPage.html"></c:redirect>
+        </c:if>
+        <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -65,33 +69,31 @@
                                 </div>
                             </div>
                             <c:if test="${LOGIN_USER ==null}" >
-                            <div class="login_register_area d-flex col-4 col-sm-4">
-                                <div class="login">
-                                    <a href="login.jsp">Sign in</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <div class="login">
+                                        <a href="login.jsp">Sign in</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="SignUp.jsp">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="register">
-                                    <a href="register.html">Sign up</a>
-                                </div>
-                            </div>
                             </c:if>
                             <c:if test="${LOGIN_USER !=null}">
-                                  <div class="login_register_area d-flex col-4 col-sm-4">
-                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="view-public-info.html">Your Profile</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="MainController?action=MyProfile&userID=${LOGIN_USER.userID}">My Profile</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="LogOut">
+                                            </form>
 
-                                        <a class="dropdown-item" href="changepass.html">Change Password</a>
-                                        <a class="dropdown-item" href="myfavorite.html">Your Saved</a>
-                                        <form action="MainController" method="POST">
-                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
-                                        </form>
-                                        
 
-                                    </div>
-                                </li>
-                        </div>
+                                        </div>
+                                    </li>
+                                </div>
                             </c:if>
                         </div>
                     </div>
@@ -115,7 +117,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" style="border-bottom: 1px solid #eeeeee; margin-bottom: 5px ">
                         <nav class="navbar navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav"
                                     aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i
@@ -123,30 +125,50 @@
                             <!-- Menu Area Start -->
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                                 <ul class="navbar-nav" id="yummy-nav">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="mainpage.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
+                                    <li class="nav-item">
+                                        <c:if test="${LOGIN_USER == null}">
+                                            <a class="nav-link" href="mainpage.jsp">Home <span
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="mainpage.jsp">Home <span
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="categories.jsp">Categories</a>
+                                        <a class="nav-link" href="MainController?action=LoadCategories">Categories</a>
                                     </li>
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown active">
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                            <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
+                                            <c:if test="${LOGIN_USER != null}">
+                                                <a class="dropdown-item" href="MainController?action=AddRecipePage&userID=${LOGIN_USER.userID}">Add a recipe</a>
+                                                <a class="dropdown-item" href="MainController?action=MyRecipe&userID=${LOGIN_USER.userID}">My Recipes</a>
+                                                <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
+                                                <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER == null}">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">Add a recipe</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login" >My Recipes</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">My favorites</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">Saved</a>
 
-                                            <a class="dropdown-item" href="#">My favorites</a>
-                                            <a class="dropdown-item" href="myfavorite.html">Saved</a>
-
+                                            </c:if>
                                         </div>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="planpage.jsp">Meal Plan</a>
+                                        <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
+                                        </c:if>
+                                        <c:if test="${LOGIN_USER == null}">
+                                            <a class="nav-link" data-toggle="modal" data-target="#Login">Meal Plan</a>
+                                        </c:if>
                                     </li>
 
                                 </ul>
@@ -164,107 +186,61 @@
                         <div class="col-sm-5">
                             <h2>Create Recipes</h2>
                         </div>
-                        
+
                     </div>
                     <div class="container">
                         <form action="MainController" method="POST">
                             <div class="row">
                                 <h4 class="post-headline mt-15">Title</h4>
-                                <input class="form-control" type="text" name="recipeName" placeholder="Give your recipe a name"/>
+                                <input class="form-control" type="text" name="recipeName" placeholder="Give your recipe a name" required=""/>
                             </div>
                             <div class="row">
                                 <h4 class="post-headline mt-15">Image</h4>
-                                <input class="form-control" type="text" name="recipeImage" placeholder="Give your recipe image"/>
+                                <input class="form-control" type="text" name="image" placeholder="https://........" required=""/>
                             </div>
+                            <!--   <div class="row justify-content-center mt-15">
+                                   <button class="btn" type="button" name="recipeImage">Add source</button>
+                               </div> -->
                             <div class="row">
                                 <label class="post-headline mt-15"><h4>Description</h4></label>
-                                <input class="form-control" type="text" name="recipeDescription" placeholder="Introduce your recipe"/>
+                                <input class="form-control" type="text" name="description" placeholder="Introduce your recipe" required=""/>
                             </div>
                             <div class="row">
-                                <label class="post-headline mt-15"><h4>Ingredients</h4></label>
+                                <label class="post-headline mt-15"><h4>Meal</h4></label>
+                                <ul class="form-control col-12 col-md-12 col-lg-12" style="display: flex" >
+                                    <div class="col-6 col-md-6 col-lg-6">
+                                        <li class="col-12 col-md-12 col-lg-12" style="padding: 8px">
+                                            <input type="checkbox" style="margin-right: 20px" value="B" name="meal">Breakfast</li>
+                                        <li class="col-12 col-md-12 col-lg-12" style="padding: 8px" >
+                                            <input type="checkbox" style="margin-right: 20px" value="L" name="meal">Lunch</li>
+                                        <li class="col-12 col-md-12 col-lg-12" style="padding: 8px">
+                                            <input type="checkbox" style="margin-right: 20px;" value="D" name="meal">Dinner</li>
+                                    </div>
+                                </ul>
+                                <!--                                <select class="form-control" name="meal">
+                                                                    <option value="S">Breakfast</option>
+                                                                    <option value="T">Lunch</option>
+                                                                    <option value="C">Dinner</option>
+                                                                </select>-->
                             </div>
-                            <div class="row" >
-
-                                <div class="col-8" style="margin-left: -25px">
-                                    <input class="form-control" type="text" name="nameIngredients" placeholder="Typing Ingredients" style="margin-left: 10px; margin-right: 10px" >
-                                </div>
-
-                                <div class="col-2"> 
-                                    <input class="form-control" type="text" name="amountIngredients" min="1" placeholder="Amount" style="margin-left: 10px" >
-                                </div>
-                                <div class="col-2 ">
-                                    <select class="form-control" name="unitIngredients" style="margin-left: 10px;padding: 5px; text-align: center">
-                                        <option value="g" >g</option>
-                                        <option value="Cup">cup</option>
-                                        <option value="tsp">tsp</option>
-                                        <option value="Tbsp">Tbsp</option>
-                                        <option value="Dessertspoon">Dessertspoon</option>
-                                        <option value="kg">Kg</option>
-                                    </select>
-                                </div>
-
-
-                            </div>
-                            <div class="row mt-4">
-                                <h6>+ Add More Ingredients</h6>
-                            </div>
-
+                            <!--Cooking Time -->
                             <h4 class="post-headline row mt-15">Cooking Time</h4>
+
                             <div class="row">
-                                <div class="col-5 hihi">
-                                    <input class="form-control" type="text" name="recipeCookingTime" placeholder="Time..."/>
+                                <div class="col-6 hihi">
+                                    <input required class="form-control" step="0.1" type="number" min="1" name="cookingTime" placeholder="Time..."/>
                                 </div>
-                                <div class="col-6" style="display: inline-table">
-                                        <h5>minutes</h5>
+                                <div class="col-6" style="display: inline-table,margin-top: 2px">
+                                    <h5>minutes</h5>
 
                                 </div>
                             </div>
-                            <h4 class="post-headline row mt-15">Stepping</h4>
-                            <div class="row" >
-                                <div class="col-2 hihi">
-                                    <input class="form-control" type="number" name="recipeStepping" placeholder="Type step ..."/>
-                                </div>
-                                <div class="col-10 hihi1">
-                                    <input class="form-control" type="text" name="recipeStepping" placeholder="Instructions...."/>
-                                </div>  
-                                <div class="row mt-4" style="margin-bottom: 40px;margin-left: 0px">
-                                    <h6>+ Add More Ingredients</h6>
-                                </div>
-                            </div>
-                            <!-- <h4 class="post-headline row mt-15">Nutritional: Per Serving</h4>
-                             <div class="row">
-                                 <div class="col-3 col-md-3 col-lg-3">
-                                     <div class="row mt-15 mb-15"><h6 style="text-align: center">Calories</h6></div>
-                                     <div class="row">
-                                         <input type="number" name="calories" placeholder="Calories" min="0" >
-                                     </div>
-                                 </div>
-                                 <div class="col-3 col-md-3 col-lg-3">
-                                     <div class="row mt-15 mb-15">Fat</div>
-                                     <div class="row">
-                                         <input type="number" name="fat" placeholder="Fat" min="0">
-                                     </div>
-                                 </div>
-                                 <div class="col-3 col-md-3 col-lg-3">
-                                     <div class="row mt-15 mb-15">Protein</div>
-                                     <div class="row">
-                                         <input type="number" name="protein" placeholder="Protein" min="0">
-                                     </div>
-                                 </div>
-                                 <div class="col-3 col-md-3 col-lg-3">
-                                     <div class="row mt-15 mb-15">Carbs</div>
-                                     <div class="row">
-                                         <input type="number" name="carbs" placeholder="Carbs" min="0">
-                                     </div>
-                                 </div>
-                             </div>
-                            -->
-                            <div class="table-title-1 row">
+                            <!--submit-->
+                            <div class="table-title-1 row">                                
                                 <div class="col-sm-12">
-                                    <a data-target="#addProductModal" data-toggle="modal" class="btn">Save</a>
+                                    <input type="submit" name="action" value="CreateRecipe" data-target="#addProductModal" data-toggle="modal" class="btn">
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -272,7 +248,14 @@
         </div>
         <!-- Form End -->
         <footer class="footer_area">
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="container">
                 <div class="row">
@@ -286,8 +269,30 @@
                 </div>
             </div>
         </footer>
+        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Please sign in to do anything !!!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="login.jsp"><button type="button" class="btn btn-primary">Sign in</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Jquery-2.2.4 js -->
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="js/addMore/addMoreS.js"></script>
+        <script src="js/addMore/addMoreI.js"></script>
+
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>
         <!-- Bootstrap-4 js -->
@@ -299,39 +304,40 @@
     </body>
     <style>
         .table-title-1 {
-    padding-bottom: 15px;
-    color: #fff;
-    padding: 16px 30px;
-    margin: -20px -25px 10px;
-    border-radius: 20px 20px 0 0;
-}
-.table-title-1 h2 {
-    margin: 5px 0 0;
-    font-size: 24px;
-}
-.table-title-1 .btn {
-    float: right;
-    font-size: 15px;
-    background: #fc6c3f;
-    min-width: 50px;
-    border-radius: 2px;
-    border: 2px solid #959695;
-    outline: none !important;
-}
-.table-title-1 .btn:hover {
-    color: white;
-    background-color: #e86c46;
-}
+            padding-bottom: 15px;
+            color: #fff;
+            padding: 16px 30px;
+            margin: -20px -25px 10px;
+            border-radius: 20px 20px 0 0;
+        }
+        .table-title-1 h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+        .table-title-1 .btn {
+            float: right;
+            font-size: 15px;
+            background: #fc6c3f;
+            min-width: 50px;
+            border-radius: 2px;
+            border: 2px solid #959695;
+            outline: none !important;
+        }
+        .table-title-1 .btn:hover {
+            color: white;
+            background-color: #e86c46;
+        }
 
-.table-title-1 .btn i {
-    float: left;
-    font-size: 21px;
-    margin-right: 5px;
-}
-.table-title-1 .btn span {
-    color: black;
-    float: left;
-    margin-top: 2px;
+        .table-title-1 .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+        .table-title-1 .btn span {
+            color: black;
+            float: left;
+            margin-top: 2px;
 
-}      
+        }
+
     </style>

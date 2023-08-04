@@ -38,7 +38,7 @@ public class RemoveController extends HttpServlet {
         switch (op) {
             case "Remove": {
                 try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
+                    int userID = user.getUserID();
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     SavedRecipesDAO dao = new SavedRecipesDAO();
                     dao.removeSavedRecipe(userID, recipeID);

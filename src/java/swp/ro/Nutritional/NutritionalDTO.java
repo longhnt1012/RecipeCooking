@@ -11,17 +11,23 @@ package swp.ro.Nutritional;
 public class NutritionalDTO {
     private int nutritionalID;
     private String name;
-    private int ingredientID;
-    private double measurement;
+    private double calories;
+    private double fat;
+    private double proteins;
+    private double carb;
+    private double sugar;
 
     public NutritionalDTO() {
     }
 
-    public NutritionalDTO(int nutritionalID, String name, int ingredientID, double measurement) {
+    public NutritionalDTO(int nutritionalID, String name, double calories, double fat, double proteins, double carb, double sugar) {
         this.nutritionalID = nutritionalID;
         this.name = name;
-        this.ingredientID = ingredientID;
-        this.measurement = measurement;
+        this.calories = calories;
+        this.fat = fat;
+        this.proteins = proteins;
+        this.carb = carb;
+        this.sugar = sugar;
     }
 
     public int getNutritionalID() {
@@ -40,25 +46,45 @@ public class NutritionalDTO {
         this.name = name;
     }
 
-    public int getIngredientID() {
-        return ingredientID;
+    public double getCalories() {
+        return calories;
     }
 
-    public void setIngredientID(int ingredientID) {
-        this.ingredientID = ingredientID;
+    public void setCalories(double calories) {
+        this.calories = calories;
     }
 
-    public double getMeasurement() {
-        return measurement;
+    public double getFat() {
+        return fat;
     }
 
-    public void setMeasurement(double measurement) {
-        this.measurement = measurement;
+    public void setFat(double fat) {
+        this.fat = fat;
     }
 
-    @Override
-    public String toString() {
-        return "NutritionalDTO{" + "nutritionalID=" + nutritionalID + ", name=" + name + ", ingredientID=" + ingredientID + ", measurement=" + measurement + '}';
+    public double getProteins() {
+        return proteins;
     }
+
+    public void setProteins(double proteins) {
+        this.proteins = proteins;
+    }
+
+    public double getCarb() {
+        return carb;
+    }
+
+    public void setCarb(double carb) {
+        this.carb = carb;
+    }
+
+    public double getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(double sugar) {
+        this.sugar = sugar;
+    }
+    
     
 }

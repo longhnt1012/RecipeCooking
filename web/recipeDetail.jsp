@@ -36,12 +36,14 @@
         <link href="<c:url value="/css/responsive/responsive.css"/>" rel="stylesheet">
         <link rel="stylesheet" href="<c:url value="/fonts-2/themify-icons/themify-icons.css"/>">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+        integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     </head>
 
     <body>
-      <!-- Preloader Start -->
+        <!-- Preloader Start -->
         <div id="preloader">
             <div class="yummy-load"></div>
         </div>
@@ -83,33 +85,31 @@
                                 </div>
                             </div>
                             <c:if test="${LOGIN_USER ==null}" >
-                            <div class="login_register_area d-flex col-4 col-sm-4">
-                                <div class="login">
-                                    <a href="login.jsp">Sign in</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <div class="login">
+                                        <a href="login.jsp">Sign in</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="SignUp.jsp">Sign up</a>
+                                    </div>
                                 </div>
-                                <div class="register">
-                                    <a href="register.html">Sign up</a>
-                                </div>
-                            </div>
                             </c:if>
                             <c:if test="${LOGIN_USER !=null}">
-                                  <div class="login_register_area d-flex col-4 col-sm-4">
-                            <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="#">Your Profile</a>
+                                <div class="login_register_area d-flex col-4 col-sm-4">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h7>${sessionScope.LOGIN_USER.userName}</h7></a>
+                                        <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                            <a class="dropdown-item" href="MainController?action=MyProfile&userID=${LOGIN_USER.userID}">My Profile</a>
+                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
+                                            <form action="MainController" method="POST">
+                                                <input class="dropdown-item" type="submit" name="action" value="LogOut">
+                                            </form>
 
-                                        <a class="dropdown-item" href="#">Change Password</a>
-                                        <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">My Saved</a>
-                                        <form action="MainController" method="POST">
-                                            <input class="dropdown-item" type="submit" name="action" value="Log out">
-                                        </form>
-                                        
 
-                                    </div>
-                                </li>
-                        </div>
+                                        </div>
+                                    </li>
+                                </div>
                             </c:if>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" style="border-bottom: 1px solid #eeeeee; margin-bottom: 5px ">
                         <nav class="navbar navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav"
                                     aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i
@@ -141,37 +141,50 @@
                             <!-- Menu Area Start -->
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                                 <ul class="navbar-nav" id="yummy-nav">
-                                    <li class="nav-item active">
+                                    <li class="nav-item">
                                         <c:if test="${LOGIN_USER == null}">
                                             <a class="nav-link" href="mainpage.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                         <c:if test="${LOGIN_USER != null}">
-                                            <a class="nav-link" href="mainpage_user.jsp">Home <span
-                                                class="sr-only">(current)</span></a>
-                                        </c:if>
-                                        
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="mainpage.jsp">Home <span
+                                                    class="sr-only">(current)</span></a>
+                                            </c:if>
+
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item active">
                                         <a class="nav-link" href="MainController?action=RecipePage">Recipes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="categories.jsp">Categories</a>
+                                        <a class="nav-link" href="MainController?action=LoadCategories">Categories</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
                                         <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                            <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
+                                            <c:if test="${LOGIN_USER != null}">
+                                                <a class="dropdown-item" href="MainController?action=AddRecipePage&userID=${LOGIN_USER.userID}">Add a recipe</a>
+                                                <a class="dropdown-item" href="MainController?action=MyRecipe&userID=${LOGIN_USER.userID}">My Recipes</a>
+                                                <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
+                                                <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
+                                            </c:if>
+                                            <c:if test="${LOGIN_USER == null}">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">Add a recipe</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login" >My Recipes</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">My favorites</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#Login">Saved</a>
 
-                                            <a class="dropdown-item" href="MainController?action=FavoritePage&userID=${LOGIN_USER.userID}">My favorites</a>
-                                            <a class="dropdown-item" href="MainController?action=SavedPage&userID=${LOGIN_USER.userID}">Saved</a>
-
+                                            </c:if>
                                         </div>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
+                                        <c:if test="${LOGIN_USER != null}">
+                                            <a class="nav-link" href="MainController?action=PlanningPage&userID=${LOGIN_USER.userID}">Meal Plan</a>
+                                        </c:if>
+                                        <c:if test="${LOGIN_USER == null}">
+                                            <a class="nav-link" data-toggle="modal" data-target="#Login">Meal Plan</a>
+                                        </c:if>
                                     </li>
 
                                 </ul>
@@ -188,8 +201,15 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Categories</li>
-                                <li class="breadcrumb-item active" aria-current="page">Keto</li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="MainController?action=RecipePage">Recipe</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <c:if test="${recipe.meal.trim() == '[B, L, D]'}">Breakfast | Lunch | Dinner</c:if>
+                                    <c:if test="${recipe.meal.trim() == '[B, L,]'}">Breakfast | Lunch</c:if>
+                                    <c:if test="${recipe.meal.trim() == '[L, D]'}">Lunch | Dinner</c:if>
+                                    <c:if test="${recipe.meal.trim() == '[B]'}">Breakfast</c:if>
+                                    <c:if test="${recipe.meal.trim() == '[L]'}">Lunch</c:if>
+                                    <c:if test="${recipe.meal.trim() == '[D]'}">Dinner</c:if></li>
+                                <li class="breadcrumb-item active" aria-current="page">${recipe.recipeName}</li>
                             </ol>
                         </nav>
                     </div>
@@ -204,16 +224,8 @@
                             <div class="col-12">
                                 <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                     <div class="post-thumb">
-                                        <img src="${recipe.image}" alt="StuffedChicken"/>
+                                        <img src="${recipe.image}" alt="Recipe Image"/>
                                     </div>  
-                                </div>
-                            </div>
-                            <div class="col-4 col-md-4">
-                                <div class="saved-favorite">
-                                    <form action="MainController?recipeID=${recipe.recipeID}&userID=${LOGIN_USER.userID}"  method="POST">
-                                        <input type="submit" name="action" value="Save"
-                                               style="padding:8px 30px 8px 30px; background-color: #fc6c3f;border-radius: 12px;color: white;border: 2px solid ;">
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-4 col-md-4">
@@ -223,15 +235,42 @@
                                 </div>
                             </div>
                             <div class="col-4 col-md-4">
-                                <div class="saved-favorite">
-                                    <form action="MainController" method="POST">
-                                        <input type="submit" name="action" value="Share"
-                                               style="padding:8px 30px 8px 30px; background-color: #fc6c3f;border-radius: 12px;color: white;border: 2px solid ;">
-                                    </form>
+                                <div class="container-share">
+                                    
+                                    <button class="share-modal" style="padding:8px 30px 8px 30px; background-color: #fc6c3f;border-radius: 12px;color: white;border: 2px solid ;">
+                                        Share
+                                    </button>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                   <div class="overlay"></div>
+                   <div class="share">
+        <h2>Share now</h2>
+
+       
+
+        <!-- twitter -->
+        <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
+
+        <!-- linkedin -->
+        <a class="linkedin" target="blank"><i class="fab fa-linkedin"></i></a>
+
+        <!-- reddit -->
+        <a class="reddit" target="blank"><i class="fab fa-reddit"></i></a>
+
+        <!-- whatsapp-->
+        <a class="whatsapp" target="blank"><i class="fab fa-whatsapp"></i></a>
+
+        <!-- telegram-->
+        <a class="telegram" target="blank"><i class="fab fa-telegram"></i></a>
+
+        <a class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+
+    </div>
+
+
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="post-content">
                             <a href="#">
@@ -244,7 +283,33 @@
                                         By <a href="#" style="font-size: 14px;">${recipe.userName}</a>
                                     </div>
                                     <div class="star-rating">
-                                        <form action="<c:url value="/recipe/rating.do?userID=${LOGIN_USER.userID}&recipeID=${recipe.recipeID}"/>" method="post">
+                                        <c:if test="${avgStar >= 1}">
+                                            <span class="fa fa-star <c:if test="${avgStar >= 1}">checked</c:if>"></span>
+                                            <span class="fa fa-star <c:if test="${avgStar >= 2}">checked</c:if>"></span>
+                                            <span class="fa fa-star <c:if test="${avgStar >= 3}">checked</c:if>"></span>
+                                            <span class="fa fa-star <c:if test="${avgStar >= 4}">checked</c:if>"></span>
+                                            <span class="fa fa-star <c:if test="${avgStar == 5}">checked</c:if>"></span>
+                                        </c:if>
+                                        <c:if test="${avgStar == 0}">
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </c:if>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-meta d-flex">
+                                <div class="post-author-date-area d-flex">
+                                    <c:if test="${LOGIN_USER != null}">    
+                                        <div class="post-author">
+                                            By <a href="#" style="font-size: 14px;">${LOGIN_USER.userName}</a>
+                                        </div>
+
+                                        <div class="star-rating">
+
                                             <c:if test="${LOGIN_USER == null}">
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(1)" data-toggle="modal" data-target="#Login"></button>
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(2)" data-toggle="modal" data-target="#Login"></button>
@@ -252,18 +317,24 @@
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(4)" data-toggle="modal" data-target="#Login"></button>
                                                 <button type="button" class="fa fa-star " style="cursor: pointer; border: none; background: none;" onclick="setRating(5)" data-toggle="modal" data-target="#Login"></button>
                                             </c:if>
-
-                                            <c:if test="${LOGIN_USER != null}">
-                                                <button type="submit" class="fa fa-star <c:if test="${rating.scoreUser >= 1}">checked</c:if>" onclick="setRating(1)" style="cursor: pointer; border: none; background: none;" name="op" value="one"></button>
-                                                <button type="submit" class="fa fa-star <c:if test="${rating.scoreUser >= 2}">checked</c:if>" onclick="setRating(2)" style="cursor: pointer; border: none; background: none;" name="op" value="two"></button>
-                                                <button type="submit" class="fa fa-star <c:if test="${rating.scoreUser >= 3}">checked</c:if>" onclick="setRating(3)" style="cursor: pointer; border: none; background: none;" name="op" value="three"></button>
-                                                <button type="submit" class="fa fa-star <c:if test="${rating.scoreUser >= 4}">checked</c:if>" onclick="setRating(4)" style="cursor: pointer; border: none; background: none;" name="op" value="four"></button>
-                                                <button type="submit" class="fa fa-star <c:if test="${rating.scoreUser == 5}">checked</c:if>" onclick="setRating(5)" style="cursor: pointer; border: none; background: none;" name="op" value="five"></button>
-                                            </c:if>
-                                        </form>
-                                    </div>
+                                            <form action="MainController?action=Rating&userID=${LOGIN_USER.userID}&recipeID=${recipe.recipeID}" method="post">
+                                                <c:if test="${LOGIN_USER != null}">   
+                                                    <button type="submit" class="rate fa fa-star <c:if test="${rating.scoreUser >= 1}">checked</c:if>" onclick="setRating(1)" style="cursor: pointer; border: none; background: none;" name="op" value="one"></button>
+                                                    <button type="submit" class="rate fa fa-star <c:if test="${rating.scoreUser >= 2}">checked</c:if>" onclick="setRating(2)" style="cursor: pointer; border: none; background: none;" name="op" value="two"></button>
+                                                    <button type="submit" class="rate fa fa-star <c:if test="${rating.scoreUser >= 3}">checked</c:if>" onclick="setRating(3)" style="cursor: pointer; border: none; background: none;" name="op" value="three"></button>
+                                                    <button type="submit" class="rate fa fa-star <c:if test="${rating.scoreUser >= 4}">checked</c:if>" onclick="setRating(4)" style="cursor: pointer; border: none; background: none;" name="op" value="four"></button>
+                                                    <button type="submit" class="rate fa fa-star <c:if test="${rating.scoreUser == 5}">checked</c:if>" onclick="setRating(5)" style="cursor: pointer; border: none; background: none;" name="op" value="five"></button>
+                                                </c:if>                                                            
+                                            </form>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
+
+
+
+
+
                             <div class="row mt-4 mb-4">
                                 <div class="col-4" style="display: flex;
                                      justify-content: start;
@@ -315,7 +386,7 @@
                                         <button class="bi bi-heart-fill"  style="font-size:23px; color:black;cursor: pointer; border: none;"
                                                 data-toggle="modal" data-target="#RemoveFavorite"></button>
                                     </c:if>
-                                    <span style="padding-left: 5px;"> Like: ${fSize}</span>
+                                    <span style="padding-left: 5px;"><c:if test="${favorite != null and LOGIN_USER != null}">Liked</c:if><c:if test="${favorite == null}">Like</c:if>: ${fSize}</span>
                                 </div>
 
                                 <div class="col-4" style="display: flex;
@@ -336,7 +407,7 @@
                                         <button class="bi bi-bookmark-fill"  style="font-size:23px; color:black;cursor: pointer; border: none;"
                                                 data-toggle="modal" data-target="#RemoveSaved"></button>
                                     </c:if>
-                                    <span style="padding-left: 5px;"> Saved: ${sSize}</span>
+                                    <span style="padding-left: 5px;"><c:if test="${save != null and LOGIN_USER != null}">Saved</c:if><c:if test="${save == null}">Save</c:if>: ${sSize}</span>
                                 </div>
                             </div>
                             <p> 
@@ -346,84 +417,56 @@
                                 <div class="col-2 col-md-2 col-lg-12 mb-2">
                                     <h4 style="background-color: #fafafa; text-align: center;" > <span><b>Nutrional</b></span></h4>
                                 </div>
+
                                 <div class="col-2 col-md-2 col-lg-2 "
                                      style="background-color: beige;border-style: solid;border-width: 2px 0px 2px 2px;text-align: center;">
                                     <span><b>kcal</b></span><br>
-                                    550
+                                    ${nutritional.calories}g
                                 </div>
                                 <div class="col-2 col-md-2 col-lg-2"
                                      style="background-color: beige;border-style: solid;border-width: 2px 0px 2px 2px;text-align: center;">
                                     <span><b>fat</b></span><br>
-                                    20
+                                    ${nutritional.fat}g
                                 </div>
                                 <div class="col-2 col-md-2 col-lg-2"
                                      style="background-color: beige;border-style: solid;border-width: 2px 0px 2px 2px; text-align: center; ">
                                     <span><b>protein</b></span><br>
-                                    1
+                                    ${nutritional.proteins}g
                                 </div>
                                 <div class="col-2 col-md-2 col-lg-2"
                                      style="background-color: beige;border-style: solid;border-width:2px 0px 2px 2px;text-align: center; ">
                                     <span><b>carbs</b></span><br>
-                                    5
+                                    ${nutritional.carb}g
                                 </div>
                                 <div class="col-2 col-md-2 col-lg-2"
-                                     style="background-color: beige;border-style: solid;border-width: 2px 0px 2px 2px;text-align: center; ">
+                                     style="background-color: beige;border-style: solid;border-width: 2px 2px 2px 2px;text-align: center; ">
                                     <span><b>sugars</b></span><br>
-                                    0g
-                                </div>
-                                <div class="col-2 col-md-2 col-lg-2"
-                                     style="background-color: beige;border-style: solid;border-width: 2px 2px 2px 2px;text-align: center;  ">
-                                    <span><b>salt</b></span><br>
-                                    1.42g
-
+                                    ${nutritional.sugar}g
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="row">
+                <div class="row"> 
                     <div class="col-12 col-md-5 col-lg-5 mt-5">
                         <h4 style="background-color: #fafafa">Ingredients</h4>
                         <ul style="background-color: #fafafa">
-                            <li>- 450g chicken breasts</li>
-                            <li>- 120g cream cheese</li>
-                            <li>- 2 tbsp green pesto</li>
-                            <li>- 2 tbsp Parmesan cheese, finely grated</li>
-                            <li>- ½ tsp avocado oil</li>
-                            <li>- ¼ tsp sea salt</li>
-                            <li>- ¼ tsp ground black pepper</li>
+                            <c:forEach var="ingre" items="${ingredient}">
+                                <li style="font-size: 17px">- ${ingre.ingredientName} ${ingre.quantity}  ${ingre.unit}</li>
+                                </c:forEach>
                         </ul>
                     </div>
                     <div class="col-12 col-md-5 col-lg-5 mt-5">
                         <h4 style="background-color: #fafafa">Steps</h4>
                         <div  style="background-color: #fafafa">
-                            <h5>Step 1:</h5>
-                            <p>Preheat the air fryer to 350°F (180°C).</p>
-                            <h5>Step 2:</h5>
-                            <P>Place the chicken breasts flat on a chopping board 
-                                and slice a pocket into each breast horizontally.</P>
-
-                            <h5>Step 3:</h5>
-                            <p>Combine the cream cheese, pesto, and Parmesan cheese.</p>
-                            <h5>Step 4:</h5>
-                            <p>Spoon equal portions of the cheese mixture into the pockets
-                                of the chicken breasts. Fold the top of the chicken breast over 
-                                the filling and secure it with a toothpick.</p>
-                            <h5>Step 5:</h5>
-                            <p>Drizzle the avocado oil over the chicken breasts and rub it in.
-                                Season on both sides with sea salt and ground black pepper.</p>
-                            <h5>Step 6:</h5>
-                            <p>Place the stuffed chicken breasts in the preheated air fryer 
-                                and cook for 18-20 minutes until golden and cooked through.</p>
-                            <h5>Step 7:</h5>
-                            <p>Remove from the air fryer and serve with a green salad or your 
-                                favorite veggies.</p>
+                            <c:forEach var="step" items="${step}"> 
+                                <h5>Step ${step.stepNumber}:</h5>
+                                <p>${step.instructions}</p>
+                            </c:forEach>
                         </div>
 
                     </div>
                 </div>
-
                 <!--Comment -->
                 <div class="container mt-9 mb-9">
                     <div class="row height d-flex justify-content-center align-items-center">
@@ -459,7 +502,7 @@
                                                         <div class="d-flex flex-row align-items-center"> 
                                                             <span class="mr-2">${fb.userName}</span> 
                                                         </div> 
-                                                        <small>${fb.feedBackDate}</small>
+                                                        <small>${fb.feedbackDate}</small>
                                                     </div>
                                                     <p class="text-justify comment-text mb-0">${fb.content}</p>
                                                 </div>
@@ -477,63 +520,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="footer-content">
-                            <!-- Logo Area Start -->
-                            <div class="footer-logo-area text-center">
-                                <a href="index.html" class="yummy-logo">Flavorful Creations</a>
-                            </div>
-                            <!-- Menu Area Start -->
-                            <nav class="navbar navbar-expand-lg">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                        data-target="#yummyfood-footer-nav" aria-controls="yummyfood-footer-nav"
-                                        aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"
-                                                                                        aria-hidden="true"></i> Menu</button>
-                                <!-- Menu Area Start -->
-                                <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
-                                    <ul class="navbar-nav" id="yummy-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="mainpage.jsp">Home <span
-                                                    class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="recipespage.jsp">Recipes</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="categories.jsp">Categories</a>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Recipes</a>
-                                            <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                                <c:if test="${LOGIN_USER ==null}">
-                                                    <a class="dropdown-item" href="login.jsp">Add a recipe</a>
-
-                                                    <a class="dropdown-item" href="login.jsp">My favorites</a>
-                                                    <a class="dropdown-item" href="login.jsp">Saved</a>
-                                                </c:if>
-                                                <c:if test="${LOGIN_USER !=null}">
-                                                    <a class="dropdown-item" href="createrecipe.jsp">Add a recipe</a>
-
-                                                    <a class="dropdown-item" href="favorite.jsp">My favorites</a>
-                                                    <a class="dropdown-item" href="saved.jsp">Saved</a>
-                                                </c:if>
 
 
-                                            </div>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="login.html">Meal Plan</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
                     </div>
                 </div>
             </div>
-
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -575,7 +566,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">2  &times;</span>
+                            <span aria-hidden="true"> &times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -602,15 +593,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Please sign up to do anything !!!
+                        Please sign in to do anything !!!
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="login.jsp"><button type="button" name="op" value="remove" class="btn btn-primary">Sign in</button></a>
+                        <a href="login.jsp"><button type="button" class="btn btn-primary">Sign in</button></a>
                     </div>
                 </div>
             </div>
         </div>
+        
+
         <!-- ****** Footer Menu Area End ****** -->
 
         <!-- Jquery-2.2.4 js -->
@@ -623,4 +616,100 @@
         <script src="js/others/plugins.js"></script>
         <!-- Active JS -->
         <script src="js/active.js"></script>
+        <script src="share.js"></script>
+          <script>
+                                                        function setRating(rating) {
+                                                            var stars = document.getElementsByClassName("rate");
+                                                            for (var i = 0; i < rating; i++) {
+                                                                stars[i].classList.add("checked");
+                                                            }
+                                                            for (var i = rating; i < stars.length; i++) {
+                                                                stars[i].classList.remove("checked");
+                                                            }
+                                                        }
+      
+    </script>
+        <style>
+            
+            .overlay{
+    opacity: 1;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .share ,.overlay{
+    display: none;
+  }
+  .show-share{
+   display: block; 
+  }
+  .share{
+    position: absolute;
+    left: 0;
+    right:0;
+    top:30%;
+    margin:auto;
+    width: 50%;
+    z-index: 1;
+    padding: 1em;
+    background-color: white;
+    border-radius: 15px;
+  }
+  .share h2{
+    margin:0;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    
+    
+  }
+  .share a{
+    padding:30px;
+    font-size: 30px;
+  }
+  .share button{
+    border:none;
+    padding: .8em 1.2em;
+    margin-top:3em;
+    width: 32%;
+    cursor: pointer;
+  }
+
+  #share-buttons i {
+    font-size: 100px;
+    margin: 20px;
+  }
+  .facebook {
+        color: #3b5998;
+  }
+  .twitter {
+      color: #55acee;
+  }
+  .linkedin {
+      color: #0077b5;
+  }
+  .reddit {
+      color: #cb2027;
+  }
+  .whatsapp {
+      color: #25D366;
+  }
+  .telegram {
+      color: #229ED9;
+  }
+  .instagram{
+   color:red ;
+  }
+  .facebook, .twitter, .linkedin, .reddit, .whatsapp, .telegram .instagram {
+    opacity: 0.6;
+  }
+  .facebook:hover, .twitter:hover, .linkedin:hover, .reddit:hover, .whatsapp:hover, .telegram:hover, .instagram {
+    opacity: 0.9;
+  }
+        </style>
     </body>
+  
+    

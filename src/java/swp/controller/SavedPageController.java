@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp.ro.Recipe.RecipeDAO;
 import swp.ro.Recipe.RecipeDTO;
+import swp.ro.User.UserDTO;
 import swp.ro.savedRecipes.SavedRecipesDAO;
 import swp.ro.savedRecipes.SavedRecipesDTO;
 
@@ -30,9 +31,10 @@ public class SavedPageController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
       String url=SUCCESS;
-         try {
-             int userID=Integer.parseInt(request.getParameter("userID"));
-             
+      UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        if (user != null ) {
+        try{
+            int userID = user.getUserID();
             SavedRecipesDAO dao=new SavedRecipesDAO();
             List<SavedRecipesDTO> list=dao.getSaved(userID);
             request.setAttribute("list", list);
@@ -43,6 +45,9 @@ public class SavedPageController extends HttpServlet {
         }finally{
                request.getRequestDispatcher(url).forward(request, response);
          }
+    } else {
+            response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -10,8 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swp.ro.FavoriteRecipes.FavoriteRecipesDAO;
 import swp.ro.FavoriteRecipes.FavoriteRecipesDTO;
+import swp.ro.Ingredient.IngredientDAO;
+import swp.ro.Ingredient.IngredientDTO;
+import swp.ro.Nutritional.NutritionalDAO;
+import swp.ro.Nutritional.NutritionalDTO;
 import swp.ro.Recipe.RecipeDAO;
 import swp.ro.Recipe.RecipeDTO;
+import swp.ro.Step.StepDAO;
+import swp.ro.Step.StepDTO;
 import swp.ro.User.UserDTO;
 import swp.ro.feedback.FeedBackDAO;
 import swp.ro.feedback.FeedBackDTO;
@@ -41,7 +47,6 @@ public class RecipeDetailController extends HttpServlet {
         int recipeID = Integer.parseInt(request.getParameter("recipeID"));
         UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
         try {
-
             if (user == null) {
                 RecipeDAO rDAO = new RecipeDAO();
                 RecipeDTO recipe = rDAO.getOne(recipeID);
@@ -51,6 +56,13 @@ public class RecipeDetailController extends HttpServlet {
 
                 RatingDAO raDAO = new RatingDAO();
                 int totalRate = raDAO.totalRating(recipeID);
+                int totalScoreRecipe = raDAO.totalScoreRecipe(recipeID);
+                int totalUserScoreRecipe = raDAO.totalUserScoreRecipe(recipeID);
+                int avgStar = 0;
+                if (totalUserScoreRecipe > 0) {
+                    avgStar = Math.round(totalScoreRecipe / totalUserScoreRecipe);
+                }
+
                 
                 FavoriteRecipesDAO favoDAO=new FavoriteRecipesDAO();
                 
@@ -59,8 +71,23 @@ public class RecipeDetailController extends HttpServlet {
                 int sSize = saveDAO.totalSavedORecipe(recipeID);
                 int fSize = favoDAO.totalFavoriteORecipe(recipeID);
                 
+                IngredientDAO ingreDAO = new IngredientDAO();
+                List<IngredientDTO> ingredient = ingreDAO.getIngreORecipe(recipeID);
+
+                NutritionalDAO nutriDAO = new NutritionalDAO();
+                NutritionalDTO nutritional = nutriDAO.getNutriOneRecipe(recipeID);
+
+                StepDAO sDAO = new StepDAO();
+                List<StepDTO> step = sDAO.getStepORecipe(recipeID);
+
+                
+                
+                request.setAttribute("nutritional", nutritional);
+                request.setAttribute("ingredient", ingredient);
+                request.setAttribute("step", step);
                 request.setAttribute("sSize", sSize);
                 request.setAttribute("fSize", fSize);
+                request.setAttribute("avgStar", avgStar);
                 request.setAttribute("totalRate", totalRate);
                 request.setAttribute("feedbacks", listFeedback);
                 request.setAttribute("noFb", listFeedback.size());
@@ -78,6 +105,12 @@ public class RecipeDetailController extends HttpServlet {
                 RatingDAO raDAO = new RatingDAO();
                 RatingDTO rating = raDAO.getRatingRecipe(recipeID, user.getUserID());
                 int totalRate = raDAO.totalRating(recipeID);
+                int totalScoreRecipe = raDAO.totalScoreRecipe(recipeID);
+                int totalUserScoreRecipe = raDAO.totalUserScoreRecipe(recipeID);
+                int avgStar = 0;
+                if (totalUserScoreRecipe > 0) {
+                    avgStar = Math.round(totalScoreRecipe / totalUserScoreRecipe);
+                }
 
                 FavoriteRecipesDAO fvDAO = new FavoriteRecipesDAO();
                 FavoriteRecipesDTO favorite = fvDAO.getFavoriteRecipeID(recipeID, user.getUserID());
@@ -87,9 +120,23 @@ public class RecipeDetailController extends HttpServlet {
 
                 int sSize = svDAO.totalSavedORecipe(recipeID);
                 int fSize = fvDAO.totalFavoriteORecipe(recipeID);
+                
+                IngredientDAO ingreDAO = new IngredientDAO();
+                List<IngredientDTO> ingredient = ingreDAO.getIngreORecipe(recipeID);
+
+                NutritionalDAO nutriDAO = new NutritionalDAO();
+                NutritionalDTO nutritional = nutriDAO.getNutriOneRecipe(recipeID);
+
+                StepDAO sDAO = new StepDAO();
+                List<StepDTO> step = sDAO.getStepORecipe(recipeID);
+
+                request.setAttribute("nutritional", nutritional);
+                request.setAttribute("ingredient", ingredient);
+                request.setAttribute("step", step);
                 request.setAttribute("save", save);
                 request.setAttribute("favorite", favorite);
                 request.setAttribute("totalRate", totalRate);
+                request.setAttribute("avgStar", avgStar);
                 request.setAttribute("sSize", sSize);
                 request.setAttribute("fSize", fSize);
                 request.setAttribute("rating", rating);

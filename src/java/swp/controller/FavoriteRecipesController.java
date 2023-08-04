@@ -27,11 +27,11 @@ public class FavoriteRecipesController extends HttpServlet {
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
-        try {
+        UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        if (user != null ) {
+         try {      
+            int userID = user.getUserID();
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
-                    
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     FavoriteRecipesDAO sfDAO = new FavoriteRecipesDAO();
                     FavoriteRecipesDTO check = sfDAO.getOneFavorite(recipeID, userID);
                     if (check == null) {
@@ -39,9 +39,9 @@ public class FavoriteRecipesController extends HttpServlet {
                         favorite.setRecipeID(recipeID);
                         favorite.setUserID(userID);
                         sfDAO.addFavoriteByID(recipeID, userID);
-                        response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
+                        response.sendRedirect("MainController?action=RecipeDetail&recipeID=" + recipeID);
                     }else {
-                        response.sendRedirect(request.getContextPath() + "/MainController?action=RecipeDetail&recipeID=" + recipeID);
+                        response.sendRedirect("MainController?action=RecipeDetail&recipeID=" + recipeID);
                     }
                     
 
@@ -49,6 +49,9 @@ public class FavoriteRecipesController extends HttpServlet {
                     log("Error at FavoriteRecipeController " + e.toString());
                 }
 
+    }else {
+            response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

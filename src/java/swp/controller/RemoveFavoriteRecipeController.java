@@ -28,8 +28,10 @@ public class RemoveFavoriteRecipeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        
+        if (user != null ) {
          try {
-                    int userID = Integer.parseInt(request.getParameter("userID"));
+             int userID = user.getUserID();
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
                     FavoriteRecipesDAO fvDAO = new FavoriteRecipesDAO();
                     fvDAO.removeFavoriteRecipe(userID, recipeID);
@@ -37,6 +39,9 @@ public class RemoveFavoriteRecipeController extends HttpServlet {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+    }else {
+            response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

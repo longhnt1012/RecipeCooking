@@ -1532,19 +1532,19 @@ li {
 }
 .my-favorite{
     margin-bottom:30px;
-    
+
 }
 .personal-info-a,.change-password-a,.saved-items-a,.personal-recipes-a{
     border-bottom-style: solid;border-color:whitesmoke;padding:10px 20px 10px 30px;
 
-    
+
 }
 .personal-info-a a,.change-password-a a,.saved-items-a a,.personal-recipes-a a{
-     font-size: 16px;
-     color:black;
+    font-size: 16px;
+    color:black;
 }
 .personal-info-a a:hover,.change-password-a a:hover,.saved-items-a a:hover,.personal-recipes-a a:hover{
-    
+
     color: #fc6c3f;
 }
 .personal-info-a:hover,.change-password-a:hover,.saved-items-a:hover,.personal-recipes-a:hover{
@@ -1560,26 +1560,26 @@ li {
     margin-top: 10px;
     margin-left: 20px;
     padding: 10px;
-    
+
 }
 .save-password-input{
     padding: 5px 15px;
     background-color: white;
     color: black;
-    
-    
+
+
 }
 .save-password-input:hover{
     background-color: #fc6c3f;
     color:white;
-    
+
 }
 .personal-info-body ul li {
     margin-bottom: 30px;
 }
 .ingredients ul li{
     margin-bottom: 20px;
-    
+
 }
 
 .container-xl {
@@ -1588,7 +1588,7 @@ li {
     font-family: 'Varela Round', sans-serif;
     font-size: 13px;
     padding: 50px;
-    
+
 }
 
 .hihi {
@@ -1758,3 +1758,21 @@ table.table .avatar {
 event-date .active-date {
     background: #fc6c3f;
 }
+
+.button-value{
+    border: 2px solid #cccccc;
+    padding: 0.2em 2em;
+    border-radius: 3em;
+    background-color: #c9c7c7;
+    color: #000;
+    cursor: pointer;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.activee {
+    background: red;
+    color:red;
+}
+

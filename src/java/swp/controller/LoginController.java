@@ -23,42 +23,57 @@ import swp.ro.User.UserDTO;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private static final String LOGIN_PAGE="login.jsp";
-    private static final String US="US";
-    private static final String US_PAGE="mainpage_user.jsp";
-    private static final String AD ="AD";
-    private static final String AD_PAGE = "admin.jsp";
-    
+    private static final String ERROR = "login.jsp";
+    private static final String LOGIN_PAGE = "login.jsp";
+    private static final String US = "US";
+    private static final String US_PAGE = "mainpage.jsp";
+    private static final String AD = "AD";
+    private static final String AD_PAGE = "LoadDashboardController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=LOGIN_PAGE;
-         try {
-            String userName = request.getParameter("userName");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO loginUser = dao.checkLogin(userName, password);
-            //xác thực ở đây nè
-            if (loginUser == null) {
-                request.setAttribute("ERROR", "Incorrect UserID or Password");
-                url = LOGIN_PAGE;
-            }else{
-                // phân quyền ở khúc này nè
-                String role=loginUser.getRole();
-                HttpSession session=request.getSession();
-                session.setAttribute("LOGIN_USER", loginUser);
-                if(US.equals(role)){
-                    url=US_PAGE;
-                }else if(AD.equals(role)){
-                    url=AD_PAGE;
-                }else {
-                    request.setAttribute("ERROR", "Your role is not support yet!");
+        String url = ERROR;
+        UserDTO user = (UserDTO) request.getAttribute("LOGIN_USER");
+        String op = request.getParameter("op");
+        if (user == null) {
+            switch (op) {
+                case "Login": {
+                    try {
+                        String gmail = request.getParameter("gmail");
+                        String password = request.getParameter("password");
+                        UserDAO dao = new UserDAO();
+                        UserDTO loginUser = dao.login(gmail, password);
+                        //xác thực ở đây nè
+                        if (loginUser == null) {
+                            request.setAttribute("ERROR", "Incorrect Email or Password");
+                            url = LOGIN_PAGE;
+                        } else {
+                            // phân quyền ở khúc này nè
+                            String role = loginUser.getRole();
+                            HttpSession session = request.getSession();
+                            session.setAttribute("LOGIN_USER", loginUser);
+                            if (US.equals(role)) {
+                                url = US_PAGE;
+                            } else if (AD.equals(role)) {
+                                url = AD_PAGE;
+                            } else {
+                                request.setAttribute("ERROR", "Your role is not support yet!");
+                            }
+                        }
+                    } catch (Exception e) {
+                        log("Error at LoginController: " + e.toString());
+                    } finally {
+                        request.getRequestDispatcher(url).forward(request, response);
+                    }
+                    break;
+                }
+                case "Cancel": {
+                    response.sendRedirect("mainpage.jsp");
+                    break;
                 }
             }
-        } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 

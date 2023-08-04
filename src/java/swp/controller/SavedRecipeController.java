@@ -26,11 +26,11 @@ public class SavedRecipeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDTO user=(UserDTO) request.getSession().getAttribute("LOGIN_USER");
-        try {
+        UserDTO user = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        if (user != null ) {
+        try{
+            int userID = user.getUserID();
                     int recipeID = Integer.parseInt(request.getParameter("recipeID"));
-                    
-                    int userID = Integer.parseInt(request.getParameter("userID"));
                     SavedRecipesDAO sfDAO = new SavedRecipesDAO();
                     SavedRecipesDTO check = sfDAO.getOneSaved(recipeID, userID);
                     if (check == null) {
@@ -47,6 +47,10 @@ public class SavedRecipeController extends HttpServlet {
                 } catch (Exception e) {
                     log("Error at SavedRecipeController " + e.toString());
                 }
+
+    }else {
+            response.sendRedirect("error.jsp");
+        }
 
     }
 

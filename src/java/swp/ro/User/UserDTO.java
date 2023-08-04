@@ -1,45 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package swp.ro.User;
 
 import java.util.Date;
 
 
-
-
-/**
- *
- * @author truc0
- */
-
 public class UserDTO {
-    private int userID;
+   private int userID;
     private String userName;
-    private String firstName;
-    private String lastName;
     private Date dob;
     private boolean gender;
     private String phone;
     private String gmail;
     private String password;
+    private String imageUser;
     private String role;
-    private boolean status;  
+    private boolean status;
+    private String code;
 
     public UserDTO() {
     }
 
-    public UserDTO(int userID, String userName, String firstName, String lastName, Date dob, boolean gender, String phone, String gmail, String password, String role, boolean status) {
+    public UserDTO(String gmail, String code) {
+        this.gmail = gmail;
+        this.code = code;
+    }
+    
+
+    public UserDTO(int userID, String userName, Date dob, boolean gender, String phone, String gmail, String password, String imageUser, String role, boolean status) {
         this.userID = userID;
         this.userName = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.dob = dob;
         this.gender = gender;
         this.phone = phone;
         this.gmail = gmail;
         this.password = password;
+        this.imageUser = imageUser;
         this.role = role;
         this.status = status;
     }
@@ -58,22 +53,6 @@ public class UserDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Date getDob() {
@@ -116,6 +95,14 @@ public class UserDTO {
         this.password = password;
     }
 
+    public String getImageUser() {
+        return imageUser;
+    }
+
+    public void setImageUser(String imageUser) {
+        this.imageUser = imageUser;
+    }
+
     public String getRole() {
         return role;
     }
@@ -132,9 +119,18 @@ public class UserDTO {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", role=" + role + ", status=" + status + '}';
+    public String getCode() {
+        return code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", dob=" + dob + ", gender=" + gender + ", phone=" + phone + ", gmail=" + gmail + ", password=" + password + ", imageUser=" + imageUser + ", role=" + role + ", status=" + status + '}';
+    }
+
+    
 }

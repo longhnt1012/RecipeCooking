@@ -38,7 +38,7 @@ public class FeedBackController extends HttpServlet {
             } else {
                 String content = request.getParameter("content");
                 String userName = request.getParameter("userName");
-                int userID = Integer.parseInt(request.getParameter("userID"));
+                int userID = user.getUserID();
                 FeedBackDAO fDAO = new FeedBackDAO();
                 FeedBackDTO feedback = new FeedBackDTO();
                 Date datePost = new Date();
